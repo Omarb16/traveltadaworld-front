@@ -7,6 +7,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { TripComponent } from './components/trip/trip.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
+import { TripFormComponent } from './components/trip-form/trip-form.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { SigninComponent } from './components/signin/signin.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +19,12 @@ import { FooterComponent } from './components/footer/footer.component';
     NavbarComponent,
     HomeComponent,
     TripComponent,
-    FooterComponent
+    FooterComponent,
+    TripDetailComponent,
+    TripFormComponent,
+    DashboardComponent,
+    LoginComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
