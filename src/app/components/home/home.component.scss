@@ -1,0 +1,27 @@
+.div1 {
+  position: relative;
+  img {
+    object-fit: cover;
+    object-position: top;
+    height: calc(100vh - 56px);
+    width: 100%;
+  }
+  div {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 30vw;
+    color: white;
+    * {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
