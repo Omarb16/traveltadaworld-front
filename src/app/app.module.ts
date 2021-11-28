@@ -14,6 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfilComponent } from './components/profil/profil.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -27,14 +28,10 @@ import { ProfilComponent } from './components/profil/profil.component';
     DashboardComponent,
     LoginComponent,
     SigninComponent,
-    ProfilComponent
+    ProfilComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatIconModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, MatIconModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
