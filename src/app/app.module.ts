@@ -31,6 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProfilComponent } from './components/profil/profil.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UpdateComponent } from './components/update/update.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { UpdateComponent } from './components/update/update.component';
     TripFormComponent,
     ProfilComponent,
     UpdateComponent,
+    DialogComponent
   ],
   imports: [
     AppRoutingModule,
