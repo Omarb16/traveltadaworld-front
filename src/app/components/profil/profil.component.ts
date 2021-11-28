@@ -1,7 +1,9 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { UserService } from './../../services/user.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { User } from 'src/app/types/user.type';
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -9,18 +11,28 @@ import { User } from 'src/app/types/user.type';
 })
 export class ProfilComponent implements OnInit {
   faUserEdit = faUserEdit;
-  private _user : User;
+  private _user: User;
 
-  constructor(private _router: Router) {
-    this._user={} as User;
+  constructor(private _router: Router, private _userService: UserService) {
+    this._user = {} as User;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const userId = this._userService.getIdUser();
+    this._userService.find(userId).subscribe(
+      (res: User) => {
+        Object.assign(res, this._user);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
 
-  get user(): User{
+  get user(): User {
     return this._user;
   }
-  
+
   @Input()
   set user(value: User) {
     this._user = value;

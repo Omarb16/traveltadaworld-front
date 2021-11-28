@@ -4,5 +4,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:3000/"
+  apiUrl: 'http://localhost:3000/',
+  jwt_secret: '$2a$12$Jx1fXSuaVSJEZGfcxeJNWuUrMAJx6p7Mjqz4s56QgcfxGqR/SqfQG',
 };

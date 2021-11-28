@@ -6,6 +6,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginUser } from '../types/login-user.type';
 import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,11 @@ export class UserService {
   isLoggedIn: boolean = false;
 
   constructor(private _http: HttpClient, private _router: Router) {
-    const name = localStorage.getItem('name');
-    if (name) this.currentUserSource.next(name);
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      this.currentUserSource.next(localStorage.getItem('name'));
+      this.isLoggedIn = true;
+    }
   }
 
   signIn(user: User): Observable<AccessToken> {
@@ -58,5 +62,14 @@ export class UserService {
     this.currentUserSource.next(res.lastname + ' ' + res.firstname);
     this.isLoggedIn = true;
     this._router.navigate(['/']);
+  }
+
+  getIdUser(): string {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      console.log(jwt_decode(accessToken));
+      return jwt_decode(accessToken);
+    }
+    return '';
   }
 }
