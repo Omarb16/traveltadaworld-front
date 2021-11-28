@@ -1,4 +1,3 @@
-import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,6 +38,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
 import { DialogTripComponent } from './components/dialog-trip/dialog-trip.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -77,6 +77,7 @@ import { DialogTripComponent } from './components/dialog-trip/dialog-trip.compon
     NgxSpinnerModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    MatToolbarModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

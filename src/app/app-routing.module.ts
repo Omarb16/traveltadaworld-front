@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+  { path: 'profil', component: ProfilComponent , canActivate: [AuthGuard] },
 
   { path: 'edit/:id', component: FormEditComponent, canActivate: [AuthGuard] },
   {
