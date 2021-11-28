@@ -32,6 +32,7 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UpdateComponent } from './components/update/update.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import {FormComponent} from "./components/form/form.component";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     NavbarComponent,
     SigninComponent,
     TripComponent,
+    FormComponent,
     TripDetailComponent,
     TripFormComponent,
     ProfilComponent,

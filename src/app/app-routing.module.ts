@@ -13,7 +13,6 @@ import { UpdateComponent } from './components/update/update.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'profil', component: ProfilComponent },
    { path: 'profil', component: ProfilComponent },
 
   { path: 'edit/:id', component: UpdateComponent },
