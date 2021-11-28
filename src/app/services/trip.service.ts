@@ -14,8 +14,8 @@ export class TripService {
     return this._http.get<Trip>(environment.apiUrl + 'trips/' + id);
   }
 
-  findAll(): Observable<Trip> {
-    return this._http.get<Trip>(environment.apiUrl + 'trips');
+  findAll(): Observable<Trip[]> {
+    return this._http.get<Trip[]>(environment.apiUrl + 'trips');
   }
 
   create(trip: Trip): Observable<Trip> {
