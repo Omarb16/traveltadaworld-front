@@ -15,7 +15,7 @@ export class JwtInterceptor implements HttpInterceptor {
       req.clone({
         headers: req.headers.set(
           'Authorization',
-          'Bearer ' + localStorage.getItem('token')
+          'Bearer ' + localStorage.getItem('access_token')
         ),
       })
     );

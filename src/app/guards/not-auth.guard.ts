@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class NotAuthGuard implements CanActivate {
   constructor(private _userService: UserService, private router: Router) {}
 
   canActivate(
@@ -20,9 +20,9 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     const isLoggedIn = this._userService.isLoggedIn;
-    if (!isLoggedIn) {
-      this.router.navigate(['/login']);
+    if (isLoggedIn) {
+      this.router.navigate(['/']);
     }
-    return isLoggedIn;
+    return !isLoggedIn;
   }
 }

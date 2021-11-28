@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { TripFormComponent } from './components/trip-form/trip-form.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { SigninComponent } from './components/signin/signin.component';
@@ -9,25 +10,28 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { TripComponent } from './components/trip/trip.component';
 import { UpdateComponent } from './components/update/update.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { NotAuthGuard } from './guards/not-auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'profil', component: ProfilComponent },
   {
     path: '',
     component: HomeComponent,
   },
-  { path: 'profil', component: ProfilComponent },
+  { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
 
-  { path: 'edit/:id', component: UpdateComponent },
+  { path: 'edit/:id', component: UpdateComponent, canActivate: [AuthGuard] },
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [NotAuthGuard],
   },
   {
     path: 'signin',
     component: SigninComponent,
+    canActivate: [NotAuthGuard],
   },
   {
     path: 'trip/:id',
@@ -36,14 +40,25 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'trips',
     component: TripComponent,
   },
   {
-    path: 'form',
+    path: 'create-trip',
     component: TripFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'update-trip/:id',
+    component: TripFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
   },
 ];
 

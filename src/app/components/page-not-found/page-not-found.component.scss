@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+button {
+  font-family: "Nunito Sans";
+}
+
+h1 {
+  font-size: 7.5em;
+  margin: 15px 0px;
+  font-weight: bold;
+}
+h2 {
+  font-weight: bold;
+}
+.btn {
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 8px 50px;
+  border-radius: 30px;
+  font-size: 1em;
+  letter-spacing: 2px;
+  transition: 0.2s ease;
+  font-weight: bold;
+  margin: 5px 0px;
+}
+
+.row {
+  --bs-gutter-x: none;
+  margin-top: 3px;
+}
