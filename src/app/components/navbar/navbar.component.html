@@ -26,7 +26,6 @@
                     aria-expanded="false" *ngIf="(userService.currentUser$ |async) as name">{{name}}</button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" [routerLink]="['/profil']">Profil</a></li>
-                    <li><a class="dropdown-item" [routerLink]="['/dashboard']">Trips</a></li>
                     <li><a class="dropdown-item" (click)="logOut()">Se deconnecter</a></li>
                 </ul>
             </div>

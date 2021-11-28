@@ -1,12 +1,13 @@
 export type User = {
-  id? : string;
+  id?: string;
   email: string;
   password: string;
   repassword: string;
   firstname: string;
   lastname: string;
+  description: string;
   photo?: string;
-  birthDate: String;
+  birthDate: string;
   address: string;
   city: string;
   postalCode: string;

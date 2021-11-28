@@ -39,7 +39,7 @@ export class UserService {
     );
   }
 
-  update(id: string, user: FormData): Observable<User> {
+  update(id: string, user: User): Observable<User> {
     return this._http.put<User>(environment.apiUrl + 'users/' + id, user);
   }
 
@@ -71,5 +71,10 @@ export class UserService {
       return (<AccessToken>jwt_decode(accessToken)).sub;
     }
     return '';
+  }
+
+  changeName(name: string) {
+    localStorage.setItem('name', name);
+    this.currentUserSource.next(name);
   }
 }

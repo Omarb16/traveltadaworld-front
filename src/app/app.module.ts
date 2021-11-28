@@ -35,6 +35,7 @@ import { UpdateComponent } from './components/update/update.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FormComponent } from './components/form/form.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FormComponent } from './components/form/form.component';
   ],
   imports: [
     AppRoutingModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,

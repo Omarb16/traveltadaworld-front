@@ -1,13 +1,26 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+} from '@angular/forms';
 import { User } from 'src/app/types/user.type';
-import { CustomValidators } from './custom-validators';
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit , OnChanges {
+export class FormComponent implements OnInit, OnChanges {
   // private property to store model value
   private _model: User;
   // private property to store cancel$ value
@@ -17,17 +30,41 @@ export class FormComponent implements OnInit , OnChanges {
   // private property to store form value
   private readonly _form: FormGroup;
 
+  _file: File;
+
   constructor() {
     this._model = {} as User;
+    this._file = {} as File;
     this._submit$ = new EventEmitter<User>();
     this._cancel$ = new EventEmitter<void>();
-    this._form = this._buildForm();
+    this._form = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      firstname: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+      ]),
+      lastname: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+      ]),
+      description: new FormControl('', [Validators.minLength(10)]),
+      photo: new FormControl(null),
+      birthDate: new FormControl(null, Validators.required),
+      address: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      postalCode: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+      ]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[+]{1}[0-9]{10,12}$'),
+      ]),
+    });
+    this.email.disable();
   }
 
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
   /**
    * Sets private property _model
    */
@@ -50,7 +87,7 @@ export class FormComponent implements OnInit , OnChanges {
     return this._form;
   }
 
-   /**
+  /**
    * Returns private property _cancel$
    */
   @Output('cancel')
@@ -66,16 +103,16 @@ export class FormComponent implements OnInit , OnChanges {
     return this._submit$;
   }
 
- 
   /**
    * Function to handle component update
    */
   ngOnChanges(record: any): void {
     if (record.model && record.model.currentValue) {
       this._model = record.model.currentValue;
+      this._model.birthDate = moment(this._model.birthDate).utc().format();
     } else {
       this._model = {
-        photo: 'https://randomuser.me/api/portraits/lego/6.jpg',
+        photo: '',
         firstname: '',
         lastname: '',
         email: '',
@@ -84,13 +121,21 @@ export class FormComponent implements OnInit , OnChanges {
         address: '',
         city: '',
         postalCode: '',
+        description: '',
         password: '',
-        repassword: ' ',
-
-    };
+        repassword: '',
+      };
       // update form's values with model
+    }
     this._form.patchValue(this._model);
   }
+
+  onFileChange(event: any) {
+    this._file = {} as File;
+    this.photo.setValue(null);
+    this.photo.markAsTouched();
+    this._file = event.target.files[0];
+    this.photo.setValue('photo');
   }
 
   /**
@@ -104,36 +149,47 @@ export class FormComponent implements OnInit , OnChanges {
    * Function to emit event to submit form and person
    */
   submit(user: User): void {
+    delete user.photo;
     this._submit$.emit(user);
   }
 
+  get email(): FormControl {
+    return <FormControl>this.form.get('email');
+  }
 
-  /**
-   * Function to build our form
-   */
-  private _buildForm(): FormGroup {
-    return new FormGroup({
-      id: new FormControl(),
-      photo: new FormControl(),
-      firstname: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2)
-      ])),
-      lastname: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2)
-      ])),
-      entity: new FormControl(),
-      email: new FormControl('', Validators.compose([
-        Validators.required, CustomValidators.googleEmail
-      ])),
-      phone: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('(0|\\+33)\\d{9}')
-      ])),
-      address: new FormGroup({
-        street: new FormControl('', Validators.required),
-        city: new FormControl('', Validators.required),
-        postalCode: new FormControl('', Validators.required)
-      }),
-      isManager: new FormControl()
-    });
+  get firstname(): FormControl {
+    return <FormControl>this.form.get('firstname');
+  }
+
+  get lastname(): FormControl {
+    return <FormControl>this.form.get('lastname');
+  }
+
+  get address(): FormControl {
+    return <FormControl>this.form.get('address');
+  }
+
+  get city(): FormControl {
+    return <FormControl>this.form.get('city');
+  }
+
+  get postalCode(): FormControl {
+    return <FormControl>this.form.get('postalCode');
+  }
+
+  get phone(): FormControl {
+    return <FormControl>this.form.get('phone');
+  }
+
+  get photo(): FormControl {
+    return <FormControl>this.form.get('photo');
+  }
+
+  get birthDate(): FormControl {
+    return <FormControl>this.form.get('birthDate');
+  }
+
+  get description(): FormControl {
+    return <FormControl>this.form.get('description');
   }
 }
