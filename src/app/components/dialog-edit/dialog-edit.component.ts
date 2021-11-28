@@ -3,13 +3,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/types/user.type';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  selector: 'app-dialog-edit',
+  templateUrl: './dialog-edit.component.html',
+  styleUrls: ['./dialog-edit.component.scss'],
 })
-export class DialogComponent implements OnInit {
-  constructor(private _dialogRef: MatDialogRef<DialogComponent, User>, @Optional() @Inject(MAT_DIALOG_DATA) private _user: User) {
-  }
+export class DialogEditComponent implements OnInit {
+  constructor(
+    private _dialogRef: MatDialogRef<DialogEditComponent, User>,
+    @Optional() @Inject(MAT_DIALOG_DATA) private _user: User
+  ) {}
 
   /**
    * Returns person passed in dialog open
@@ -21,8 +23,7 @@ export class DialogComponent implements OnInit {
   /**
    * OnInit implementation
    */
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   /**
    * Function to cancel the process and close the modal
@@ -37,6 +38,4 @@ export class DialogComponent implements OnInit {
   onSave(user: User): void {
     this._dialogRef.close(user);
   }
-
-
 }

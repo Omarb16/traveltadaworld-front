@@ -24,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './components/signin/signin.component';
 import { TripComponent } from './components/trip/trip.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
-import { TripFormComponent } from './components/trip-form/trip-form.component';
+import { FormTripComponent } from './components/form-trip/form-trip.component';
 import { MatInputModule } from '@angular/material/input';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
@@ -32,29 +32,33 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfilComponent } from './components/profil/profil.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UpdateComponent } from './components/update/update.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { FormComponent } from './components/form/form.component';
+import { ModalEditComponent } from './components/modal-edit/modal-edit.component';
+import { ModalTripComponent } from './components/modal-trip/modal-trip.component';
+import { FormEditComponent } from './components/form-edit/form-edit.component';
 import { MatButtonModule } from '@angular/material/button';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
+import { DialogTripComponent } from './components/dialog-trip/dialog-trip.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    DialogEditComponent,
+    DialogTripComponent,
     FooterComponent,
+    FormEditComponent,
+    FormTripComponent,
     HomeComponent,
     LoginComponent,
+    ModalEditComponent,
+    ModalTripComponent,
     NavbarComponent,
+    PageNotFoundComponent,
+    ProfilComponent,
     SigninComponent,
     TripComponent,
-    FormComponent,
     TripDetailComponent,
-    TripFormComponent,
-    ProfilComponent,
-    UpdateComponent,
-    PageNotFoundComponent,
-    DialogComponent,
   ],
   imports: [
     AppRoutingModule,

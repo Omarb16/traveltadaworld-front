@@ -1,16 +1,15 @@
-import { TripService } from './../../services/trip.service';
-import { Trip } from './../../types/trip.type';
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { TripService } from '../../services/trip.service';
+import { Trip } from '../../types/trip.type';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-trip-form',
-  templateUrl: './trip-form.component.html',
-  styleUrls: ['./trip-form.component.scss'],
+  selector: 'app-form-trip',
+  templateUrl: './form-trip.component.html',
+  styleUrls: ['./form-trip.component.scss'],
 })
-export class TripFormComponent implements OnInit {
+export class FormTripComponent implements OnInit {
   // private property to store update mode flag
   private _isUpdateMode: boolean;
   // private property to store model value
@@ -55,7 +54,6 @@ export class TripFormComponent implements OnInit {
     return this._form;
   }
 
-
   /**
    * Returns private property _cancel$
    */
@@ -75,8 +73,7 @@ export class TripFormComponent implements OnInit {
   /**
    * OnInit implementation
    */
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   /**
    * Function to handle component update
@@ -94,10 +91,9 @@ export class TripFormComponent implements OnInit {
         description: '',
         destination: {
           pays: '',
-          ville: ''
-        }
+          ville: '',
+        },
       };
-
     }
 
     // update form's values with model
@@ -118,7 +114,6 @@ export class TripFormComponent implements OnInit {
     this._submit$.emit(trip);
   }
 
-
   /**
    * Function to build our form
    */
@@ -126,20 +121,26 @@ export class TripFormComponent implements OnInit {
     return new FormGroup({
       id: new FormControl(),
       photo: new FormControl(),
-      firstname: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2)
-      ])),
-      lastname: new FormControl('', Validators.compose([
-        Validators.required, Validators.minLength(2)
-      ])),
+      firstname: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(2)])
+      ),
+      lastname: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(2)])
+      ),
       entity: new FormControl(),
-      phone: new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern('(0|\\+33)\\d{9}')
-      ])),
+      phone: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('(0|\\+33)\\d{9}'),
+        ])
+      ),
       address: new FormGroup({
         street: new FormControl('', Validators.required),
         city: new FormControl('', Validators.required),
-        postalCode: new FormControl('', Validators.required)
+        postalCode: new FormControl('', Validators.required),
       }),
     });
   }
