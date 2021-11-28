@@ -1,38 +1,64 @@
-<div class="container main-cont">
-    <h1>Créer un voyage</h1>
-    <form [formGroup]="form">
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Titre</label>
-                <input type="text" class="form-control" formControlName="firstname" placeholder="Titre">
-                <div class="text-danger" *ngIf="title.touched && title?.hasError('required')">
-                    Titre requis
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Destination</label>
-                <input type="text" class="form-control" formControlName="destination" placeholder="Destination">
-                <div class="text-danger" *ngIf="destination.touched && destination?.hasError('required')">
-                    Destination requis
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md">
-                <label>Description</label>
-                <textarea type="email" class="form-control" formControlName="description"
-                    placeholder="Description"></textarea>
-                <div class="text-danger" *ngIf="description.touched && description?.hasError('required')">
-                    Description requis
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Photo</label>
-                <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="save()">S'inscrire</button>
-    </form>
-</div>
+<mat-dialog-content>
+  <form novalidate [formGroup]="form">
+
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="full-width" [class.mgb15]="form.get('titre')?.dirty && form.get('titre')?.invalid">
+            <input matInput placeholder="Titre" formControlName="titre" minlength="2" required name="titre" />
+            <mat-error *ngIf="form.get('titre')?.dirty && form.get('titre')?.hasError('required')">
+              Titre is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="form.get('titre')?.dirty && form.get('titre')?.hasError('minlength')">
+              Titre is <strong>2 chars min</strong>
+            </mat-error>
+          </mat-form-field>
+
+        </td>
+        <td class="align-right">
+          <!-- not required by API, so we put static content which is not editable and not sent to the API -->
+          <img width="112" [src]="form.get('photo')?.value"/>
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Organisateur" formControlName="organisateur" required name="organisateur" />
+        <mat-error *ngIf="form.get('organisateur')?.dirty && form.get('organisateur')?.hasError('required')">
+          Organisateur is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="form.get('organisateur')?.dirty && !form.get('organisateur')?.hasError('required') && form.get('email')?.hasError('googleEmail')">
+          Organisateur is <strong>2 chars min</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+    <p formGroupName="destination">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Ville" formControlName="ville" required name="ville"/>
+        <mat-error *ngIf="form.get('destination')?.get('ville')?.dirty && form.get('destination')?.get('ville')?.hasError('required')">
+          Destination is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+    <p formGroupName="destination">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Pays" formControlName="pays" required name="pays"/>
+            <mat-error *ngIf="form.get('destination')?.get('pays')?.dirty && form.get('destination')?.get('pays')?.hasError('required')">
+              Pays is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+    </p>
+
+    <!-- required by API, so we put static content which is not editable but sent to the API -->
+    <input type="hidden" formControlName="entity" name="entity">
+  </form>
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-button color="primary" type="submit" (click)="submit(form.value)" [disabled]="form.invalid">Publier</button>
+</mat-dialog-actions>

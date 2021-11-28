@@ -17,6 +17,8 @@
               <img class="img" src="./assets/img/face/marc.jpg" />
             </a>
           </div>
+          <mat-card class="mat-whiteframe-2dp">
+          <mat-card-content>
           <div class="card-body">
             <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
             <h4>Nancy, FRANCE</h4>
@@ -24,8 +26,15 @@
             <p class="card-description">
               Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
             </p>
-            <a href="javascript:void(0)" class="btn btn-danger btn-round" [routerLink]="['/edit', user?.id]">Editer profile</a>
+
+            <a mat-button title="Edit" [routerLink]="['/edit', user?.id]">
+              <mat-icon svgIcon="icon-edit"></mat-icon>
+            </a>
+
+            <a href="javascript:void(0)" class="btn btn-danger btn-round" [routerLink]="['/create-trip']">Organiser un voyage</a>
           </div>
+          </mat-card-content>
+          </mat-card>
         </div>
       </div>
     </div>
