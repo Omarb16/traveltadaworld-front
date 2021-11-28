@@ -1,12 +1,13 @@
 import { User } from '../types/user.type';
-import { AccessToken } from '../types/access-token.type';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserLogged } from '../types/user-logged.type';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginUser } from '../types/login-user.type';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
+import { AccessToken } from '../types/access-token.type ';
 
 @Injectable({
   providedIn: 'root',
@@ -24,15 +25,15 @@ export class UserService {
     }
   }
 
-  signIn(user: User): Observable<AccessToken> {
-    return this._http.post<AccessToken>(
+  signIn(user: User): Observable<UserLogged> {
+    return this._http.post<UserLogged>(
       environment.apiUrl + 'users/signIn',
       user
     );
   }
 
-  logIn(user: LoginUser): Observable<AccessToken> {
-    return this._http.post<AccessToken>(
+  logIn(user: LoginUser): Observable<UserLogged> {
+    return this._http.post<UserLogged>(
       environment.apiUrl + 'users/logIn',
       user
     );
@@ -55,7 +56,7 @@ export class UserService {
     this._router.navigate(['/']);
   }
 
-  loggedIn(res: AccessToken) {
+  loggedIn(res: UserLogged) {
     localStorage.setItem('name', res.lastname + ' ' + res.firstname);
     localStorage.setItem('access_token', res.access_token);
     localStorage.setItem('id', res.id);
@@ -67,8 +68,7 @@ export class UserService {
   getIdUser(): string {
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
-      console.log(jwt_decode(accessToken));
-      return jwt_decode(accessToken);
+      return (<AccessToken>jwt_decode(accessToken)).sub;
     }
     return '';
   }

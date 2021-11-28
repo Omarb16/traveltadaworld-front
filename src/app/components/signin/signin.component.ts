@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AccessToken } from 'src/app/types/access-token.type';
+import { UserLogged } from 'src/app/types/user-logged.type';
 import { User } from 'src/app/types/user.type';
 import * as moment from 'moment';
 
@@ -79,7 +79,7 @@ export class SigninComponent implements OnInit {
       delete user.photo;
       user.birthDate = moment(this.birthDate.value).utc().format();
       this._userService.signIn(user).subscribe(
-        (res: AccessToken) => {
+        (res: UserLogged) => {
           this._userService.loggedIn(res);
         },
         (err) => {

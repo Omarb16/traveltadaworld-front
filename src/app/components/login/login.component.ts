@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { AccessToken } from 'src/app/types/access-token.type';
+import { UserLogged } from 'src/app/types/user-logged.type';
 import { LoginUser } from 'src/app/types/login-user.type';
 
 @Component({
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       var user = this.form.value as LoginUser;
       this._userService.logIn(user).subscribe(
-        (res: AccessToken) => {
+        (res: UserLogged) => {
           this._userService.loggedIn(res);
         },
         (err) => {

@@ -21,7 +21,7 @@ export class ProfilComponent implements OnInit {
     const userId = this._userService.getIdUser();
     this._userService.find(userId).subscribe(
       (res: User) => {
-        Object.assign(res, this._user);
+        Object.assign(this._user, res);
       },
       (err) => {
         console.error(err);
