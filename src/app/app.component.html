@@ -1,3 +1,6 @@
 <app-navbar></app-navbar>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+<ngx-spinner [visible]="showSpinner" [config]="spinnerConfig">
+    <h4>Loading...</h4>
+</ngx-spinner>

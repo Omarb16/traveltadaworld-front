@@ -1,12 +1,12 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { User } from 'src/app/types/create-user.types';
 
 @Component({
   selector: 'app-signin',
@@ -20,38 +20,42 @@ export class SigninComponent implements OnInit {
   constructor(private _userService: UserService) {
     this.file = {} as File;
     this.form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
+      email: new FormControl('omar@gmail.com', [
+        Validators.required,
+        Validators.email,
+      ]),
+      password: new FormControl('aaAA12**', [
         Validators.required,
         Validators.pattern(
           '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
         ),
       ]),
-      repassword: new FormControl(null, [
-        Validators.required,
-        this.checkPassword(),
-      ]),
-      firstname: new FormControl(null, Validators.required),
-      lastname: new FormControl(null, Validators.required),
+      repassword: new FormControl('aaAA12**', Validators.required),
+      firstname: new FormControl('Omar', Validators.required),
+      lastname: new FormControl('Bouayad', Validators.required),
       photo: new FormControl(null, Validators.required),
       birthDate: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      postalCode: new FormControl(null, [
+      address: new FormControl('address', Validators.required),
+      city: new FormControl('city', Validators.required),
+      postalCode: new FormControl('9055', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
       ]),
-      phone: new FormControl(null, [
+      phone: new FormControl('+33610012939', [
         Validators.required,
-        Validators.pattern('^+[0-9]{10,12}$'),
+        Validators.pattern('^[+]{1}[0-9]{10,12}$'),
       ]),
     });
+
+    this.repassword.addValidators(this.checkPassword);
   }
 
-  checkPassword() {
-    return (form: FormControl) => {
+  checkPassword(): ValidatorFn {
+    return () => {
+      const pass = this.password.value;
+      const repass = this.repassword.value;
       let valid: boolean = false;
-      if (this.password.value === form.value) valid = true;
+      if (pass === repass) valid = true;
       return valid ? null : { missMatch: true };
     };
   }
@@ -68,8 +72,10 @@ export class SigninComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
-      const user = this.form.value as User;
-      this._userService.signIn(user).subscribe(
+      var formData = new FormData();
+      formData.append('data', JSON.stringify(this.form.value));
+      if (this.file) formData.append('file', this.file, this.file.name);
+      this._userService.signIn(formData).subscribe(
         (res) => {},
         (err) => {
           console.error(err);
@@ -84,6 +90,10 @@ export class SigninComponent implements OnInit {
 
   get password(): FormControl {
     return <FormControl>this.form.get('password');
+  }
+
+  get repassword(): FormControl {
+    return <FormControl>this.form.get('repassword');
   }
 
   get firstname(): FormControl {

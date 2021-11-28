@@ -11,18 +11,24 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   constructor(private _http: HttpClient) {}
 
-  signIn(user: User): Observable<AccessToken> {
-    return this._http.post<AccessToken>(environment.apiUrl, user);
+  signIn(user: FormData): Observable<AccessToken> {
+    return this._http.post<AccessToken>(
+      environment.apiUrl + '/users/signIn',
+      user
+    );
   }
 
-  /**
-   * Function to return request options
-   */
-  private _options(headerList: object = {}): any {
-    return {
-      headers: new HttpHeaders(
-        Object.assign({ 'Content-Type': 'application/json' }, headerList)
-      ),
-    };
+  logIn(user: User): Observable<AccessToken> {
+    return this._http.post<AccessToken>(
+      environment.apiUrl + '/users/logIn',
+      user
+    );
+  }
+
+  update(id: string, user: FormData): Observable<AccessToken> {
+    return this._http.put<AccessToken>(
+      environment.apiUrl + '/users/' + id,
+      user
+    );
   }
 }

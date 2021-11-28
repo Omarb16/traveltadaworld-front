@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.main-cont {
+  min-height: calc(100vh - 76px - 197px);
+}
+
+.form-control {
+  &:focus {
+    border-color: unset;
+    outline: 0;
+    box-shadow: unset;
+  }
+}

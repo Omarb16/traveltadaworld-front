@@ -1,7 +1,7 @@
-<div class="container">
-    <h2>Créer un compte</h2>
+<div class="container main-cont">
+    <h1>Créer un compte</h1>
     <form [formGroup]="form">
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-6">
                 <label>Prenom</label>
                 <input type="text" class="form-control" formControlName="firstname" placeholder="Prenom">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-6">
                 <label>Email</label>
                 <input type="email" class="form-control" formControlName="email" placeholder="Email">
@@ -40,18 +40,19 @@
             </div>
 
         </div>
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-6">
-                <input type="file" (change)="onFileChange($event)" accept="image/*" />
+                <label>Photo</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
             </div>
             <div class="form-group col-md-6">
                 <label>Retaper le mot de passe</label>
                 <input type="password" class="form-control" formControlName="repassword"
                     placeholder="Retaper le mot de passe">
-                <div class="text-danger" *ngIf="password.touched && password?.hasError('missMatch')">
+                <div class="text-danger" *ngIf="repassword.touched && form?.hasError('missMatch')">
                     Retaper le mot de passe correctement
                 </div>
-            </div>>
+            </div>
         </div>
         <div class="form-group">
             <label>Adresse</label>
@@ -60,7 +61,7 @@
                 Adresse requise
             </div>
         </div>
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-6">
                 <label>Ville</label>
                 <input type="text" class="form-control" formControlName="city" placeholder="Ville">
@@ -73,6 +74,32 @@
                 <input type="text" class="form-control" formControlName="postalCode" placeholder="Code postal">
                 <div class="text-danger" *ngIf="postalCode.touched && postalCode?.hasError('required')">
                     Code postal requis
+                </div>
+                <div class="text-danger" *ngIf="postalCode.touched && postalCode?.hasError('pattern')">
+                    Code postal invalid
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Telephone</label>
+                <input type="text" class="form-control" formControlName="phone" placeholder="Telephone">
+                <div class="text-danger" *ngIf="phone.touched && phone?.hasError('required')">
+                    Telephone requis
+                </div>
+                <div class="text-danger" *ngIf="phone.touched && phone?.hasError('pattern')">
+                    Telephone invalid
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <mat-form-field appearance="fill">
+                    <mat-label>Date de naissance</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="birthDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="text-danger" *ngIf="birthDate.touched && birthDate?.hasError('required')">
+                    Date de naissance requise
                 </div>
             </div>
         </div>
