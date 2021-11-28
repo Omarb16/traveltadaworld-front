@@ -16,3 +16,10 @@
     border: white 1px solid;
   }
 }
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: rgb(37, 26, 26) !important;
+}

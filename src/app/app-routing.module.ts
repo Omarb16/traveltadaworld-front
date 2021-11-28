@@ -1,3 +1,4 @@
+import { TripFormComponent } from './components/trip-form/trip-form.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { LoginComponent } from './components/login/login.component';
@@ -5,13 +6,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import {ProfilComponent} from "./components/profil/profil.component";
-import {TripComponent} from "./components/trip/trip.component";
+import { ProfilComponent } from './components/profil/profil.component';
+import { TripComponent } from './components/trip/trip.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'profil', component: ProfilComponent   },
+  { path: 'profil', component: ProfilComponent },
   {
     path: '',
     component: HomeComponent,
@@ -33,8 +34,13 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
-    path: 'trips', component:TripComponent
-  }
+    path: 'trips',
+    component: TripComponent,
+  },
+  {
+    path: 'form',
+    component: TripFormComponent,
+  },
 ];
 
 @NgModule({

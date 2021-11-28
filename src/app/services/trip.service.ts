@@ -11,22 +11,22 @@ export class TripService {
   constructor(private _http: HttpClient) {}
 
   find(id: string): Observable<Trip> {
-    return this._http.get<Trip>(environment.apiUrl + '/trips/' + id);
+    return this._http.get<Trip>(environment.apiUrl + 'trips/' + id);
   }
 
   findAll(): Observable<Trip> {
-    return this._http.get<Trip>(environment.apiUrl + '/trips');
+    return this._http.get<Trip>(environment.apiUrl + 'trips');
   }
 
   create(trip: Trip): Observable<Trip> {
-    return this._http.post<Trip>(environment.apiUrl + '/trips', trip);
+    return this._http.post<Trip>(environment.apiUrl + 'trips', trip);
   }
 
   update(id: string, trip: Trip): Observable<Trip> {
-    return this._http.put<Trip>(environment.apiUrl + '/trips/' + id, trip);
+    return this._http.put<Trip>(environment.apiUrl + 'trips/' + id, trip);
   }
 
   delete(id: string): Observable<Trip> {
-    return this._http.delete<Trip>(environment.apiUrl + '/trips/' + id);
+    return this._http.delete<Trip>(environment.apiUrl + 'trips/' + id);
   }
 }

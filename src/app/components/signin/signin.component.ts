@@ -1,13 +1,15 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AccessToken } from 'src/app/types/access-token.type';
+import { User } from 'src/app/types/user.type';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-signin',
@@ -73,12 +75,12 @@ export class SigninComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
-      var formData = new FormData();
-      formData.append('data', JSON.stringify(this.form.value));
-      if (this.file) formData.append('file', this.file, this.file.name);
-      this._userService.signIn(formData).subscribe(
-        (res) => {
-          this._router.navigate(['/']);
+      var user = this.form.value as User;
+      delete user.photo;
+      user.birthDate = moment(this.birthDate.value).utc().format();
+      this._userService.signIn(user).subscribe(
+        (res: AccessToken) => {
+          this._userService.loggedIn(res);
         },
         (err) => {
           console.error(err);

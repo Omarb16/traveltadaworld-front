@@ -4,7 +4,7 @@ export type User = {
   repassword: string;
   firstname: string;
   lastname: string;
-  photo: string;
+  photo?: string;
   birthDate: String;
   address: string;
   city: string;

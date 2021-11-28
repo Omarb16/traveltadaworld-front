@@ -19,7 +19,17 @@
             </ul>
         </div>
         <div>
-            <button class="btn-login" routerLink="/signin">Se connecter</button>
+            <button class="btn-login" [routerLink]="['/login']" *ngIf="!(userService.currentUser$ |async)">Se
+                connecter</button>
+            <div class="dropdown" *ngIf="userService.currentUser$ |async">
+                <button id="dropdownMenuButton1" class="btn-login dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false" *ngIf="(userService.currentUser$ |async) as name">{{name}}</button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item">Profil</a></li>
+                    <li><a class="dropdown-item">Dashboard</a></li>
+                    <li><a class="dropdown-item" (click)="logOut()">Se deconnecter</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>

@@ -1,1 +1,38 @@
-<p>trip-form works!</p>
+<div class="container main-cont">
+    <h1>Créer un voyage</h1>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Titre</label>
+                <input type="text" class="form-control" formControlName="firstname" placeholder="Titre">
+                <div class="text-danger" *ngIf="title.touched && title?.hasError('required')">
+                    Titre requis
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Destination</label>
+                <input type="text" class="form-control" formControlName="destination" placeholder="Destination">
+                <div class="text-danger" *ngIf="destination.touched && destination?.hasError('required')">
+                    Destination requis
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md">
+                <label>Description</label>
+                <textarea type="email" class="form-control" formControlName="description"
+                    placeholder="Description"></textarea>
+                <div class="text-danger" *ngIf="description.touched && description?.hasError('required')">
+                    Description requis
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Photo</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="save()">S'inscrire</button>
+    </form>
+</div>

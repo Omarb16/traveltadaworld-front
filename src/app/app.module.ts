@@ -66,13 +66,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       provide: MAT_DATE_FORMATS,
       useValue: {
         parse: {
-          dateInput: 'DD/MM/YYYY',
+          dateInput: 'yyyy-MM-ddTHH:mm:ss.SSSZ',
         },
         display: {
           dateInput: 'DD/MM/YYYY',
-          monthYearLabel: 'MMM YYYY',
-          dateA11yLabel: 'DD/MM/YYYY',
-          monthYearA11yLabel: 'MMMM YYYY',
         },
       },
     },
