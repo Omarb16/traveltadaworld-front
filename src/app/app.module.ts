@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {
   MatNativeDateModule,
@@ -65,6 +66,8 @@ import { FormComponent } from './components/form/form.component';
     MatInputModule,
     MatMomentDateModule,
     MatNativeDateModule,
+    MatIconModule,
+    MatCardModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
     FontAwesomeModule,
