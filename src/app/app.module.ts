@@ -30,6 +30,7 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfilComponent } from './components/profil/profil.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UpdateComponent } from './components/update/update.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TripDetailComponent,
     TripFormComponent,
     ProfilComponent,
+    UpdateComponent,
   ],
   imports: [
     AppRoutingModule,
