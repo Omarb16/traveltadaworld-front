@@ -27,6 +27,9 @@ import { MatInputModule } from '@angular/material/input';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { ProfilComponent } from './components/profil/profil.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
     TripComponent,
     TripDetailComponent,
     TripFormComponent,
+    ProfilComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -49,12 +53,12 @@ import { NgxSpinnerModule } from '@hardpool/ngx-spinner';
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatFormFieldModule,
-    NgxSpinnerModule,
+    MatInputModule,
     MatMomentDateModule,
     MatNativeDateModule,
+    NgxSpinnerModule,
     ReactiveFormsModule,
-    MatInputModule,
+    FontAwesomeModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
