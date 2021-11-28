@@ -7,6 +7,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +18,7 @@ export class SigninComponent implements OnInit {
   form: FormGroup;
   file: File;
 
-  constructor(private _userService: UserService) {
+  constructor(private _userService: UserService, private _router: Router) {
     this.file = {} as File;
     this.form = new FormGroup({
       email: new FormControl('omar@gmail.com', [
@@ -76,7 +77,9 @@ export class SigninComponent implements OnInit {
       formData.append('data', JSON.stringify(this.form.value));
       if (this.file) formData.append('file', this.file, this.file.name);
       this._userService.signIn(formData).subscribe(
-        (res) => {},
+        (res) => {
+          this._router.navigate(['/']);
+        },
         (err) => {
           console.error(err);
         }

@@ -1,5 +1,5 @@
-import { User } from './../types/create-user.types';
-import { AccessToken } from './../types/access-token.entity';
+import { User } from '../types/user.type';
+import { AccessToken } from '../types/access-token.type';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -25,10 +25,11 @@ export class UserService {
     );
   }
 
-  update(id: string, user: FormData): Observable<AccessToken> {
-    return this._http.put<AccessToken>(
-      environment.apiUrl + '/users/' + id,
-      user
-    );
+  update(id: string, user: FormData): Observable<User> {
+    return this._http.put<User>(environment.apiUrl + '/users/' + id, user);
+  }
+
+  find(id: string): Observable<User> {
+    return this._http.get<User>(environment.apiUrl + '/users/' + id);
   }
 }
