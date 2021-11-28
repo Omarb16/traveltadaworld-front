@@ -12,6 +12,7 @@ import { TripFormComponent } from './components/trip-form/trip-form.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SigninComponent } from './components/signin/signin.component';
     TripFormComponent,
     DashboardComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
