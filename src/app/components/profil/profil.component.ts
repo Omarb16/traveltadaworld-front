@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { User } from 'src/app/types/user.type';
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -7,8 +9,20 @@ import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 })
 export class ProfilComponent implements OnInit {
   faUserEdit = faUserEdit;
+  private _user : User;
 
-  constructor() {}
+  constructor(private _router: Router) {
+    this._user={} as User;
+  }
 
   ngOnInit(): void {}
+
+  get user(): User{
+    return this._user;
+  }
+  
+  @Input()
+  set user(value: User) {
+    this._user = value;
+  }
 }
