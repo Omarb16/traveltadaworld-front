@@ -33,7 +33,9 @@
       <div class="col-md-4">
         <br>
         <div class="col-md-2">
-          <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+          <a mat-button title="Edit" [routerLink]="['/edit']">
+            <mat-icon svgIcon="icon-edit"></mat-icon>
+          </a>
         </div>
       </div>
       <div class="col-md-8">

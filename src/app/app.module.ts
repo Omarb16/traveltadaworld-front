@@ -12,6 +12,7 @@ import { TripFormComponent } from './components/trip-form/trip-form.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { MatIconModule } from '@angular/material/icon';
 import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ProfilComponent } from './components/profil/profil.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
