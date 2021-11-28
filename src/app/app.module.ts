@@ -1,4 +1,3 @@
-import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,6 +36,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FormComponent } from './components/form/form.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ import { MatButtonModule } from '@angular/material/button';
     NgxSpinnerModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    MatToolbarModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
