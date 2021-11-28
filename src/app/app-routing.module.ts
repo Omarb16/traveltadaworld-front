@@ -14,8 +14,6 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { NotAuthGuard } from './guards/not-auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'profil', component: ProfilComponent },
   {
     path: '',
     component: HomeComponent,
