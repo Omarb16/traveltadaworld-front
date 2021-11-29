@@ -2,6 +2,7 @@ import { TripService } from 'src/app/services/trip.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Trip } from 'src/app/types/trip.type';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-trip-list',
@@ -11,14 +12,20 @@ import { Trip } from 'src/app/types/trip.type';
 export class TripListComponent implements OnInit {
   form: FormGroup;
   private _trips: Trip[];
+  private _view: string;
 
-  constructor(private _tripService: TripService) {
+
+
+
+  constructor(private _tripService: TripService,private  _routeur:Router) {
     this._trips = [];
     this.form = new FormGroup({
       title: new FormControl(null),
       city: new FormControl(null),
       country: new FormControl(null),
     });
+    this._view = 'list';
+
   }
 
   ngOnInit(): void {
@@ -31,6 +38,28 @@ export class TripListComponent implements OnInit {
 
   set trips(value: Trip[]) {
     this._trips = value;
+  }
+
+
+  get view(): string {
+    return this._view;
+  }
+
+  set view(value: string) {
+    this._view = value;
+  }
+
+  navigate(id: string | undefined): void {
+    this._routeur.navigate([ '/trip', id ]);
+  }
+
+  travlerFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    //this._travelerTrips.filter = filterValue.trim().toLowerCase();
+  }
+
+  switchView(): void {
+    this._view = (this._view === 'card') ? 'list' : 'card';
   }
 
 
