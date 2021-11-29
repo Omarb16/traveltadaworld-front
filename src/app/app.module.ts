@@ -39,6 +39,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { DialogEditComponent } from './components/dialog-edit/dialog-edit.component';
 import { DialogTripComponent } from './components/dialog-trip/dialog-trip.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TripListComponent } from './components/trip-list/trip-list.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     SigninComponent,
     TripComponent,
     TripDetailComponent,
+    TripListComponent,
   ],
   imports: [
     AppRoutingModule,

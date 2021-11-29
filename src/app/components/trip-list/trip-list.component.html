@@ -1,0 +1,30 @@
+<div class="container">
+    <mat-dialog-content>
+        <form novalidate [formGroup]="form">
+            <h1>Rechercher un voyage</h1>
+            <p>
+                <mat-form-field class="full-width">
+                    <input type="text" matInput placeholder="Titre" formControlName="title" requis name="title" />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input type="text" matInput placeholder="Pays" formControlName="country" requis name="country" />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input type="text" matInput placeholder="Ville" formControlName="city" requis name="city" />
+                </mat-form-field>
+            </p>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button color="primary" (click)="find()" [disabled]="form.invalid">Recherche</button>
+    </mat-dialog-actions>
+    <div class="container flex">
+        <div *ngFor="let t of _trips; let i = index">
+            <app-trip [trip]="t"></app-trip>
+        </div>
+    </div>
+</div>

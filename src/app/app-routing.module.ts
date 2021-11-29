@@ -12,6 +12,7 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { TripComponent } from './components/trip/trip.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { NotAuthGuard } from './guards/not-auth.guard';
+import { TripListComponent } from './components/trip-list/trip-list.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'trips-list',
+    component: TripListComponent,
   },
   {
     path: 'trips',
