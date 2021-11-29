@@ -59,7 +59,6 @@ export class UserService {
   loggedIn(res: UserLogged) {
     localStorage.setItem('name', res.lastname + ' ' + res.firstname);
     localStorage.setItem('access_token', res.access_token);
-    localStorage.setItem('id', res.id);
     this.currentUserSource.next(res.lastname + ' ' + res.firstname);
     this.isLoggedIn = true;
     this._router.navigate(['/']);

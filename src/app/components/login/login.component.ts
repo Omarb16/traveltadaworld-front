@@ -13,7 +13,10 @@ import { LoginUser } from 'src/app/types/login-user.type';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   file: File;
+  error: string;
+
   constructor(private _userService: UserService, private _router: Router) {
+    this.error = '';
     this.file = {} as File;
     this.form = new FormGroup({
       email: new FormControl('Mclaughlin.Cochran@undefined.com', [
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
         },
         (err) => {
           console.error(err);
+          this.error = err.error.message;
         }
       );
     }

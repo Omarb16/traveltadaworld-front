@@ -33,7 +33,9 @@
             </mat-form-field>
           </p>
 
-
+          <mat-error *ngIf="error!=''">
+            {{error}}
+          </mat-error>
         </form>
 
         <mat-dialog-actions align="end">
