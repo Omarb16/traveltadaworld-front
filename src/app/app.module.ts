@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import {
   MatNativeDateModule,
@@ -40,7 +41,9 @@ import { DialogEditComponent } from './components/dialog-edit/dialog-edit.compon
 import { DialogTripComponent } from './components/dialog-trip/dialog-trip.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TripListComponent } from './components/trip-list/trip-list.component';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,6 +83,10 @@ import { TripListComponent } from './components/trip-list/trip-list.component';
     ReactiveFormsModule,
     FontAwesomeModule,
     MatToolbarModule,
+    MatListModule,
+    MatTableModule,
+    MatMenuModule,
+    MatBadgeModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
