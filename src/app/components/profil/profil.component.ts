@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { User } from 'src/app/types/user.type';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profil',
@@ -12,9 +13,10 @@ import { User } from 'src/app/types/user.type';
 export class ProfilComponent implements OnInit {
   faUserEdit = faUserEdit;
   private _user: User;
-
+  defaultImg: string;
   constructor(private _router: Router, private _userService: UserService) {
     this._user = {} as User;
+    this.defaultImg = environment.defaultImgUser;
   }
 
   ngOnInit(): void {

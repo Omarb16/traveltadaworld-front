@@ -11,7 +11,7 @@ export class TripService {
   constructor(private _http: HttpClient) {}
 
   find(id: string): Observable<Trip> {
-    return this._http.get<Trip>(environment.apiUrl + 'trips/' + id);
+    return this._http.get<Trip>(environment.apiUrl + 'trips/find/' + id);
   }
 
   findAll(query: string): Observable<Trip[]> {

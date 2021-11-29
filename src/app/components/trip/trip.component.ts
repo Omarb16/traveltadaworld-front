@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -8,7 +9,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TripComponent implements OnInit {
   @Input() trip: any = {};
-  constructor(private _router: Router) {}
+  defaultImg: string;
+  constructor(private _router: Router) {
+    this.defaultImg = environment.defaultImgTrip;
+  }
 
   ngOnInit(): void {}
 

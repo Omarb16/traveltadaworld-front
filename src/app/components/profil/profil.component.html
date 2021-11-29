@@ -17,8 +17,8 @@
       <div class="col-md-4">
         <div class="card card-profile">
           <div class="card-avatar">
-            <a href="javascript:void(0)">
-              <img class="img" src="./assets/img/face/marc.jpg" />
+            <a>
+              <img class="img" [src]="user.photo||defaultImg" />
             </a>
           </div>
           <mat-card class="mat-whiteframe-2dp">

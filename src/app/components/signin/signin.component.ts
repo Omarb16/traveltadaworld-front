@@ -19,12 +19,15 @@ import * as moment from 'moment';
 export class SigninComponent implements OnInit {
   form: FormGroup;
   file: File;
-  hide=true;
+  hide: boolean;
+  error: string;
 
   constructor(private _userService: UserService, private _router: Router) {
     this.file = {} as File;
+    this.hide = true;
+    this.error = '';
     this.form = new FormGroup({
-      email: new FormControl('omar@gmail.com', [
+      email: new FormControl('mclaughlin.cochran@gmail.com', [
         Validators.required,
         Validators.email,
       ]),
@@ -35,8 +38,8 @@ export class SigninComponent implements OnInit {
         ),
       ]),
       repassword: new FormControl('aaAA12**', Validators.required),
-      firstname: new FormControl('Omar', Validators.required),
-      lastname: new FormControl('Bouayad', Validators.required),
+      firstname: new FormControl('Mclaughlin', Validators.required),
+      lastname: new FormControl('Cochran', Validators.required),
       photo: new FormControl(null, Validators.required),
       birthDate: new FormControl(null, Validators.required),
       address: new FormControl('address', Validators.required),
@@ -76,15 +79,24 @@ export class SigninComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
-      var user = this.form.value as User;
+      var formData = new FormData();
+      var user = this.form.value;
       delete user.photo;
       user.birthDate = moment(this.birthDate.value).utc().format();
-      this._userService.signIn(user).subscribe(
+      for (const property in user) {
+        if (user[property]) {
+          formData.append(property, user[property]);
+        }
+      }
+      if (this.file) formData.append('file', this.file, this.file.name);
+      console.log(formData);
+      this._userService.signIn(formData).subscribe(
         (res: UserLogged) => {
           this._userService.loggedIn(res);
         },
         (err) => {
           console.error(err);
+          this.error = err.error.message;
         }
       );
     }

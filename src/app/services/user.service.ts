@@ -25,7 +25,7 @@ export class UserService {
     }
   }
 
-  signIn(user: User): Observable<UserLogged> {
+  signIn(user: FormData): Observable<UserLogged> {
     return this._http.post<UserLogged>(
       environment.apiUrl + 'users/signIn',
       user

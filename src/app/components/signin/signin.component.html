@@ -53,14 +53,16 @@
 
     <p>
       <mat-form-field class="full-width">
-        <input type="password" matInput placeholder="Mot de passe" formControlName="password" requis name="password" [type]="hide ? 'password' : 'text'" />
+        <input type="password" matInput placeholder="Mot de passe" formControlName="password" requis name="password"
+          [type]="hide ? 'password' : 'text'" />
         <mat-error *ngIf="password?.dirty && password?.hasError('requis')">
           Mot de passe est <strong>requis</strong>
         </mat-error>
         <mat-error *ngIf="password.touched && password?.hasError('pattern')">
           Mot de passe est <strong>invalide</strong>
         </mat-error>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
@@ -83,7 +85,7 @@
     <p>
 
       <mat-form-field class="full-width">
-        <input matInput placeholder="Adresse" formControlName="adress" minlength="2" requis name="address" />
+        <input matInput placeholder="Adresse" formControlName="address" minlength="2" requis name="address" />
         <mat-error *ngIf="address?.dirty && address?.hasError('requis')">
           Adresse est <strong>requis</strong>
         </mat-error>
@@ -138,9 +140,14 @@
     <p>
       <input (change)="onFileChange($event)" type="file" class="form-control" accept="image/*">
     </p>
+    <p>
+      <mat-error *ngIf="error!=''">
+        {{error}}
+      </mat-error>
+    </p>
 
-    <button href="javascript:void(0)" class="btn btn-danger btn-round"
-       [disabled]="form.invalid" (click)="save()">S'inscrire</button>
+    <button href="javascript:void(0)" class="btn btn-danger btn-round" [disabled]="form.invalid"
+      (click)="save()">S'inscrire</button>
     &nbsp;&nbsp;
     <a href="javascript:void(0)" class="btn btn-danger btn-round" [routerLink]="['/']">Retour</a>
   </form>
