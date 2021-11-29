@@ -1,19 +1,16 @@
 <app-navbar></app-navbar>
 
+
 <mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="travlerFilter($event)" placeholder="Ex. ium" #input>
 </mat-form-field>
   <section>
-    <mat-list>
-      <mat-list-item (click)="navigate(trip.id)" *ngFor="let trip of trips" class="mat-whiteframe-2dp mat-card">
-        <img mat-list-avatar src="{{ trip.photo }}">
-        <h3 matLine> test</h3>
-        <p matLine>
-          ici trip
-        </p>
+
+      <mat-list-item (click)="navigate(t.id)" *ngFor="let t of trips; " class="mat-whiteframe-2dp mat-card">
+        <app-trip [trip]="t"></app-trip>
       </mat-list-item>
-    </mat-list>
+
   </section>
 
 
