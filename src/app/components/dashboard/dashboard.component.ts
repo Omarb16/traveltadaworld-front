@@ -7,17 +7,24 @@ import {MatTableDataSource} from "@angular/material/table";
 export interface PeriodicElement {
   destination: string;
   date: string;
-  oragnisateur: string;
-  etat: string;
+  oragnisateur?: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {date: 'Jan 8, 2016', destination: "nancy", oragnisateur: 'H', etat: 'H'},
-  {date: 'Jan 8, 2019', destination: "p", oragnisateur: 'He', etat: 'H'},
-  {date: 'Jan 8, 2000', destination: "cas", oragnisateur: 'Li', etat: 'H'},
-  {date: 'Jan 8, 2011', destination: "jj" ,oragnisateur: 'Be', etat: 'H'},
-  { date: 'Jan 8, 2021', destination: "jjj", oragnisateur: 'B', etat: 'H'},
-  { date: 'Jan 8, 2002', destination: "jjjjj", oragnisateur: 'C', etat: 'H'},
+  {date: 'Jan 8, 2016', destination: "nancy", oragnisateur: 'H' },
+  {date: 'Jan 8, 2019', destination: "p", oragnisateur: 'He'},
+  {date: 'Jan 8, 2000', destination: "cas", oragnisateur: 'Li'},
+  {date: 'Jan 8, 2011', destination: "jj" ,oragnisateur: 'Be'},
+  { date: 'Jan 8, 2021', destination: "jjj", oragnisateur: 'B'},
+  { date: 'Jan 8, 2002', destination: "jjjjj", oragnisateur: 'C'},
+];
+const ELEMENT_DATA_0rganisateur : PeriodicElement[] = [
+  {date: 'Jan 8, 2016', destination: "nancy"},
+  {date: 'Jan 8, 2019', destination: "p"},
+  {date: 'Jan 8, 2000', destination: "cas"},
+  {date: 'Jan 8, 2011', destination: "jj" },
+  { date: 'Jan 8, 2021', destination: "jjj"},
+  { date: 'Jan 8, 2002', destination: "jjjjj"},
 ];
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +34,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class DashboardComponent implements OnInit {
   _trips: Trip[];
   displayedColumns: string[] = ['date', 'destination', 'oragnisateur', 'etat'];
+  displayedColumnsOrganisateur: string[] = ['date', 'destination', 'etat', 'supprimer'];
+
   myDataArray = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
