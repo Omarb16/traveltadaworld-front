@@ -16,8 +16,7 @@
 
         </td>
         <td class="align-right">
-          <!-- not required by API, so we put static content which is not editable and not sent to the API -->
-          <img width="112" [src]="photo?.value" />
+          <img [src]="photo?.value" *ngIf="isUpdateMode" />
         </td>
       </tr>
     </table>
@@ -36,7 +35,7 @@
       </mat-form-field>
     </p>
 
-    <p formGroupName="destination">
+    <p>
       <mat-form-field class="full-width">
         <input matInput placeholder="Ville" formControlName="city" required name="ville" />
         <mat-error *ngIf="city.dirty && city.hasError('required')">
@@ -45,7 +44,7 @@
       </mat-form-field>
     </p>
 
-    <p formGroupName="destination">
+    <p>
       <mat-form-field class="full-width">
         <input matInput placeholder="Pays" formControlName="country" required name="country" />
         <mat-error *ngIf="country?.dirty && country?.hasError('required')">

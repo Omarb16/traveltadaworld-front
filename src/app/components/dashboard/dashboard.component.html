@@ -1,74 +1,109 @@
 <mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  <input matInput (keyup)="travlerFilter($event)" placeholder="Ex. ium" #input>
 </mat-form-field>
 
 <h4 class="mat-subheading-1 ">Voyageur</h4>
-<table mat-table [dataSource]="myDataArray" class="mat-elevation-z8">
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+<table mat-table [dataSource]="_userTrips" class="mat-elevation-z8" *ngIf="_travelerTrips.length>0">
+  <ng-container matColumnDef="photo">
+    <th mat-header-cell *matHeaderCellDef> Photo </th>
+    <td mat-cell *matCellDef="let e"> {{e.photo}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="destination">
-    <th mat-header-cell *matHeaderCellDef> Destination </th>
-    <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Titre </th>
+    <td mat-cell *matCellDef="let e"> {{e.title}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="oragnisateur">
+  <ng-container matColumnDef="createdBy">
     <th mat-header-cell *matHeaderCellDef> Oragnisateur </th>
-    <td mat-cell *matCellDef="let element"> {{element.oragnisateur}} </td>
+    <td mat-cell *matCellDef="let e"> {{e.createdBy}} </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let e"> {{e.description}} </td>
+  </ng-container>
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef> Ville </th>
+    <td mat-cell *matCellDef="let e"> {{e.city}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="etat">
-    <th mat-header-cell *matHeaderCellDef> Etat </th>
-    <td mat-cell *matCellDef="let element">
-      <a href="javascript:void(0)" mat-raised-button color="warn"
-                                                  [routerLink]="['/']">Annuler la demande</a></td>
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef> Pays </th>
+    <td mat-cell *matCellDef="let e"> {{e.country}} </td>
+  </ng-container>
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef> Date de création </th>
+    <td mat-cell *matCellDef="let e"> {{e.createdAt}} </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <ng-container>
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let e">
+      <a mat-raised-button color="warn" (click)="cancel(e.id)">Annuler la demande</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="colTravelerrips"></tr>
+  <tr mat-row *matRowDef="let row; columns: colTravelerrips;"></tr>
 </table>
+<p *ngIf="_travelerTrips.length<=0">
+  Aucun voyage
+</p>
 
 <br>
 <h4 class="mat-subheading-1 accent-color ">Organisateur</h4>
-<table mat-table [dataSource]="myDataArray" class="mat-elevation-z8">
+<table mat-table [dataSource]="_userTrips" class="mat-elevation-z8" *ngIf="_userTrips.length>0">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+  <ng-container matColumnDef="photo">
+    <th mat-header-cell *matHeaderCellDef> Photo </th>
+    <td mat-cell *matCellDef="let e"> {{e.photo}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="destination">
-    <th mat-header-cell *matHeaderCellDef> Destination </th>
-    <td mat-cell *matCellDef="let element"> {{element.destination}} </td>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Titre </th>
+    <td mat-cell *matCellDef="let e"> {{e.title}} </td>
   </ng-container>
 
-   <!-- Symbol Column -->
-  <ng-container matColumnDef="etat">
-    <th mat-header-cell *matHeaderCellDef> Etat </th>
-    <td mat-cell *matCellDef="let element">
-      <a href="javascript:void(0)" mat-raised-button color="warn"
-         [routerLink]="['/']">Edit</a></td>
+  <!-- <ng-container matColumnDef="travelers">
+    <th mat-header-cell *matHeaderCellDef> Voyageurs </th>
+    <td mat-cell *matCellDef="let e"> {{e.travelers}} </td>
+  </ng-container> -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let e"> {{e.description}} </td>
+  </ng-container>
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef> Ville </th>
+    <td mat-cell *matCellDef="let e"> {{e.city}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="supprimer">
-    <th mat-header-cell *matHeaderCellDef> Suprimer </th>
-    <td mat-cell *matCellDef="let element">
-      <a href="javascript:void(0)" mat-raised-button color="warn"
-         [routerLink]="['/']">Suprimer</a></td>
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef> Pays </th>
+    <td mat-cell *matCellDef="let e"> {{e.country}} </td>
+  </ng-container>
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef> Date de création </th>
+    <td mat-cell *matCellDef="let e"> {{e.createdAt}} </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumnsOrganisateur"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumnsOrganisateur;"></tr>
+  <ng-container>
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let e">
+      <a mat-raised-button color="warn" (click)="update(e.id)">Modifier</a>
+    </td>
+  </ng-container>
+
+  <ng-container>
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let e">
+      <a mat-raised-button color="warn" (click)="delete(e.id)">Supprimer</a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="colUserTrips"></tr>
+  <tr mat-row *matRowDef="let row; columns: colUserTrips;"></tr>
 </table>
-
+<p *ngIf="_userTrips.length<=0">
+  Aucun voyage organisé
+</p>

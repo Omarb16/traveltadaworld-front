@@ -42,10 +42,8 @@ export class FormTripComponent implements OnInit {
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
       photo: new FormControl(''),
-      destination: new FormGroup({
-        city: new FormControl('', Validators.required),
-        country: new FormControl('', Validators.required),
-      }),
+      city: new FormControl('', Validators.required),
+      country: new FormControl('', Validators.required),
     });
 
     if (!this._isUpdateMode) {
@@ -109,15 +107,18 @@ export class FormTripComponent implements OnInit {
         photo: 'https://randomuser.me/api/portraits/lego/6.jpg',
         title: '',
         description: '',
-        destination: {
-          pays: '',
-          ville: '',
-        },
+        country: '',
+        city: '',
       };
+      this._isUpdateMode = false;
     }
 
     // update form's values with model
     this._form.patchValue(this._model);
+  }
+
+  get isUpdateMode(): boolean {
+    return this._isUpdateMode;
   }
 
   /**
@@ -144,29 +145,28 @@ export class FormTripComponent implements OnInit {
     if (this._isUpdateMode) {
       const id = trip.id;
       delete trip.id;
-      for (const property in trip) {
-        if (trip[property]) {
-          formData.append(property, trip[property]);
-        }
-      }
+      formData.append('title', JSON.stringify(trip.title));
+      formData.append('description', JSON.stringify(trip.description));
+      formData.append('city', trip.desnation.city);
+      formData.append('country', trip.country);
       if (this._file) formData.append('file', this._file, this._file.name);
       this._submit$.emit({ formData, id, isUpdate: true });
     } else {
-      for (const property in trip) {
-        if (trip[property]) {
-          formData.append(property, trip[property]);
-        }
-      }
+      formData.append('title', JSON.stringify(trip.title));
+      formData.append('description', JSON.stringify(trip.description));
+      formData.append('city', trip.city);
+      formData.append('country', trip.country);
+      if (this._file) formData.append('file', this._file, this._file.name);
       this._submit$.emit({ formData, id: null, isUpdate: false });
     }
   }
 
   get country(): FormControl {
-    return <FormControl>this.form.get('destination')?.get('country');
+    return <FormControl>this.form.get('country');
   }
 
   get city(): FormControl {
-    return <FormControl>this.form.get('destination')?.get('city');
+    return <FormControl>this.form.get('city');
   }
 
   get title(): FormControl {

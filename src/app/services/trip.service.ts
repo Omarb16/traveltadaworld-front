@@ -18,6 +18,10 @@ export class TripService {
     return this._http.get<Trip[]>(environment.apiUrl + 'trips' + query);
   }
 
+  findTravelerTrips(): Observable<Trip[]> {
+    return this._http.get<Trip[]>(environment.apiUrl + 'trips/travelertrips');
+  }
+
   findUserTrips(): Observable<Trip[]> {
     return this._http.get<Trip[]>(environment.apiUrl + 'trips/usertrips');
   }
@@ -27,10 +31,18 @@ export class TripService {
   }
 
   update(id: string, trip: Trip): Observable<Trip> {
-    return this._http.put<Trip>(environment.apiUrl + 'trips/' + id, trip);
+    return this._http.put<Trip>(environment.apiUrl + 'trips/update' + id, trip);
   }
 
   delete(id: string): Observable<Trip> {
-    return this._http.delete<Trip>(environment.apiUrl + 'trips/' + id);
+    return this._http.delete<Trip>(environment.apiUrl + 'trips/delete' + id);
+  }
+
+  demand(id: string): Observable<Trip> {
+    return this._http.put<Trip>(environment.apiUrl + 'trips/demand/' + id, {});
+  }
+
+  cancel(id: string): Observable<Trip> {
+    return this._http.delete<Trip>(environment.apiUrl + 'trips/cancel/' + id);
   }
 }
