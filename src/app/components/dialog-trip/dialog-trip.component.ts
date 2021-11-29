@@ -35,7 +35,7 @@ export class DialogTripComponent implements OnInit {
   /**
    * Function to close the modal and send person to parent
    */
-  onSave(trip: Trip): void {
+  onSave(trip: any): void {
     this._dialogRef.close(trip);
   }
 }

@@ -39,7 +39,7 @@ export class UserService {
     );
   }
 
-  update(id: string, user: User): Observable<User> {
+  update(id: string, user: FormData): Observable<User> {
     return this._http.put<User>(environment.apiUrl + 'users/' + id, user);
   }
 

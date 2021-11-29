@@ -17,19 +17,40 @@ export class FormTripComponent implements OnInit {
   // private property to store cancel$ value
   private readonly _cancel$: EventEmitter<void>;
   // private property to store submit$ value
-  private readonly _submit$: EventEmitter<Trip>;
+  private readonly _submit$: EventEmitter<FormData>;
   // private property to store form value
   private readonly _form: FormGroup;
 
+  _file: File | null;
   /**
    * Component constructor
    */
   constructor() {
     this._model = {} as Trip;
+    this._file = null;
     this._isUpdateMode = false;
-    this._submit$ = new EventEmitter<Trip>();
+    this._submit$ = new EventEmitter<FormData>();
     this._cancel$ = new EventEmitter<void>();
-    this._form = this._buildForm();
+    this._form = new FormGroup({
+      id: new FormControl(''),
+      title: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(2)])
+      ),
+      description: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(2)])
+      ),
+      photo: new FormControl(''),
+      destination: new FormGroup({
+        city: new FormControl('', Validators.required),
+        country: new FormControl('', Validators.required),
+      }),
+    });
+
+    if (!this._isUpdateMode) {
+      this.photo.addValidators(Validators.required);
+    }
   }
 
   /**
@@ -66,7 +87,7 @@ export class FormTripComponent implements OnInit {
    * Returns private property _submit$
    */
   @Output('submit')
-  get submit$(): EventEmitter<Trip> {
+  get submit$(): EventEmitter<FormData> {
     return this._submit$;
   }
 
@@ -106,34 +127,30 @@ export class FormTripComponent implements OnInit {
     this._cancel$.emit();
   }
 
-  /**
-   * Function to emit event to submit form and person
-   */
-  submit(trip: Trip): void {
-    delete trip.photo;
-    this._submit$.emit(trip);
+  onFileChange(event: any) {
+    this._file = null;
+    this.photo.setValue(null);
+    this.photo.markAsTouched();
+    this._file = event.target.files[0];
+    this.photo.setValue('Done');
   }
 
   /**
-   * Function to build our form
+   * Function to emit event to submit form and person
    */
-  private _buildForm(): FormGroup {
-    return new FormGroup({
-      id: new FormControl(''),
-      title: new FormControl(
-        '',
-        Validators.compose([Validators.required, Validators.minLength(2)])
-      ),
-      description: new FormControl(
-        '',
-        Validators.compose([Validators.required, Validators.minLength(2)])
-      ),
-      photo: new FormControl(''),
-      destination: new FormGroup({
-        city: new FormControl('', Validators.required),
-        country: new FormControl('', Validators.required),
-      }),
-    });
+  submit(trip: any): void {
+    var formData = new FormData();
+    delete trip.photo;
+    if (this._isUpdateMode) {
+      delete trip.id;
+    }
+    for (const property in trip) {
+      if (trip[property]) {
+        formData.append(property, trip[property]);
+      }
+    }
+    if (this._file) formData.append('file', this._file, this._file.name);
+    this._submit$.emit(formData);
   }
 
   get country(): FormControl {

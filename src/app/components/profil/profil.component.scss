@@ -1,3 +1,15 @@
+.card-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    width: 50%;
+    .img-profil,
+    img {
+      width: 100%;
+    }
+  }
+}
 
 app-footer {
   position: fixed;
@@ -5,5 +17,3 @@ app-footer {
   bottom: 0;
   width: 100%;
 }
-
-

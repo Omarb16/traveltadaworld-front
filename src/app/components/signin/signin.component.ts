@@ -89,7 +89,6 @@ export class SigninComponent implements OnInit {
         }
       }
       if (this.file) formData.append('file', this.file, this.file.name);
-      console.log(formData);
       this._userService.signIn(formData).subscribe(
         (res: UserLogged) => {
           this._userService.loggedIn(res);

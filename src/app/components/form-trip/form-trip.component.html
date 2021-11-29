@@ -54,6 +54,10 @@
       </mat-form-field>
     </p>
 
+    <p>
+      <input (change)="onFileChange($event)" type="file" class="form-control" accept="image/*">
+    </p>
+
     <!-- required by API, so we put static content which is not editable but sent to the API -->
   </form>
 </mat-dialog-content>

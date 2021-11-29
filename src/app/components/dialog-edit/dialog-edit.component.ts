@@ -35,7 +35,7 @@ export class DialogEditComponent implements OnInit {
   /**
    * Function to close the modal and send person to parent
    */
-  onSave(user: User): void {
+  onSave(user: any): void {
     this._dialogRef.close(user);
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs';
 import { User } from 'src/app/types/user.type';
 import { UserService } from 'src/app/services/user.service';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
@@ -12,7 +11,9 @@ import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
   styleUrls: ['./modal-edit.component.scss'],
 })
 export class ModalEditComponent implements OnInit {
-  private _personDialog: MatDialogRef<DialogEditComponent, User> | undefined;
+  private _personDialog:
+    | MatDialogRef<DialogEditComponent, FormData>
+    | undefined;
 
   /**
    * Component constructor
@@ -51,28 +52,12 @@ export class ModalEditComponent implements OnInit {
     });
 
     // subscribe to afterClosed observable to set dialog status and do process
-    this._personDialog
-      .afterClosed()
-      .pipe(
-        filter((user: User | undefined) => !!user),
-        map((user: User | undefined) => {
-          delete user?.id;
-          return { update: user };
-        }),
-        mergeMap((_: { update: any }) => {
-          this._userService.changeName(
-            _.update.lastname + ' ' + _.update.firstname
-          );
-          return this._userService.update(
-            this._userService.getIdUser(),
-            _.update
-          );
-        })
-      )
-      .subscribe({
-        next: () => {
+    this._personDialog.afterClosed().subscribe((res: any) => {
+      this._userService
+        .update(this._userService.getIdUser(), res)
+        .subscribe((res2) => {
           this._router.navigate(['/profil']);
-        },
-      });
+        });
+    });
   }
 }

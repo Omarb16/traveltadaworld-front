@@ -13,7 +13,9 @@ import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
   styleUrls: ['./modal-trip.component.scss'],
 })
 export class ModalTripComponent implements OnInit {
-  private _personDialog: MatDialogRef<DialogTripComponent, Trip> | undefined;
+  private _personDialog:
+    | MatDialogRef<DialogTripComponent, FormData>
+    | undefined;
   _id: string | null;
   /**
    * Component constructor
@@ -57,28 +59,16 @@ export class ModalTripComponent implements OnInit {
       data: trip,
     });
 
-    // subscribe to afterClosed observable to set dialog status and do process
-    this._personDialog
-      .afterClosed()
-      .pipe(
-        filter((trip: Trip | undefined) => !!trip),
-        map((trip: any) => {
-          const id = trip?.id;
-          delete trip?.id;
-          return { id, update: trip };
-        }),
-        mergeMap((_: { id: string | undefined; update: any }) => {
-          if (_.id) {
-            return this._tripService.update(_.id, _.update);
-          } else {
-            return this._tripService.create(_.update);
-          }
-        })
-      )
-      .subscribe({
-        next: () => {
-          this._router.navigate(['/profil']);
-        },
-      });
+    // this._personDialog.afterClosed().subscribe((res: any) => {
+    //   if (update) {
+    //     this._tripService.update(id, res).subscribe((res2) => {
+    //       this._router.navigate(['/profil']);
+    //     });
+    //   } else {
+    //     this._tripService.create(res).subscribe((res2) => {
+    //       this._router.navigate(['/profil']);
+    //     });
+    //   }
+    // });
   }
 }

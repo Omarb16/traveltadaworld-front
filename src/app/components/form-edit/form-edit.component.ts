@@ -9,6 +9,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/types/user.type';
 import * as moment from 'moment';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-form-edit',
@@ -21,16 +22,16 @@ export class FormEditComponent implements OnInit, OnChanges {
   // private property to store cancel$ value
   private readonly _cancel$: EventEmitter<void>;
   // private property to store submit$ value
-  private readonly _submit$: EventEmitter<User>;
+  private readonly _submit$: EventEmitter<FormData>;
   // private property to store form value
   private readonly _form: FormGroup;
 
-  _file: File;
+  _file: File | null;
 
-  constructor() {
+  constructor(private _userService: UserService) {
     this._model = {} as User;
-    this._file = {} as File;
-    this._submit$ = new EventEmitter<User>();
+    this._file = null;
+    this._submit$ = new EventEmitter<FormData>();
     this._cancel$ = new EventEmitter<void>();
     this._form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -94,7 +95,7 @@ export class FormEditComponent implements OnInit, OnChanges {
    * Returns private property _submit$
    */
   @Output('submit')
-  get submit$(): EventEmitter<User> {
+  get submit$(): EventEmitter<FormData> {
     return this._submit$;
   }
 
@@ -126,11 +127,8 @@ export class FormEditComponent implements OnInit, OnChanges {
   }
 
   onFileChange(event: any) {
-    this._file = {} as File;
-    this.photo.setValue(null);
-    this.photo.markAsTouched();
+    this._file = null;
     this._file = event.target.files[0];
-    this.photo.setValue('photo');
   }
 
   /**
@@ -143,9 +141,20 @@ export class FormEditComponent implements OnInit, OnChanges {
   /**
    * Function to emit event to submit form and person
    */
-  submit(user: User): void {
+  submit(user: any): void {
+    var formData = new FormData();
     delete user.photo;
-    this._submit$.emit(user);
+    delete user.id;
+    user.birthDate = moment(this.birthDate.value).utc().format();
+
+    this._userService.changeName(user.lastname + ' ' + user.firstname);
+    for (const property in user) {
+      if (user[property]) {
+        formData.append(property, user[property]);
+      }
+    }
+    if (this._file) formData.append('file', this._file, this._file.name);
+    this._submit$.emit(formData);
   }
 
   get email(): FormControl {
