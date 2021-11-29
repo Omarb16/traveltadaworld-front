@@ -10,7 +10,8 @@ import { Trip } from 'src/app/types/trip.type';
 })
 export class TripListComponent implements OnInit {
   form: FormGroup;
-  _trips: Trip[];
+  private _trips: Trip[];
+
   constructor(private _tripService: TripService) {
     this._trips = [];
     this.form = new FormGroup({
@@ -23,6 +24,15 @@ export class TripListComponent implements OnInit {
   ngOnInit(): void {
     this.find();
   }
+
+  get trips(): Trip[] {
+    return this._trips;
+  }
+
+  set trips(value: Trip[]) {
+    this._trips = value;
+  }
+
 
   find() {
     if (this.form.valid) {
