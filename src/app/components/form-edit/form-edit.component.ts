@@ -6,21 +6,16 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  FormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/types/user.type';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+  selector: 'app-form-edit',
+  templateUrl: './form-edit.component.html',
+  styleUrls: ['./form-edit.component.scss'],
 })
-export class FormComponent implements OnInit, OnChanges {
+export class FormEditComponent implements OnInit, OnChanges {
   // private property to store model value
   private _model: User;
   // private property to store cancel$ value

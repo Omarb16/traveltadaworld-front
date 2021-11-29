@@ -4,15 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs';
 import { User } from 'src/app/types/user.type';
 import { UserService } from 'src/app/services/user.service';
-import { DialogComponent } from '../dialog/dialog.component';
+import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
 
 @Component({
-  selector: 'app-update',
-  templateUrl: './update.component.html',
-  styleUrls: ['./update.component.scss'],
+  selector: 'app-modal-edit',
+  templateUrl: './modal-edit.component.html',
+  styleUrls: ['./modal-edit.component.scss'],
 })
-export class UpdateComponent implements OnInit {
-  private _personDialog: MatDialogRef<DialogComponent, User> | undefined;
+export class ModalEditComponent implements OnInit {
+  private _personDialog: MatDialogRef<DialogEditComponent, User> | undefined;
 
   /**
    * Component constructor
@@ -44,7 +44,7 @@ export class UpdateComponent implements OnInit {
    */
   private _initModal(user: User): void {
     // create modal with initial data inside
-    this._personDialog = this._dialog.open(DialogComponent, {
+    this._personDialog = this._dialog.open(DialogEditComponent, {
       width: '500px',
       disableClose: true,
       data: user,
