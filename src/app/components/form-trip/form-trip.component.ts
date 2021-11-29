@@ -130,10 +130,10 @@ export class FormTripComponent implements OnInit {
 
   onFileChange(event: any) {
     this._file = null;
-    this.photo.setValue(null);
-    this.photo.markAsTouched();
     this._file = event.target.files[0];
-    this.photo.setValue('Done');
+    if (!this.isUpdateMode) {
+      this.photo.setValue('Done');
+    }
   }
 
   /**
@@ -145,15 +145,15 @@ export class FormTripComponent implements OnInit {
     if (this._isUpdateMode) {
       const id = trip.id;
       delete trip.id;
-      formData.append('title', JSON.stringify(trip.title));
-      formData.append('description', JSON.stringify(trip.description));
-      formData.append('city', trip.desnation.city);
+      formData.append('title', trip.title);
+      formData.append('description', trip.description);
+      formData.append('city', trip.city);
       formData.append('country', trip.country);
       if (this._file) formData.append('file', this._file, this._file.name);
       this._submit$.emit({ formData, id, isUpdate: true });
     } else {
-      formData.append('title', JSON.stringify(trip.title));
-      formData.append('description', JSON.stringify(trip.description));
+      formData.append('title', trip.title);
+      formData.append('description', trip.description);
       formData.append('city', trip.city);
       formData.append('country', trip.country);
       if (this._file) formData.append('file', this._file, this._file.name);

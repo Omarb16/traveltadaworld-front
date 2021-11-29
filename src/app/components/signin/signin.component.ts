@@ -43,12 +43,13 @@ export class SigninComponent implements OnInit {
       photo: new FormControl(null, Validators.required),
       birthDate: new FormControl(null, Validators.required),
       address: new FormControl('address', Validators.required),
-      city: new FormControl('city', Validators.required),
-      postalCode: new FormControl('9055', [
+      city: new FormControl('Nancy', Validators.required),
+      country: new FormControl('France', Validators.required),
+      postalCode: new FormControl('54500', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
       ]),
-      phone: new FormControl('+33610012939', [
+      phone: new FormControl('+33610012739', [
         Validators.required,
         Validators.pattern('^[+]{1}[0-9]{10,12}$'),
       ]),
@@ -131,6 +132,10 @@ export class SigninComponent implements OnInit {
 
   get postalCode(): FormControl {
     return <FormControl>this.form.get('postalCode');
+  }
+
+  get country(): FormControl {
+    return <FormControl>this.form.get('country');
   }
 
   get phone(): FormControl {

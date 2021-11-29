@@ -19,7 +19,7 @@ import {
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './components/signin/signin.component';
 import { TripComponent } from './components/trip/trip.component';
@@ -41,9 +41,14 @@ import { DialogEditComponent } from './components/dialog-edit/dialog-edit.compon
 import { DialogTripComponent } from './components/dialog-trip/dialog-trip.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TripListComponent } from './components/trip-list/trip-list.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeFr);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,9 +91,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatListModule,
     MatTableModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     {
       provide: MAT_DATE_FORMATS,

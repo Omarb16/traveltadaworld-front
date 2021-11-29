@@ -31,11 +31,14 @@ export class TripService {
   }
 
   update(id: string, trip: Trip): Observable<Trip> {
-    return this._http.put<Trip>(environment.apiUrl + 'trips/update' + id, trip);
+    return this._http.put<Trip>(
+      environment.apiUrl + 'trips/update/' + id,
+      trip
+    );
   }
 
   delete(id: string): Observable<Trip> {
-    return this._http.delete<Trip>(environment.apiUrl + 'trips/delete' + id);
+    return this._http.delete<Trip>(environment.apiUrl + 'trips/delete/' + id);
   }
 
   demand(id: string): Observable<Trip> {

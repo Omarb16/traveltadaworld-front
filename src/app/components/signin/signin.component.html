@@ -100,7 +100,7 @@
       <mat-form-field class="full-width">
         <input matInput placeholder="Ville" formControlName="city" minlength="2" requis name="city" />
         <mat-error *ngIf="city?.dirty && city?.hasError('requis')">
-          Ville est <strong>requis</strong>
+          Ville est <strong>requise</strong>
         </mat-error>
         <mat-error *ngIf="city?.dirty && city?.hasError('minlength')">
           Ville est <strong>2 chars min</strong>
@@ -124,15 +124,27 @@
 
     <p>
       <mat-form-field class="full-width">
+        <input matInput placeholder="Ville" formControlName="country" minlength="2" requis name="city" />
+        <mat-error *ngIf="city?.dirty && city?.hasError('requis')">
+          Pays est <strong>requis</strong>
+        </mat-error>
+        <mat-error *ngIf="city?.dirty && city?.hasError('minlength')">
+          Pays est <strong>2 chars min</strong>
+        </mat-error>
+      </mat-form-field>
+
+    </p>
+
+    <p>
+      <mat-form-field class="full-width">
         <input matInput placeholder="Telephone" formControlName="phone" minlength="2" requis name="phone" />
         <mat-error *ngIf="phone?.dirty && phone?.hasError('requis')">
-          Adresse est <strong>requis</strong>
+          Telephone est <strong>requis</strong>
         </mat-error>
         <mat-error *ngIf="phone.touched && phone?.hasError('pattern')">
           Telephone est <strong> invalide </strong>
         </mat-error>
       </mat-form-field>
-
     </p>
 
 
