@@ -1,31 +1,51 @@
-<div class="container main-cont">
-    <h1>Se connecter</h1>
-    <form [formGroup]="form">
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Email</label>
-                <input type="email" class="form-control" formControlName="email" placeholder="Email">
-                <div class="text-danger" *ngIf="email.touched && email?.hasError('required')">
-                    Email requis
-                </div>
-                <div class="text-danger" *ngIf="email.touched && email?.hasError('email')">
-                    Email invalid
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Mot de passe</label>
-                <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe">
-                <div class="text-danger" *ngIf="password.touched && password?.hasError('required')">
-                    Mot de passe requis
-                </div>
-                <div class="text-danger" *ngIf="password.touched && password?.hasError('pattern')">
-                    Mot de passe invalid
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="save()">Se connecter</button>
+<div id="sect1"class="container">
+  <h1 style="text-align:center ; color:blueviolet;  position: relative;
+  top:25%; right: 25%;">Rentrer dans le monde du voyage</h1>
 
-    </form>
-    <a [routerLink]="['/signin']">S'inscrire</a>
+  <mat-card class="mat-whiteframe-2dp" style=" position: relative;
+  top:25%; right: 25%;">
+    <mat-card-title-group>
+      <mat-card-title>
+        <a href="javascript:void(0);">
+          <span style="font-size: 100%;">Connexion</span>
+        </a>
+      </mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div class="connexion">
+        <form novalidate [formGroup]="form">
+          <p>
+            <mat-form-field class="full-width">
+              <input type="email" matInput placeholder="Email" formControlName="email" requis name="email" />
+              <mat-error *ngIf="email?.dirty && email?.hasError('requis')">
+                Email est <strong>requis</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+
+          <p>
+            <mat-form-field class="full-width">
+              <input type="password" matInput placeholder="Mot de passe" formControlName="password" requis name="password" />
+              <mat-error *ngIf="password?.dirty && password?.hasError('requis')">
+                Mot de passe est <strong>requis</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+
+
+        </form>
+
+        <mat-dialog-actions align="end">
+          <button mat-button color="primary" type="submit" (click)="save()" [disabled]="form.invalid" style="color:blueviolet;">Se connecter</button>
+
+          <div class="col-sm-12 pt-3 text-right">
+            <a [routerLink]="['/signin']" style="color:blueviolet;"  >Pas encore inscrit? c'est ici !</a>
+          </div>
+        </mat-dialog-actions>
+
+      </div>
+    </mat-card-content>
+
+  </mat-card>
 
 </div>

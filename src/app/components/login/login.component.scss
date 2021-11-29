@@ -1,0 +1,132 @@
+#sect1 {
+  height: 1000px;
+  color: #fff;
+  background-image: url("../../../assets/img/background/login.jpg");
+  background-size: 100% ;
+  background-size: cover;
+}
+
+
+@media (min-width: 768px) {
+  :host(.wide) mat-card,
+  :host(.wide) mat-list-item{
+    width: 600px;
+  }
+}
+
+
+mat-card,
+mat-list-item {
+  background-color-color: rgb(212,210,198);
+  border: 2px solid pink;
+  color: rgba(0,0,0,0.87);
+  width: 360px;
+  height: 400px;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+  vertical-align:middle;
+}
+
+
+
+mat-list-item {
+  height: 22px;
+  padding: 0;
+  margin-left: -12px;
+  font-size: 14px;
+}
+
+mat-card-title {
+  margin-bottom: 30px;
+}
+
+mat-card-title span {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+mat-card-subtitle.connexion {
+
+  height: 20px;
+}
+
+mat-card-title-group {
+  margin-bottom: 20px;
+}
+
+.connexion mat-icon + a {
+  position: relative;
+  height: 18px;
+
+}
+
+.connexion a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+.full-width{
+  color:  rgb(69,61,59) ;
+  text-decoration: none;
+
+}
+
+mat-icon {
+  color: rgba(0,0,0,0.54);
+  margin: 4px;
+}
+
+a {
+  color:  rgb(69,61,59) ;
+  text-decoration: none;
+}
+
+mat-card-actions button[mat-raised-button] {
+  margin: 5px;
+}
+
+
+a.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 188px;
+}
+
+@media (max-width: 600px) {
+  a.truncate {
+    width: 170px;
+  }
+}
+
+@media (max-width: 768px) {
+  a.truncate {
+    width: 190px;
+  }
+}
+
+.mat-whiteframe-2dp {
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,.2),
+  0 2px 2px 0 rgba(0,0,0,.14),
+  0 3px 1px -2px rgba(0,0,0,.12);
+
+}
+
+img {
+  border-radius: 50%;
+  margin-right: 18px;
+}
+
+
+.inscriptionFLink:hover {
+  cursor: pointer;
+}
+.connexionLink:hover {
+  cursor: pointer;
+}
+
