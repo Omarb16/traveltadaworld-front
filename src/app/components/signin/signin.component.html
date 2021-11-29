@@ -1,108 +1,140 @@
-<div class="container main-cont">
+<div id="section" class="container main-cont">
     <h1>Créer un compte</h1>
     <form [formGroup]="form">
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Prenom</label>
-                <input type="text" class="form-control" formControlName="firstname" placeholder="Prenom">
-                <div class="text-danger" *ngIf="firstname.touched && firstname?.hasError('required')">
-                    Prénom requis
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Nom</label>
-                <input type="text" class="form-control" formControlName="lastname" placeholder="Nom">
-                <div class="text-danger" *ngIf="lastname.touched && firstname?.hasError('required')">
-                    Nom requis
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Email</label>
-                <input type="email" class="form-control" formControlName="email" placeholder="Email">
-                <div class="text-danger" *ngIf="email.touched && email?.hasError('required')">
-                    Email requis
-                </div>
-                <div class="text-danger" *ngIf="email.touched && email?.hasError('email')">
-                    Email invalid
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Mot de passe</label>
-                <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe">
-                <div class="text-danger" *ngIf="password.touched && password?.hasError('required')">
-                    Mot de passe requis
-                </div>
-                <div class="text-danger" *ngIf="password.touched && password?.hasError('pattern')">
-                    Mot de passe invalid
-                </div>
-            </div>
 
+      <table class="full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="full-width" [class.mgb15]="firstname?.dirty && firstname?.invalid">
+              <input matInput placeholder="Prenom" formControlName="firstname" minlength="2" requis name="firstname" />
+              <mat-error *ngIf="firstname?.dirty && firstname?.hasError('requis')">
+                Prenom est <strong>request</strong>
+              </mat-error>
+              <mat-error *ngIf="firstname?.dirty && firstname?.hasError('minlength')">
+                Prenom est <strong>2 chars min</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nom" formControlName="lastname" minlength="2" requis name="lastname" />
+              <mat-error *ngIf="lastname?.dirty && lastname?.hasError('requis')">
+                Nom est <strong>requis</strong>
+              </mat-error>
+              <mat-error *ngIf="lastname?.dirty && lastname?.hasError('minlength')">
+                Nom est <strong>2 chars min</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <div class="form-group col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Date de naissance</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="text-danger" *ngIf="birthDate.touched && birthDate?.hasError('required')">
+          Date de naissance requise
         </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Photo</label>
-                <input type="file" class="form-control" (change)="onFileChange($event)" accept="image/*" />
-            </div>
-            <div class="form-group col-md-6">
-                <label>Retaper le mot de passe</label>
-                <input type="password" class="form-control" formControlName="repassword"
-                    placeholder="Retaper le mot de passe">
-                <div class="text-danger" *ngIf="repassword.touched && form?.hasError('missMatch')">
-                    Retaper le mot de passe correctement
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Adresse</label>
-            <input type="text" class="form-control" formControlName="address" placeholder="Adresse">
-            <div class="text-danger" *ngIf="address.touched && address?.hasError('required')">
-                Adresse requise
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Ville</label>
-                <input type="text" class="form-control" formControlName="city" placeholder="Ville">
-                <div class="text-danger" *ngIf="city.touched && city?.hasError('required')">
-                    Ville requise
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Code postal</label>
-                <input type="text" class="form-control" formControlName="postalCode" placeholder="Code postal">
-                <div class="text-danger" *ngIf="postalCode.touched && postalCode?.hasError('required')">
-                    Code postal requis
-                </div>
-                <div class="text-danger" *ngIf="postalCode.touched && postalCode?.hasError('pattern')">
-                    Code postal invalid
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Telephone</label>
-                <input type="text" class="form-control" formControlName="phone" placeholder="Telephone">
-                <div class="text-danger" *ngIf="phone.touched && phone?.hasError('required')">
-                    Telephone requis
-                </div>
-                <div class="text-danger" *ngIf="phone.touched && phone?.hasError('pattern')">
-                    Telephone invalid
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <mat-form-field appearance="fill">
-                    <mat-label>Date de naissance</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="birthDate">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <div class="text-danger" *ngIf="birthDate.touched && birthDate?.hasError('required')">
-                    Date de naissance requise
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-primary" [disabled]="form.invalid" (click)="save()">S'inscrire</button>
+      </div>
+
+      <p>
+        <mat-form-field class="full-width">
+          <input type="email" matInput placeholder="Email" formControlName="email" requis name="email" />
+          <mat-error *ngIf="email?.dirty && email?.hasError('requis')">
+            Email est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="email?.dirty && !email?.hasError('requis') && email?.hasError('googleEmail')">
+            Invalid email <strong>(ex: name.firstname@gmail.com)</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field class="full-width">
+          <input type="password" matInput placeholder="Mot de passe" formControlName="password" requis name="password" />
+          <mat-error *ngIf="password?.dirty && password?.hasError('requis')">
+            Mot de passe est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="password.touched && password?.hasError('pattern')">
+            Mot de passe est <strong>invalide</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+
+      <p>
+        <mat-form-field class="full-width">
+          <input type="password" matInput placeholder="Confirmation mot de passe" formControlName="repassword" requis name="password" />
+          <mat-error *ngIf="repassword?.dirty && repassword?.hasError('requis')">
+            Confirmation mot de passe est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="repassword.touched && repassword?.hasError('pattern')">
+            Confirmation mot de passe est <strong>invalide</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Adresse" formControlName="adress" minlength="2" requis name="address" />
+          <mat-error *ngIf="address?.dirty && address?.hasError('requis')">
+            Adresse est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="address?.dirty && address?.hasError('minlength')">
+            Adresse est <strong>2 chars min</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </p>
+
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Ville" formControlName="city" minlength="2" requis name="city" />
+          <mat-error *ngIf="city?.dirty && city?.hasError('requis')">
+            Ville est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="city?.dirty && city?.hasError('minlength')">
+            Ville est <strong>2 chars min</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </p>
+
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Code postal" formControlName="postalCode" minlength="2" requis name="postalCode" />
+          <mat-error *ngIf="postalCode?.dirty && postalCode?.hasError('requis')">
+            Code postal est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="postalCode?.dirty && postalCode?.hasError('minlength')">
+            Code postal est <strong>2 chars min</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </p>
+
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Telephone" formControlName="phone" minlength="2" requis name="phone" />
+          <mat-error *ngIf="phone?.dirty && phone?.hasError('requis')">
+            Adresse est <strong>requis</strong>
+          </mat-error>
+          <mat-error *ngIf="phone.touched && phone?.hasError('pattern')">
+            Telephone est <strong> invalide </strong>
+          </mat-error>
+        </mat-form-field>
+
+      </p>
+      <p>
+        <input (change)="onFileChange($event)" type="file" class="form-control" accept="image/*">
+      </p>
+
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid" (click)="save()">S'inscrire</button>
     </form>
 </div>
+
+
+
