@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TripDetail } from '../types/trip-detail.type';
 import { Trip } from '../types/trip.type';
 
 @Injectable({
@@ -12,6 +13,12 @@ export class TripService {
 
   find(id: string): Observable<Trip> {
     return this._http.get<Trip>(environment.apiUrl + 'trips/find/' + id);
+  }
+
+  findDetail(id: string): Observable<TripDetail> {
+    return this._http.get<TripDetail>(
+      environment.apiUrl + 'trips/finddetail/' + id
+    );
   }
 
   findAll(query: string): Observable<Trip[]> {
