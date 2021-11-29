@@ -1,1 +1,3 @@
-<p>trip-detail works!</p>
+<app-trip [trip]="_trip"></app-trip>
+<button mat-button type="button" *ngIf="_trip.canDemand" (click)="demand(_trip.id)">Effectuer une demande</button>
+<button mat-button type="button" *ngIf="_trip.canCancel" (click)="cancel(_trip.id)">Annuler la demande</button>
