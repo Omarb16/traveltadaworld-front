@@ -5,6 +5,9 @@
   <mat-card class="mat-whiteframe-2dp" style=" position: relative;
   top:25%; right: 25%;">
     <mat-card-title-group>
+      <button mat-button color="primary" type="submit" [routerLink]="['/']"
+      style="color:blue; position: absolute;
+bottom: 0; right:0;">Retour</button>
       <mat-card-title>
         <a href="javascript:void(0);">
           <span style="font-size: 100%;">Connexion</span>
@@ -26,10 +29,13 @@
           <p>
             <mat-form-field class="full-width">
               <input type="password" matInput placeholder="Mot de passe" formControlName="password" requis
-                name="password" />
+                name="password" matInput [type]="hide ? 'password' : 'text'" />
               <mat-error *ngIf="password?.dirty && password?.hasError('requis')">
                 Mot de passe est <strong>requis</strong>
               </mat-error>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
           </p>
 
@@ -41,15 +47,16 @@
         <mat-dialog-actions align="end">
           <button mat-button color="primary" type="submit" (click)="save()" [disabled]="form.invalid"
             style="color:blueviolet;">Se connecter</button>
-
-          <div class="col-sm-12 pt-3 text-right">
-            <a [routerLink]="['/signin']" style="color:blueviolet;">Pas encore inscrit? c'est ici !</a>
+            <div class="col-sm-12 pt-3 text-left">
+            <a [routerLink]="['/signin']" style="color:blueviolet; position: center">Pas encore inscrit? c'est ici !</a>
           </div>
         </mat-dialog-actions>
-
       </div>
     </mat-card-content>
 
+
+
   </mat-card>
+
 
 </div>

@@ -19,6 +19,7 @@ import * as moment from 'moment';
 export class SigninComponent implements OnInit {
   form: FormGroup;
   file: File;
+  hide=true;
 
   constructor(private _userService: UserService, private _router: Router) {
     this.file = {} as File;

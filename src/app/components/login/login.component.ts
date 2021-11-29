@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   file: File;
   error: string;
+  hide=true;
 
   constructor(private _userService: UserService, private _router: Router) {
     this.error = '';
