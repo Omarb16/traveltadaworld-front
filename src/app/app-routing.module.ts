@@ -1,6 +1,6 @@
-import { FormEditComponent } from './components/form-edit/form-edit.component';
+import { ModalTripComponent } from './components/modal-trip/modal-trip.component';
+import { ModalEditComponent } from './components/modal-edit/modal-edit.component';
 import { AuthGuard } from './guards/auth.guard';
-import { FormTripComponent } from './components/form-trip/form-trip.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,9 +18,9 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  { path: 'profil', component: ProfilComponent , canActivate: [AuthGuard] },
+  { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
 
-  { path: 'edit/:id', component: FormEditComponent, canActivate: [AuthGuard] },
+  { path: 'edit/:id', component: ModalEditComponent, canActivate: [AuthGuard] },
   {
     path: 'login',
     component: LoginComponent,
@@ -46,12 +46,12 @@ const routes: Routes = [
   },
   {
     path: 'create-trip',
-    component: FormTripComponent,
+    component: ModalTripComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'update-trip/:id',
-    component: FormTripComponent,
+    component: ModalTripComponent,
     canActivate: [AuthGuard],
   },
   {

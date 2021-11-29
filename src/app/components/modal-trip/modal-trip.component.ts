@@ -1,3 +1,4 @@
+import { DialogTripComponent } from './../dialog-trip/dialog-trip.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,30 +13,37 @@ import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
   styleUrls: ['./modal-trip.component.scss'],
 })
 export class ModalTripComponent implements OnInit {
-  private _personDialog: MatDialogRef<DialogEditComponent, Trip> | undefined;
-
+  private _personDialog: MatDialogRef<DialogTripComponent, Trip> | undefined;
+  _id: string | null;
   /**
    * Component constructor
    */
   constructor(
-    private _route: ActivatedRoute,
+    private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _tripService: TripService,
     private _dialog: MatDialog
-  ) {}
+  ) {
+    this._id = null;
+  }
 
   /**
    * OnInit implementation
    */
   ngOnInit(): void {
-    // this._tripService.find(tripId).subscribe(
-    //   (res: Trip) => {
-    //     this._initModal(res);
-    //   },
-    //   (err) => {
-    //     console.error(err);
-    //   }
-    // );
+    this._id = this._activatedRoute.snapshot.paramMap.get('id');
+    if (!this._id) {
+      this._initModal({} as Trip);
+    } else {
+      this._tripService.find(this._id).subscribe(
+        (res: Trip) => {
+          this._initModal(res);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    }
   }
 
   /**
@@ -43,7 +51,7 @@ export class ModalTripComponent implements OnInit {
    */
   private _initModal(trip: Trip): void {
     // create modal with initial data inside
-    this._personDialog = this._dialog.open(DialogEditComponent, {
+    this._personDialog = this._dialog.open(DialogTripComponent, {
       width: '500px',
       disableClose: true,
       data: trip,

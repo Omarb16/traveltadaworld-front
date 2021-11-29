@@ -111,6 +111,7 @@ export class FormTripComponent implements OnInit {
    * Function to emit event to submit form and person
    */
   submit(trip: Trip): void {
+    delete trip.photo;
     this._submit$.emit(trip);
   }
 
@@ -119,29 +120,39 @@ export class FormTripComponent implements OnInit {
    */
   private _buildForm(): FormGroup {
     return new FormGroup({
-      id: new FormControl(),
-      photo: new FormControl(),
-      firstname: new FormControl(
+      title: new FormControl(
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
-      lastname: new FormControl(
+      description: new FormControl(
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
-      entity: new FormControl(),
-      phone: new FormControl(
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern('(0|\\+33)\\d{9}'),
-        ])
-      ),
-      address: new FormGroup({
-        street: new FormControl('', Validators.required),
+      photo: new FormControl(''),
+      destination: new FormGroup({
         city: new FormControl('', Validators.required),
-        postalCode: new FormControl('', Validators.required),
+        country: new FormControl('', Validators.required),
       }),
     });
+  }
+
+  get country(): FormControl {
+    return <FormControl>this.form.get('destination')?.get('country');
+  }
+
+  get city(): FormControl {
+    return <FormControl>this.form.get('destination')?.get('city');
+  }
+
+  get title(): FormControl {
+    return <FormControl>this.form.get('title');
+  }
+
+  get photo(): FormControl {
+    return <FormControl>this.form.get('photo');
+  }
+
+  get description(): FormControl {
+    return <FormControl>this.form.get('description');
   }
 }

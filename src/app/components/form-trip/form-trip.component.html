@@ -4,12 +4,12 @@
     <table class="full-width" cellspacing="0">
       <tr>
         <td>
-          <mat-form-field class="full-width" [class.mgb15]="form.get('titre')?.dirty && form.get('titre')?.invalid">
-            <input matInput placeholder="Titre" formControlName="titre" minlength="2" required name="titre" />
-            <mat-error *ngIf="form.get('titre')?.dirty && form.get('titre')?.hasError('required')">
+          <mat-form-field class="full-width" [class.mgb15]="title?.dirty && title?.invalid">
+            <input matInput placeholder="Titre" formControlName="title" minlength="2" required name="title" />
+            <mat-error *ngIf="title?.dirty && title?.hasError('required')">
               Titre is <strong>required</strong>
             </mat-error>
-            <mat-error *ngIf="form.get('titre')?.dirty && form.get('titre')?.hasError('minlength')">
+            <mat-error *ngIf="title?.dirty && title?.hasError('minlength')">
               Titre is <strong>2 chars min</strong>
             </mat-error>
           </mat-form-field>
@@ -17,46 +17,44 @@
         </td>
         <td class="align-right">
           <!-- not required by API, so we put static content which is not editable and not sent to the API -->
-          <img width="112" [src]="form.get('photo')?.value" />
+          <img width="112" [src]="photo?.value" />
         </td>
       </tr>
     </table>
 
     <p>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Organisateur" formControlName="organisateur" required name="organisateur" />
-        <mat-error *ngIf="form.get('organisateur')?.dirty && form.get('organisateur')?.hasError('required')">
+        <textarea matInput placeholder="Description" formControlName="description" required
+          name="description"></textarea>
+        <mat-error *ngIf="description?.dirty && description?.hasError('required')">
           Organisateur is <strong>required</strong>
         </mat-error>
         <mat-error
-          *ngIf="form.get('organisateur')?.dirty && !form.get('organisateur')?.hasError('required') && form.get('email')?.hasError('googleEmail')">
-          Organisateur is <strong>2 chars min</strong>
+          *ngIf="description?.dirty && !description?.hasError('required') && form.get('email')?.hasError('googleEmail')">
+          Description est <strong>2 chars min</strong>
         </mat-error>
       </mat-form-field>
     </p>
 
     <p formGroupName="destination">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Ville" formControlName="ville" required name="ville" />
-        <mat-error
-          *ngIf="form.get('destination')?.get('ville')?.dirty && form.get('destination')?.get('ville')?.hasError('required')">
-          Destination is <strong>required</strong>
+        <input matInput placeholder="Ville" formControlName="city" required name="ville" />
+        <mat-error *ngIf="city.dirty && city.hasError('required')">
+          Ville est <strong>requise</strong>
         </mat-error>
       </mat-form-field>
     </p>
 
     <p formGroupName="destination">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Pays" formControlName="pays" required name="pays" />
-        <mat-error
-          *ngIf="form.get('destination')?.get('pays')?.dirty && form.get('destination')?.get('pays')?.hasError('required')">
+        <input matInput placeholder="Pays" formControlName="country" required name="country" />
+        <mat-error *ngIf="country?.dirty && country?.hasError('required')">
           Pays is <strong>required</strong>
         </mat-error>
       </mat-form-field>
     </p>
 
     <!-- required by API, so we put static content which is not editable but sent to the API -->
-    <input type="hidden" formControlName="entity" name="entity">
   </form>
 </mat-dialog-content>
 
