@@ -84,10 +84,9 @@ export class FormTripComponent implements OnInit {
       this._isUpdateMode = true;
     } else {
       this._model = {
-        dateVoyage: 0,
+        id: '',
         photo: 'https://randomuser.me/api/portraits/lego/6.jpg',
         title: '',
-        organisateur: ' ',
         description: '',
         destination: {
           pays: '',
@@ -120,6 +119,7 @@ export class FormTripComponent implements OnInit {
    */
   private _buildForm(): FormGroup {
     return new FormGroup({
+      id: new FormControl(''),
       title: new FormControl(
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])

@@ -2,7 +2,7 @@ import { DialogTripComponent } from './../dialog-trip/dialog-trip.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, mergeMap } from 'rxjs';
+import { defaultIfEmpty, filter, map, mergeMap } from 'rxjs';
 import { Trip } from 'src/app/types/trip.type';
 import { TripService } from 'src/app/services/trip.service';
 import { DialogEditComponent } from '../dialog-edit/dialog-edit.component';
@@ -62,11 +62,17 @@ export class ModalTripComponent implements OnInit {
       .afterClosed()
       .pipe(
         filter((trip: Trip | undefined) => !!trip),
-        map((trip: Trip | undefined) => {
-          return { create: trip };
+        map((trip: any) => {
+          const id = trip?.id;
+          delete trip?.id;
+          return { id, update: trip };
         }),
-        mergeMap((_: { create: any }) => {
-          return this._tripService.create(_.create);
+        mergeMap((_: { id: string | undefined; update: any }) => {
+          if (_.id) {
+            return this._tripService.update(_.id, _.update);
+          } else {
+            return this._tripService.create(_.update);
+          }
         })
       )
       .subscribe({

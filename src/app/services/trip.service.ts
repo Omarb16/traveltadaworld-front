@@ -18,6 +18,10 @@ export class TripService {
     return this._http.get<Trip[]>(environment.apiUrl + 'trips');
   }
 
+  findUserTrips(): Observable<Trip[]> {
+    return this._http.get<Trip[]>(environment.apiUrl + 'trips/usertrips');
+  }
+
   create(trip: Trip): Observable<Trip> {
     return this._http.post<Trip>(environment.apiUrl + 'trips', trip);
   }

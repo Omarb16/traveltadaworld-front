@@ -1,1 +1,8 @@
-<p>dashboard works!</p>
+<div class="container flex">
+    <div *ngFor="let t of _trips; let i = index">
+        <app-trip [trip]="t"></app-trip>
+
+        <button mat-button color="primary" (click)="update(t.id)">Modifier</button>
+        <button mat-button (click)="delete(t.id)">Supprimer</button>
+    </div>
+</div>
