@@ -10,6 +10,7 @@ export type User = {
   birthDate: string;
   address: string;
   city: string;
+  country: string;
   postalCode: string;
   phone: string;
 };

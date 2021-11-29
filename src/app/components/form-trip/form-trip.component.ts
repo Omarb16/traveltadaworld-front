@@ -17,7 +17,7 @@ export class FormTripComponent implements OnInit {
   // private property to store cancel$ value
   private readonly _cancel$: EventEmitter<void>;
   // private property to store submit$ value
-  private readonly _submit$: EventEmitter<FormData>;
+  private readonly _submit$: EventEmitter<any>;
   // private property to store form value
   private readonly _form: FormGroup;
 
@@ -142,15 +142,23 @@ export class FormTripComponent implements OnInit {
     var formData = new FormData();
     delete trip.photo;
     if (this._isUpdateMode) {
+      const id = trip.id;
       delete trip.id;
-    }
-    for (const property in trip) {
-      if (trip[property]) {
-        formData.append(property, trip[property]);
+      for (const property in trip) {
+        if (trip[property]) {
+          formData.append(property, trip[property]);
+        }
       }
+      if (this._file) formData.append('file', this._file, this._file.name);
+      this._submit$.emit({ formData, id, isUpdate: true });
+    } else {
+      for (const property in trip) {
+        if (trip[property]) {
+          formData.append(property, trip[property]);
+        }
+      }
+      this._submit$.emit({ formData, id: null, isUpdate: false });
     }
-    if (this._file) formData.append('file', this._file, this._file.name);
-    this._submit$.emit(formData);
   }
 
   get country(): FormControl {

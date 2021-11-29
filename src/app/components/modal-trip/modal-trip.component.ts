@@ -59,16 +59,17 @@ export class ModalTripComponent implements OnInit {
       data: trip,
     });
 
-    // this._personDialog.afterClosed().subscribe((res: any) => {
-    //   if (update) {
-    //     this._tripService.update(id, res).subscribe((res2) => {
-    //       this._router.navigate(['/profil']);
-    //     });
-    //   } else {
-    //     this._tripService.create(res).subscribe((res2) => {
-    //       this._router.navigate(['/profil']);
-    //     });
-    //   }
-    // });
+    this._personDialog.afterClosed().subscribe((res: any) => {
+      console.log(res);
+      if (res.isUpdate) {
+        this._tripService.update(res.id, res.formdate).subscribe(() => {
+          this._router.navigate(['/profil']);
+        });
+      } else {
+        this._tripService.create(res.formdate).subscribe(() => {
+          this._router.navigate(['/profil']);
+        });
+      }
+    });
   }
 }

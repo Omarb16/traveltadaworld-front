@@ -86,6 +86,15 @@
 
     <p>
       <mat-form-field class="full-width">
+        <input matInput placeholder="Pays" formControlName="country" requis name="country" />
+        <mat-error *ngIf="country?.dirty && country?.hasError('requis')">
+          Pays est <strong>requis</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field class="full-width">
         <textarea matInput placeholder="Description" formControlName="description" requis name="description"></textarea>
         <mat-error *ngIf="description?.dirty && description?.hasError('requis')">
           Description est <strong>requise</strong>

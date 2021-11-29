@@ -48,6 +48,7 @@ export class FormEditComponent implements OnInit, OnChanges {
       birthDate: new FormControl(null, Validators.required),
       address: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
+      country: new FormControl('', Validators.required),
       postalCode: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
@@ -116,6 +117,7 @@ export class FormEditComponent implements OnInit, OnChanges {
         birthDate: '',
         address: '',
         city: '',
+        country: '',
         postalCode: '',
         description: '',
         password: '',
@@ -175,6 +177,10 @@ export class FormEditComponent implements OnInit, OnChanges {
 
   get city(): FormControl {
     return <FormControl>this.form.get('city');
+  }
+
+  get country(): FormControl {
+    return <FormControl>this.form.get('country');
   }
 
   get postalCode(): FormControl {
