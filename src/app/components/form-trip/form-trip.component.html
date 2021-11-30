@@ -24,7 +24,7 @@
     <div class="form-group col-md-6">
       <mat-form-field appearance="fill">
         <mat-label>Date de debut</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="birthDate">
+        <input matInput [matDatepicker]="picker" formControlName="dateBegin">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -33,17 +33,19 @@
       </div>
     </div>
 
+
     <div class="form-group col-md-6">
       <mat-form-field appearance="fill">
         <mat-label>Date de fin</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="birthDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput [matDatepicker]="picker2" formControlName="dateEnd">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
       <div class="text-danger" *ngIf="dateEnd.touched && dateEnd?.hasError('required')">
         Date de fin requise
       </div>
     </div>
+
 
     <p>
       <mat-form-field class="full-width">

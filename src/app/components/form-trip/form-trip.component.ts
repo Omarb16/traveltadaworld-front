@@ -3,6 +3,7 @@ import { Trip } from '../../types/trip.type';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-form-trip',
@@ -154,10 +155,11 @@ export class FormTripComponent implements OnInit {
   submit(trip: any): void {
     var formData = new FormData();
     delete trip.photo;
+    trip.dateBegin= moment(this.dateBegin.value).utc().format();
+    trip.dateEnd= moment(this.dateEnd.value).utc().format();
     if (this._isUpdateMode) {
       const id = trip.id;
       delete trip.id;
-
       formData.append('title', trip.title);
       formData.append('dateBegin', trip.dateBegin);
       formData.append('dataEnd', trip.dataEnd);
