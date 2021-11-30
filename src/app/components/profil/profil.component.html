@@ -31,13 +31,13 @@
                 <p class="card-description">
                   {{user.description}}
                 </p>
-
-                <a mat-raised-button color="warn" [routerLink]="['/edit', user?.id]">Edit</a>
-                &nbsp;&nbsp;
                 <a mat-raised-button color="warn" [routerLink]="['/create-trip']">Organiser
                   un voyage</a>
+                &nbsp;&nbsp;
 
 
+
+                <button mat-icon-button color="warn" [routerLink]="['/edit', user?.id]"title="Edit"><mat-icon>edit</mat-icon></button>
               </div>
             </mat-card-content>
           </mat-card>
