@@ -1,6 +1,5 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { User } from 'src/app/types/user.type';
 import { environment } from 'src/environments/environment';
@@ -11,7 +10,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./profil.component.scss'],
 })
 export class ProfilComponent implements OnInit {
-  faUserEdit = faUserEdit;
   private _user: User;
   defaultImg: string;
   constructor(private _router: Router, private _userService: UserService) {

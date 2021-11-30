@@ -4,7 +4,7 @@ import { TripService } from 'src/app/services/trip.service';
 import { Trip } from 'src/app/types/trip.type';
 import { MatTableDataSource } from '@angular/material/table';
 import { environment } from 'src/environments/environment';
-import { NotifiactionService } from 'src/app/services/notifiaction.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { Notification } from '../../types/notification.type';
 
 @Component({
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private _tripService: TripService,
-    private _notificationService: NotifiactionService,
+    private _notificationService: NotificationService,
     private _router: Router
   ) {
     this._travelerTrips = [];
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
         this._travelerTrips = this._travelerTrips.filter(
           (e) => e.id !== item.id
         );
-        const notif: Notification = {
+        const notif: any = {
           title: 'Demande annulée',
           content: localStorage.getItem('name') + ' a annulée sa demande',
           seen: false,
@@ -113,7 +113,7 @@ export class DashboardComponent implements OnInit {
     this._tripService.accept(id, t.user).subscribe(
       (res) => {
         t.accept = true;
-        const notif: Notification = {
+        const notif: any = {
           title: 'Demande accepté',
           content: localStorage.getItem('name') + ' a accepté votre demande',
           seen: false,
@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
           (e) => e != t
         );
 
-        const notif: Notification = {
+        const notif: any = {
           title: 'Demande annulée',
           content: localStorage.getItem('name') + ' a rejeté votre demande',
           seen: false,

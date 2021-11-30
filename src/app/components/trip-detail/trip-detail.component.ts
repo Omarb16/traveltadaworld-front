@@ -1,4 +1,4 @@
-import { NotifiactionService } from 'src/app/services/notifiaction.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { TripService } from './../../services/trip.service';
 import { Trip } from './../../types/trip.type';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +16,7 @@ export class TripDetailComponent implements OnInit {
   _id: string | null;
   constructor(
     private _tripService: TripService,
-    private _notificationService: NotifiactionService,
+    private _notificationService: NotificationService,
     private _activatedRoute: ActivatedRoute
   ) {
     this._trip = {} as TripDetail;
@@ -44,7 +44,7 @@ export class TripDetailComponent implements OnInit {
       () => {
         this._trip.canDemand = false;
         this._trip.canCancel = true;
-        const notif: Notification = {
+        const notif: any = {
           title: 'Demande crée',
           content: localStorage.getItem('name') + ' a fait une demande',
           seen: false,
@@ -63,7 +63,7 @@ export class TripDetailComponent implements OnInit {
       () => {
         this._trip.canCancel = false;
         this._trip.canDemand = true;
-        const notif: Notification = {
+        const notif: any = {
           title: 'Demande annulée',
           content: localStorage.getItem('name') + ' a annulée sa demande',
           seen: false,

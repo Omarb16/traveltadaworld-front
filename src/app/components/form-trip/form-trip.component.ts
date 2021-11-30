@@ -219,6 +219,6 @@ export class FormTripComponent implements OnInit {
     return <FormControl>this.form.get('dateBegin');
   }
   get dateEnd(): FormControl {
-    return <FormControl>this.form.get('dateBegin');
+    return <FormControl>this.form.get('dateEnd');
   }
 }

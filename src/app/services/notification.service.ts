@@ -7,7 +7,7 @@ import { Notification } from '../types/notification.type';
 @Injectable({
   providedIn: 'root',
 })
-export class NotifiactionService {
+export class NotificationService {
   constructor(private _http: HttpClient) {}
 
   create(notification: Notification): Observable<Notification> {
@@ -17,20 +17,24 @@ export class NotifiactionService {
     );
   }
 
-  find(id: string): Observable<Notification> {
-    return this._http.get<Notification>(
-      environment.apiUrl + 'notifications/' + id
+  find(): Observable<Notification[]> {
+    return this._http.get<Notification[]>(
+      environment.apiUrl + 'notifications/'
     );
   }
 
-  update(id: string, notification: FormData): Observable<Notification> {
+  seen(id: string, n: Notification): Observable<Notification> {
     return this._http.put<Notification>(
       environment.apiUrl + 'notifications/' + id,
-      notification
+      n
     );
   }
 
   delete(id: string): Observable<void> {
     return this._http.delete<void>(environment.apiUrl + 'notifications/' + id);
+  }
+
+  count(): Observable<number> {
+    return this._http.get<number>(environment.apiUrl + 'notifications/count/');
   }
 }
