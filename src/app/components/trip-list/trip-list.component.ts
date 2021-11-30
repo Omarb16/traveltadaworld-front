@@ -1,8 +1,10 @@
 import { TripService } from 'src/app/services/trip.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Trip } from 'src/app/types/trip.type';
 import {Router} from "@angular/router";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-trip-list',
@@ -21,17 +23,20 @@ export class TripListComponent implements OnInit {
   constructor(private _tripService: TripService,private  _routeur:Router) {
     this._trips = [];
     this.form = new FormGroup({
-      title: new FormControl(null),
+      price: new FormControl(null),
       city: new FormControl(null),
       country: new FormControl(null),
+      dateBegin: new FormControl(null),
+  dateEnd: new FormControl(null),
     });
     this._view = 'list';
 
   }
 
+
   ngOnInit(): void {
     this.find();
-  }
+   }
 
   get trips(): Trip[] {
     return this._trips;
@@ -54,10 +59,6 @@ export class TripListComponent implements OnInit {
     this._routeur.navigate([ '/trip', id ]);
   }
 
-  travlerFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    //this._travelerTrips.filter = filterValue.trim().toLowerCase();
-  }
 
   switchView(): void {
     this._view = (this._view === 'card') ? 'list' : 'card';
@@ -84,7 +85,6 @@ export class TripListComponent implements OnInit {
       );
     }
   }
-
 
 }
 

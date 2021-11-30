@@ -1,3 +1,29 @@
-<app-trip [trip]="_trip"></app-trip>
+<mat-card class="trip-card">
+  <mat-card-header>
+    <div mat-card-avatar class="trip-header-image"></div>
+    <mat-card-title>{{_trip?.title}}</mat-card-title>
+    <mat-card-subtitle>{{_trip?.country}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="flex">
+    <img class="img-profil" mat-card-image [src]="_trip.photo">
+  </div>
+  <mat-card-content>
+    <p>
+      {{_trip?.dateBegin}} jusqu'au {{_trip?.dataEnd}}
+    </p>
+    <p>
+      {{_trip?.description}}
+    </p>
+    <p>
+      {{_trip?.detail}}
+    </p>
+
+    <p>
+    <p>
+    Estimation du prix :  <a style="color:green;">{{_trip?.price}} € </a>
+    </p>
+  </mat-card-content>
+</mat-card>
 <button mat-button type="button" *ngIf="_trip.canDemand" (click)="demand(_trip)">Effectuer une demande</button>
 <button mat-button type="button" *ngIf="_trip.canCancel" (click)="cancel(_trip)">Annuler la demande</button>
+<button mat-button type="button"  color=warn [routerLink]="['/trips-list']">Retour</button>

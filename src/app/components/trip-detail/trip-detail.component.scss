@@ -1,0 +1,13 @@
+.img-profil {
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
+  object-fit: contain;
+  object-fit: cover;
+  object-position: top;
+}
+
+.trip-card {
+  width: 100%;
+  overflow-x: scroll;
+}
