@@ -1,33 +1,20 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" [routerLink]="['/']"><img class="logo" src="assets/logo.png"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <button mat-button [routerLink]="['/trips-list']">Voyage</button>
-          <button mat-button [routerLink]="['/contact']">Contact</button>
-          <button mat-raised-button color="primary"
-                  matBadge="8" matBadgePosition="before" matBadgeColor="accent" *ngIf="(userService.currentUser$ |async)">
-            Notifications
-          </button>
-        </div>
+<mat-toolbar>
+  <a [routerLink]="['/']"><img class="logo" src="assets/logo.png"></a>
+  <button mat-button [routerLink]="['/trips-list']">Voyage</button>
+  <button mat-button [routerLink]="['/contact']">Contact</button>
+  <button mat-raised-button color="primary"
+          matBadge="8" matBadgePosition="below after" matBadgeColor="accent" *ngIf="(userService.currentUser$ |async)">
+    Notifications
+  </button>
+  <span class="fill-space"></span>
+    <button color="primary"  mat-button [routerLink]="['/login']" *ngIf="!(userService.currentUser$ |async)">Se
+      connecter</button>
+
+    <button mat-button color="accent" *ngIf="(userService.currentUser$ |async) as name" [matMenuTriggerFor]="menu">{{name}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/profil']">Profil</button>
+      <button mat-menu-item (click)="logOut()">Se deconnecter</button>
+    </mat-menu>
 
 
-        <div>
-            <button class="btn-login" [routerLink]="['/login']" *ngIf="!(userService.currentUser$ |async)">Se
-                connecter</button>
-            <div class="dropdown" *ngIf="userService.currentUser$ |async">
-                <button id="dropdownMenuButton1" class="btn-login dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false" *ngIf="(userService.currentUser$ |async) as name">{{name}}</button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" [routerLink]="['/profil']">Profil</a></li>
-                    <li><a class="dropdown-item" (click)="logOut()">Se deconnecter</a></li>
-                </ul>
-            </div>
-        </div>
-
-
-    </div>
-</nav>
+</mat-toolbar>
