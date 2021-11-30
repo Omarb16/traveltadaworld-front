@@ -91,4 +91,26 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  accept(id: string, t: any) {
+    this._tripService.accept(id, t.traveler).subscribe(
+      (res) => {
+        t.accept = true;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  decline(id: string, t: any) {
+    this._tripService.decline(id, t.traveler).subscribe(
+      (res) => {
+        t.decline = true;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
 }
