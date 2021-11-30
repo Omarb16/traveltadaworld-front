@@ -146,6 +146,7 @@ export class FormTripComponent implements OnInit {
     if (this._isUpdateMode) {
       const id = trip.id;
       delete trip.id;
+
       formData.append('title', trip.title);
       formData.append('description', trip.description);
       formData.append('city', trip.city);
