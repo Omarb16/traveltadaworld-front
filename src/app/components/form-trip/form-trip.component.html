@@ -74,6 +74,19 @@
     </p>
 
     <p>
+      <mat-form-field class="full-width" [class.mgb15]="price?.dirty && price?.invalid">
+        <input matInput placeholder="Estimation du prix" formControlName="price" minlength="2" required name="price" />
+        <mat-error *ngIf="price?.dirty && price?.hasError('required')">
+          Prix is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="price?.dirty && price?.hasError('minlength')">
+          Prix is <strong>2 chars min</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+    </p>
+    <p>
       <mat-form-field class="full-width">
         <input matInput placeholder="Ville" formControlName="city" required name="ville" />
         <mat-error *ngIf="city.dirty && city.hasError('required')">
