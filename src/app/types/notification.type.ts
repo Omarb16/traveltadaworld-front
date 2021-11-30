@@ -1,4 +1,7 @@
 export type Notification = {
-  id: string;
-  description: string;
+  id?: string;
+  title: string;
+  content: string;
+  seen: boolean;
+  userId: string;
 };

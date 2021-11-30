@@ -4,6 +4,8 @@ import { TripService } from 'src/app/services/trip.service';
 import { Trip } from 'src/app/types/trip.type';
 import { MatTableDataSource } from '@angular/material/table';
 import { environment } from 'src/environments/environment';
+import { NotifiactionService } from 'src/app/services/notifiaction.service';
+import { Notification } from '../../types/notification.type';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,7 +38,11 @@ export class DashboardComponent implements OnInit {
     'Supprimer',
   ];
 
-  constructor(private _tripService: TripService, private _router: Router) {
+  constructor(
+    private _tripService: TripService,
+    private _notificationService: NotifiactionService,
+    private _router: Router
+  ) {
     this._travelerTrips = [];
     this._userTrips = [];
     this.defaultImg = environment.defaultImgTrip;
@@ -83,10 +89,19 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  cancel(id: string) {
-    this._tripService.cancel(id).subscribe(
+  cancel(item: any) {
+    this._tripService.cancel(item.id).subscribe(
       (res) => {
-        this._travelerTrips = this._travelerTrips.filter((e) => e.id !== id);
+        this._travelerTrips = this._travelerTrips.filter(
+          (e) => e.id !== item.id
+        );
+        const notif: Notification = {
+          title: 'Demande annulée',
+          content: localStorage.getItem('name') + ' a annulée sa demande',
+          seen: false,
+          userId: item.createdBy,
+        };
+        this._notificationService.create(notif).subscribe();
       },
       (err) => {
         console.error(err);
@@ -98,6 +113,13 @@ export class DashboardComponent implements OnInit {
     this._tripService.accept(id, t.user).subscribe(
       (res) => {
         t.accept = true;
+        const notif: Notification = {
+          title: 'Demande accepté',
+          content: localStorage.getItem('name') + ' a accepté votre demande',
+          seen: false,
+          userId: t.user,
+        };
+        this._notificationService.create(notif).subscribe();
       },
       (err) => {
         console.error(err);
@@ -111,6 +133,14 @@ export class DashboardComponent implements OnInit {
         this._userTrips[i].travelers = this._userTrips[i].travelers.filter(
           (e) => e != t
         );
+
+        const notif: Notification = {
+          title: 'Demande annulée',
+          content: localStorage.getItem('name') + ' a rejeté votre demande',
+          seen: false,
+          userId: t.user,
+        };
+        this._notificationService.create(notif).subscribe();
       },
       (err) => {
         console.error(err);

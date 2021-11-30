@@ -38,8 +38,8 @@ export class FormTripComponent implements OnInit {
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
-      dateBegin: new FormControl(''),
-      dateEnd: new FormControl(''),
+      dateBegin: new FormControl('', Validators.required),
+      dateEnd: new FormControl('', Validators.required),
       description: new FormControl(
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
@@ -48,7 +48,7 @@ export class FormTripComponent implements OnInit {
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
-      price: new FormControl(''),
+      price: new FormControl('', [Validators.required, Validators.min(0)]),
       photo: new FormControl(''),
       city: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
@@ -118,7 +118,7 @@ export class FormTripComponent implements OnInit {
         dataEnd: '',
         description: '',
         detail: '',
-        price:0,
+        price: 0,
         country: '',
         city: '',
         travelers: [],
@@ -155,14 +155,14 @@ export class FormTripComponent implements OnInit {
   submit(trip: any): void {
     var formData = new FormData();
     delete trip.photo;
-    trip.dateBegin= moment(this.dateBegin.value).utc().format();
-    trip.dateEnd= moment(this.dateEnd.value).utc().format();
+    trip.dateBegin = moment(this.dateBegin.value).utc().format();
+    trip.dateEnd = moment(this.dateEnd.value).utc().format();
     if (this._isUpdateMode) {
       const id = trip.id;
       delete trip.id;
       formData.append('title', trip.title);
       formData.append('dateBegin', trip.dateBegin);
-      formData.append('dataEnd', trip.dataEnd);
+      formData.append('dateEnd', trip.dataEnd);
       formData.append('description', trip.description);
       formData.append('detail', trip.detail);
       formData.append('price', trip.price);
@@ -175,7 +175,7 @@ export class FormTripComponent implements OnInit {
     } else {
       formData.append('title', trip.title);
       formData.append('dateBegin', trip.dateBegin);
-      formData.append('dataEnd', trip.dataEnd);
+      formData.append('dateEnd', trip.dataEnd);
       formData.append('description', trip.description);
       formData.append('detail', trip.detail);
       formData.append('price', trip.price);
@@ -221,6 +221,4 @@ export class FormTripComponent implements OnInit {
   get dateEnd(): FormControl {
     return <FormControl>this.form.get('dateBegin');
   }
-
-
 }
