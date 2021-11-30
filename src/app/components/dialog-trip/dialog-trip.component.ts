@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Trip } from 'src/app/types/trip.type';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dialog-trip',
@@ -10,7 +11,7 @@ import { Trip } from 'src/app/types/trip.type';
 export class DialogTripComponent implements OnInit {
   constructor(
     private _dialogRef: MatDialogRef<DialogTripComponent, Trip>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _trip: Trip
+    @Optional() @Inject(MAT_DIALOG_DATA) private _trip: Trip, private _router: Router
   ) {}
 
   /**
@@ -30,6 +31,7 @@ export class DialogTripComponent implements OnInit {
    */
   onCancel(): void {
     this._dialogRef.close();
+    this._router.navigate(['/profil']);
   }
 
   /**
@@ -37,5 +39,7 @@ export class DialogTripComponent implements OnInit {
    */
   onSave(trip: any): void {
     this._dialogRef.close(trip);
+    this._router.navigate(['/profil']);
+
   }
 }

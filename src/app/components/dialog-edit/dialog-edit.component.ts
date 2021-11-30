@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/types/user.type';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dialog-edit',
@@ -10,7 +11,7 @@ import { User } from 'src/app/types/user.type';
 export class DialogEditComponent implements OnInit {
   constructor(
     private _dialogRef: MatDialogRef<DialogEditComponent, User>,
-    @Optional() @Inject(MAT_DIALOG_DATA) private _user: User
+    @Optional() @Inject(MAT_DIALOG_DATA) private _user: User , private _router: Router
   ) {}
 
   /**
@@ -30,6 +31,7 @@ export class DialogEditComponent implements OnInit {
    */
   onCancel(): void {
     this._dialogRef.close();
+    this._router.navigate(['/profil']);
   }
 
   /**
