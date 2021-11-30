@@ -48,23 +48,26 @@ export class TripService {
     return this._http.delete<Trip>(environment.apiUrl + 'trips/delete/' + id);
   }
 
-  demand(id: string): Observable<Trip> {
-    return this._http.put<Trip>(environment.apiUrl + 'trips/demand/' + id, {});
+  demand(id: string, body: any): Observable<Trip> {
+    return this._http.put<Trip>(
+      environment.apiUrl + 'trips/demand/' + id,
+      body
+    );
   }
 
   cancel(id: string): Observable<Trip> {
     return this._http.delete<Trip>(environment.apiUrl + 'trips/cancel/' + id);
   }
 
-  accept(id: string, traveler: string): Observable<Trip> {
+  accept(id: string, user: string): Observable<Trip> {
     return this._http.put<Trip>(environment.apiUrl + 'trips/accept/' + id, {
-      id: traveler,
+      id: user,
     });
   }
 
-  decline(id: string, traveler: string): Observable<Trip> {
+  decline(id: string, user: string): Observable<Trip> {
     return this._http.put<Trip>(environment.apiUrl + 'trips/decline/' + id, {
-      id: traveler,
+      id: user,
     });
   }
 }

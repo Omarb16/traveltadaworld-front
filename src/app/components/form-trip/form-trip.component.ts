@@ -109,6 +109,7 @@ export class FormTripComponent implements OnInit {
         description: '',
         country: '',
         city: '',
+        travelers: [],
       };
       this._isUpdateMode = false;
     }
@@ -149,6 +150,8 @@ export class FormTripComponent implements OnInit {
       formData.append('description', trip.description);
       formData.append('city', trip.city);
       formData.append('country', trip.country);
+      const name = localStorage.getItem('name');
+      if (name) formData.append('createdNameBy', name);
       if (this._file) formData.append('file', this._file, this._file.name);
       this._submit$.emit({ formData, id, isUpdate: true });
     } else {
@@ -156,6 +159,8 @@ export class FormTripComponent implements OnInit {
       formData.append('description', trip.description);
       formData.append('city', trip.city);
       formData.append('country', trip.country);
+      const name = localStorage.getItem('name');
+      if (name) formData.append('createdNameBy', name);
       if (this._file) formData.append('file', this._file, this._file.name);
       this._submit$.emit({ formData, id: null, isUpdate: false });
     }

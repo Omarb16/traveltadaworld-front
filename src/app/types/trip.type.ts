@@ -5,4 +5,5 @@ export type Trip = {
   country: string;
   city: string;
   photo?: string;
+  travelers: any[];
 };

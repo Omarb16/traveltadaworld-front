@@ -34,7 +34,10 @@ export class TripDetailComponent implements OnInit {
   }
 
   demand(id: string) {
-    this._tripService.demand(id).subscribe(
+    const body = {
+      name: localStorage.getItem('name'),
+    };
+    this._tripService.demand(id, body).subscribe(
       () => {
         this._trip.canDemand = false;
         this._trip.canCancel = true;

@@ -43,6 +43,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._userTrips = [];
+    this._travelerTrips = [];
     this._tripService.findUserTrips().subscribe(
       (res: Trip[]) => {
         this._userTrips = res;
@@ -93,7 +95,7 @@ export class DashboardComponent implements OnInit {
   }
 
   accept(id: string, t: any) {
-    this._tripService.accept(id, t.traveler).subscribe(
+    this._tripService.accept(id, t.user).subscribe(
       (res) => {
         t.accept = true;
       },
@@ -103,10 +105,12 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  decline(id: string, t: any) {
-    this._tripService.decline(id, t.traveler).subscribe(
+  decline(id: string, t: any, i: number) {
+    this._tripService.decline(id, t.user).subscribe(
       (res) => {
-        t.decline = true;
+        this._userTrips[i].travelers = this._userTrips[i].travelers.filter(
+          (e) => e != t
+        );
       },
       (err) => {
         console.error(err);
