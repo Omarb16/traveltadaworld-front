@@ -17,6 +17,7 @@ export class TripListComponent implements OnInit {
 
 
 
+
   constructor(private _tripService: TripService,private  _routeur:Router) {
     this._trips = [];
     this.form = new FormGroup({
@@ -83,4 +84,7 @@ export class TripListComponent implements OnInit {
       );
     }
   }
+
+
 }
+

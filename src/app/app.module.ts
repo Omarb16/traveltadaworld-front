@@ -48,6 +48,8 @@ import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { ContactComponent } from './components/contact/contact.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 registerLocaleData(localeFr);
 
@@ -96,6 +98,8 @@ registerLocaleData(localeFr);
     MatMenuModule,
     MatBadgeModule,
     MatSnackBarModule,
+    MatGridListModule,
+    MatPaginatorModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

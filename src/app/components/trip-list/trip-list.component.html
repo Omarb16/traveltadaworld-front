@@ -22,13 +22,13 @@
     <a mat-raised-button color="warn" (click)="find()">Filtrer</a>
 </mat-dialog-content>
 
-<section>
 
-    <mat-list-item (click)="navigate(t.id)" *ngFor="let t of trips; " class="mat-whiteframe-2dp mat-card">
-        <app-trip [trip]="t"></app-trip>
-    </mat-list-item>
+    <mat-grid-list cols="3" rowHeight="2:1" >
+      <mat-grid-tile  *ngFor="let t of trips;"><app-trip [trip]="t"></app-trip></mat-grid-tile>
+      <br>
 
-</section>
+    </mat-grid-list>
 
 
-<app-footer></app-footer>
+
+
