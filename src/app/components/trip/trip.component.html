@@ -4,10 +4,12 @@
     <mat-card-title>{{trip?.title}}</mat-card-title>
     <mat-card-subtitle>{{trip?.country}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image [src]="trip.photo||defaultImg">
+  <div class="flex">
+    <img class="img-profil" mat-card-image [src]="trip.photo||defaultImg">
+  </div>
   <mat-card-content>
     <p>
-     {{trip?.description}}
+      {{trip?.description}}
     </p>
   </mat-card-content>
   <mat-card-actions>
