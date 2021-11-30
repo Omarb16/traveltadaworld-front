@@ -4,7 +4,8 @@
 </mat-form-field>
 
 <h4 class="mat-subheading-1">Voyageur</h4>
-<table mat-table [dataSource]="_travelerTrips" class="mat-elevation-z8" *ngIf="_travelerTrips.length>0">
+<table mat-table [dataSource]="_travelerTrips" class="mat-elevation-z8"
+  *ngIf="!!_travelerTrips && _travelerTrips.length>0">
   <ng-container matColumnDef="photo">
     <th mat-header-cell *matHeaderCellDef> Photo </th>
     <td mat-cell *matCellDef="let e"> <img [src]="e.photo||defaultImg" class="card-img-top" alt="..."></td>
@@ -55,7 +56,7 @@
 
 <br>
 <h4 class="mat-subheading-1 accent-color ">Organisateur</h4>
-<table mat-table [dataSource]="_userTrips" class="mat-elevation-z8" *ngIf="_userTrips.length>0">
+<table mat-table [dataSource]="_userTrips" class="mat-elevation-z8" *ngIf="!!_userTrips && _userTrips.length>0">
   <ng-container matColumnDef="photo">
     <th mat-header-cell *matHeaderCellDef> Photo </th>
     <td mat-cell *matCellDef="let e"> <img [src]="e.photo||defaultImg" class="card-img-top" alt="..."></td>
@@ -70,7 +71,7 @@
     <th mat-header-cell *matHeaderCellDef> Voyageurs </th>
     <td mat-cell *matCellDef="let e; let i = index;">
       <div *ngFor="let t of e.travelers">
-        <p>{{t.user.name}}</p>
+        <p>{{t.name}}</p>
         <a mat-raised-button color="warn" (click)="accept(e.id,t)"
           *ngIf="t.accept == null && t.decline !=true">Accepter</a>
         <a mat-raised-button color="warn" (click)="decline(e.id,t,i)"
