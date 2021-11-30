@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+
+<h2>Contacter nous <mat-icon aria-hidden="false">contact_support</mat-icon></h2>
+
+
+<form class="contact-form" [formGroup]="_form"  (ngSubmit)="openSnackBar(_form)">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Object</mat-label>
+    <input matInput placeholder="Ex. Signalement" formControlName="object" >
+  </mat-form-field>
+
+  <mat-form-field class="message" appearance="fill">
+    <mat-label>Votre message</mat-label>
+    <textarea matInput placeholder="Ex. Probelement eu avec un certain utilisateur" formControlName="text"></textarea>
+  </mat-form-field>
+  <button mat-stroked-button >Envoyer</button>
+
+
+</form>
+

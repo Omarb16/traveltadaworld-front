@@ -46,6 +46,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import { ContactComponent } from './components/contact/contact.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 registerLocaleData(localeFr);
 
@@ -69,6 +71,7 @@ registerLocaleData(localeFr);
     TripComponent,
     TripDetailComponent,
     TripListComponent,
+    ContactComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -92,6 +95,7 @@ registerLocaleData(localeFr);
     MatTableModule,
     MatMenuModule,
     MatBadgeModule,
+    MatSnackBarModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

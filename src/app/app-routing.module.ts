@@ -13,6 +13,7 @@ import { TripComponent } from './components/trip/trip.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { NotAuthGuard } from './guards/not-auth.guard';
 import { TripListComponent } from './components/trip-list/trip-list.component';
+import {ContactComponent} from "./components/contact/contact.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
     component: HomeComponent,
   },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+  {
+    path:'contact',
+    component:ContactComponent,
+
+  },
 
   { path: 'edit/:id', component: ModalEditComponent, canActivate: [AuthGuard] },
   {
