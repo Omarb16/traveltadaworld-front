@@ -21,16 +21,54 @@
       </tr>
     </table>
 
+    <div class="form-group col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de debut</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="text-danger" *ngIf="dateBegin.touched && dateBegin?.hasError('required')">
+        Date de debut requise
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Date de fin</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="text-danger" *ngIf="dateEnd.touched && dateEnd?.hasError('required')">
+        Date de fin requise
+      </div>
+    </div>
+
     <p>
       <mat-form-field class="full-width">
         <textarea matInput placeholder="Description" formControlName="description" required
           name="description"></textarea>
         <mat-error *ngIf="description?.dirty && description?.hasError('required')">
-          Organisateur is <strong>required</strong>
+          Description is <strong>required</strong>
         </mat-error>
         <mat-error
-          *ngIf="description?.dirty && !description?.hasError('required') && form.get('email')?.hasError('googleEmail')">
+          *ngIf="description?.dirty && !description?.hasError('required') ">
           Description est <strong>2 chars min</strong>
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+
+    <p>
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Detail" formControlName="detail" required name="detail"></textarea>
+        <mat-error *ngIf="detail?.dirty && detail?.hasError('required')">
+          Detail est <strong>requis</strong>
+        </mat-error>
+        <mat-error
+          *ngIf="detail?.dirty && !detail?.hasError('required')">
+          Detail est <strong>2 chars min</strong>
         </mat-error>
       </mat-form-field>
     </p>

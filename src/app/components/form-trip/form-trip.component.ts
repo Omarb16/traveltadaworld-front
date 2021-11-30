@@ -37,10 +37,17 @@ export class FormTripComponent implements OnInit {
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
+      dateBegin: new FormControl(''),
+      dateEnd: new FormControl(''),
       description: new FormControl(
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
+      detail: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(2)])
+      ),
+      price: new FormControl(''),
       photo: new FormControl(''),
       city: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
@@ -106,7 +113,11 @@ export class FormTripComponent implements OnInit {
         id: '',
         photo: 'https://randomuser.me/api/portraits/lego/6.jpg',
         title: '',
+        dateBegin: '',
+        dataEnd: '',
         description: '',
+        detail: '',
+        price:0,
         country: '',
         city: '',
         travelers: [],
@@ -148,7 +159,11 @@ export class FormTripComponent implements OnInit {
       delete trip.id;
 
       formData.append('title', trip.title);
+      formData.append('dateBegin', trip.dateBegin);
+      formData.append('dataEnd', trip.dataEnd);
       formData.append('description', trip.description);
+      formData.append('detail', trip.detail);
+      formData.append('price', trip.price);
       formData.append('city', trip.city);
       formData.append('country', trip.country);
       const name = localStorage.getItem('name');
@@ -157,7 +172,11 @@ export class FormTripComponent implements OnInit {
       this._submit$.emit({ formData, id, isUpdate: true });
     } else {
       formData.append('title', trip.title);
+      formData.append('dateBegin', trip.dateBegin);
+      formData.append('dataEnd', trip.dataEnd);
       formData.append('description', trip.description);
+      formData.append('detail', trip.detail);
+      formData.append('price', trip.price);
       formData.append('city', trip.city);
       formData.append('country', trip.country);
       const name = localStorage.getItem('name');
@@ -186,4 +205,20 @@ export class FormTripComponent implements OnInit {
   get description(): FormControl {
     return <FormControl>this.form.get('description');
   }
+
+  get detail(): FormControl {
+    return <FormControl>this.form.get('detail');
+  }
+  get price(): FormControl {
+    return <FormControl>this.form.get('price');
+  }
+
+  get dateBegin(): FormControl {
+    return <FormControl>this.form.get('dateBegin');
+  }
+  get dateEnd(): FormControl {
+    return <FormControl>this.form.get('dateBegin');
+  }
+
+
 }
