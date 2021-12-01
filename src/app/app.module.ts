@@ -51,8 +51,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ToastrModule } from 'ngx-toastr';
 import { UserComponent } from './components/user/user.component';
+import { ToasterComponent } from './components/toaster/toaster.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -77,6 +77,7 @@ registerLocaleData(localeFr);
     TripListComponent,
     ContactComponent,
     UserComponent,
+    ToasterComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -103,12 +104,6 @@ registerLocaleData(localeFr);
     MatSnackBarModule,
     MatGridListModule,
     MatPaginatorModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
-      closeButton: true,
-      progressBar: true,
-    }),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
