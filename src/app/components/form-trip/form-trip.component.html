@@ -98,10 +98,7 @@
 
     <p>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Pays" formControlName="country" required name="country" />
-        <mat-error *ngIf="country?.dirty && country?.hasError('required')">
-          Pays is <strong>required</strong>
-        </mat-error>
+        <input matInput placeholder="Pays" formControlName="country" readonly name="country" value={{this._country}} />
       </mat-form-field>
     </p>
 
