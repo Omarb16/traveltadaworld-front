@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,9 +48,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { ContactComponent } from './components/contact/contact.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatGridListModule} from "@angular/material/grid-list";
-import {MatPaginatorModule} from "@angular/material/paginator";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ToastrModule } from 'ngx-toastr';
 
 registerLocaleData(localeFr);
 
@@ -100,6 +102,12 @@ registerLocaleData(localeFr);
     MatSnackBarModule,
     MatGridListModule,
     MatPaginatorModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: 'toast-top-right',
+      closeButton: true,
+      progressBar: true,
+    }),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

@@ -53,10 +53,6 @@ export class FormTripComponent implements OnInit {
       city: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
     });
-
-    if (!this._isUpdateMode) {
-      this.photo.addValidators(Validators.required);
-    }
   }
 
   /**
@@ -112,7 +108,7 @@ export class FormTripComponent implements OnInit {
     } else {
       this._model = {
         id: '',
-        photo: 'https://randomuser.me/api/portraits/lego/6.jpg',
+        photo: '',
         title: '',
         dateBegin: '',
         dateEnd: '',
@@ -124,6 +120,8 @@ export class FormTripComponent implements OnInit {
         travelers: [],
       };
       this._isUpdateMode = false;
+      this.photo.addValidators(Validators.required);
+      console.log(this.photo);
     }
 
     // update form's values with model

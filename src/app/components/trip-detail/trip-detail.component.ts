@@ -1,3 +1,4 @@
+import { SocketService } from './../../services/socket.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TripService } from './../../services/trip.service';
 import { Trip } from './../../types/trip.type';
@@ -17,6 +18,7 @@ export class TripDetailComponent implements OnInit {
   constructor(
     private _tripService: TripService,
     private _notificationService: NotificationService,
+    private _socketService: SocketService,
     private _activatedRoute: ActivatedRoute
   ) {
     this._trip = {} as TripDetail;
@@ -51,6 +53,7 @@ export class TripDetailComponent implements OnInit {
           userId: item.createdBy,
         };
         this._notificationService.create(notif).subscribe();
+        this._socketService.sendNotif(notif);
       },
       (err) => {
         console.error(err);
@@ -70,6 +73,7 @@ export class TripDetailComponent implements OnInit {
           userId: item.createdBy,
         };
         this._notificationService.create(notif).subscribe();
+        this._socketService.sendNotif(notif);
       },
       (err) => {
         console.error(err);

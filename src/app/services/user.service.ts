@@ -1,3 +1,4 @@
+import { SocketService } from 'src/app/services/socket.service';
 import { User } from '../types/user.type';
 import { UserLogged } from '../types/user-logged.type';
 import { HttpClient } from '@angular/common/http';
@@ -17,11 +18,16 @@ export class UserService {
   currentUser$ = this.currentUserSource.asObservable();
   isLoggedIn: boolean = false;
 
-  constructor(private _http: HttpClient, private _router: Router) {
+  constructor(
+    private _http: HttpClient,
+    private _router: Router,
+    private _socketService: SocketService
+  ) {
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
       this.currentUserSource.next(localStorage.getItem('name'));
       this.isLoggedIn = true;
+      this._socketService.subscribe();
     }
   }
 
@@ -48,6 +54,7 @@ export class UserService {
   }
 
   logOut() {
+    this._socketService.unsubscribe();
     localStorage.removeItem('name');
     localStorage.removeItem('access_token');
     localStorage.removeItem('id');
@@ -60,6 +67,7 @@ export class UserService {
     localStorage.setItem('name', res.lastname + ' ' + res.firstname);
     localStorage.setItem('access_token', res.access_token);
     this.currentUserSource.next(res.lastname + ' ' + res.firstname);
+    this._socketService.subscribe();
     this.isLoggedIn = true;
     this._router.navigate(['/']);
   }

@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Notification } from '../../types/notification.type';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,6 +42,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _tripService: TripService,
     private _notificationService: NotificationService,
+    private _socketService: SocketService,
     private _router: Router
   ) {
     this._travelerTrips = [];
@@ -102,6 +104,7 @@ export class DashboardComponent implements OnInit {
           userId: item.createdBy,
         };
         this._notificationService.create(notif).subscribe();
+        this._socketService.sendNotif(notif);
       },
       (err) => {
         console.error(err);
@@ -120,6 +123,7 @@ export class DashboardComponent implements OnInit {
           userId: t.user,
         };
         this._notificationService.create(notif).subscribe();
+        this._socketService.sendNotif(notif);
       },
       (err) => {
         console.error(err);
@@ -141,6 +145,7 @@ export class DashboardComponent implements OnInit {
           userId: t.user,
         };
         this._notificationService.create(notif).subscribe();
+        this._socketService.sendNotif(notif);
       },
       (err) => {
         console.error(err);

@@ -9,7 +9,7 @@
   </div>
   <mat-card-content>
     <p>
-      {{_trip?.dateBegin}} jusqu'au {{_trip?.dateEnd}}
+      {{_trip?.dateBegin | date:'longDate'}} jusqu'au {{_trip?.dateEnd| date:'longDate'}}
     </p>
     <p>
       {{_trip?.description}}

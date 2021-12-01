@@ -1,13 +1,12 @@
-.trip-card{
+.trip-card {
   max-width: 400px;
   margin-bottom: 8px;
 }
 
 .img-profil {
   border-radius: 50%;
-  width: 50%;
-  height: 50%;
-  object-fit: contain;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   object-position: top;
 }
@@ -20,6 +19,33 @@
   width: 100%;
 }
 
+::ng-deep .trip-card {
+  width: 100%;
+  overflow-x: unset;
+}
+
 ::ng-deep .mat-list-item {
   overflow-x: unset !important;
+}
+
+::ng-deep mat-grid-tile {
+  overflow-x: unset !important;
+}
+
+::ng-deep .mat-card-image:first-child {
+  margin-top: 0 !important;
+  border-top-left-radius: 50% !important;
+  border-top-right-radius: 50% !important;
+}
+
+::ng-deep .mat-grid-tile-content {
+  position: unset;
+}
+
+::ng-deep app-trip {
+  padding: 10px;
+}
+
+::ng-deep mat-grid-tile {
+  padding-top: 0 !important;
 }

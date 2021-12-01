@@ -3,11 +3,33 @@
   width: 20%;
   height: 20%;
   object-fit: contain;
-  object-fit: cover;
-  object-position: top;
+  object-position: center;
+}
+
+::ng-deep.trip-card {
+  width: 100%;
+  overflow-x: unset;
+}
+
+::ng-deep .mat-list-item {
+  overflow-x: unset;
 }
 
 .trip-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+::ng-deep .mat-card-image:first-child {
+  margin-top: 0 !important;
+  border-top-left-radius: 50% !important;
+  border-top-right-radius: 50% !important;
+}
+
+.flex {
   width: 100%;
-  overflow-x: scroll;
+  display: flex;
+  justify-content: center;
 }

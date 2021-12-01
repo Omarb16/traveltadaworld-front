@@ -1,5 +1,4 @@
-app-trip{
-
+app-trip {
 }
 app-footer {
   position: fixed;
@@ -10,23 +9,22 @@ app-footer {
 
 section {
   display: flex;
-
 }
 
-
 mat-grid-tile {
-  border: 1px solid rgba(0,0,0,0.1);
-  color: rgba(0,0,0,0.87);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.87);
   background-color: white;
   font-size: 14px;
   overflow-x: scroll;
   max-width: 400px;
-
 }
 
-
-p{
+p {
   display: inline-block;
   vertical-align: top;
 }
 
+::ng-deep .mat-grid-tile {
+  overflow-x: unset;
+}
