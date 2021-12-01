@@ -52,9 +52,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserComponent } from './components/user/user.component';
-import {MatSortModule} from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
 import { ToasterComponent } from './components/toaster/toaster.component';
-import {DialogDeleteComponent} from "./components/dialog-delete/dialogDelete.component";
+import { DialogDeleteComponent } from './components/dialog-delete/dialogDelete.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -62,6 +63,7 @@ registerLocaleData(localeFr);
     AppComponent,
     DashboardComponent,
     DialogEditComponent,
+
     DialogTripComponent,
     FooterComponent,
     FormEditComponent,
@@ -87,6 +89,7 @@ registerLocaleData(localeFr);
     MatButtonModule,
     BrowserAnimationsModule,
     BrowserModule,
+    CKEditorModule,
     HttpClientModule,
     MatDatepickerModule,
     MatDialogModule,
@@ -107,7 +110,7 @@ registerLocaleData(localeFr);
     MatSnackBarModule,
     MatGridListModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

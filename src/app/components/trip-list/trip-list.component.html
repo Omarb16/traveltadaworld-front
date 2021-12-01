@@ -27,8 +27,11 @@
     </mat-form-field>
 
   </form>
-  <a mat-raised-button color="warn" (click)="find()">Filtrer</a>
+  <a mat-raised-button color="warn" (click)="find(page)">Filtrer</a>
 </mat-dialog-content>
+
+<mat-paginator [length]="count" [pageSize]="pageSize" (page)="find($event)" *ngIf="!!trips && trips.length>0">
+</mat-paginator>
 
 
 <div class="flex">

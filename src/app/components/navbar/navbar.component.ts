@@ -11,22 +11,28 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 })
 export class NavbarComponent implements OnInit {
   faBell = faBell;
-  contNotif: number;
+  countNotif: number;
   firstTime: boolean;
   notifs: Notification[];
   constructor(
     private _userService: UserService,
     private _notificationService: NotificationService
   ) {
-    this.contNotif = 0;
+    this.countNotif = 0;
     this.firstTime = true;
     this.notifs = [];
   }
 
   ngOnInit(): void {
+    this.userService.countNotif$.subscribe(() => {
+      this.getCountNotif();
+    });
+  }
+
+  getCountNotif() {
     this._notificationService.count().subscribe(
       (res) => {
-        this.contNotif = res;
+        this.countNotif = res;
       },
       (err) => {
         console.error(err);
@@ -46,7 +52,7 @@ export class NavbarComponent implements OnInit {
     this._notificationService.find().subscribe(
       (res) => {
         this.notifs = res;
-        this.contNotif = 0;
+        this.countNotif = 0;
         if (this.firstTime) {
           this.firstTime = false;
           this.notifs.forEach((e: any) => {

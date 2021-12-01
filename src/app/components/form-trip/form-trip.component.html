@@ -54,7 +54,7 @@
         <mat-error *ngIf="description?.dirty && description?.hasError('required')">
           Description is <strong>required</strong>
         </mat-error>
-        <mat-error *ngIf="description?.dirty && !description?.hasError('required') ">
+        <mat-error *ngIf="description?.dirty && !description?.hasError('minLength') ">
           Description est <strong>2 chars min</strong>
         </mat-error>
       </mat-form-field>
@@ -62,15 +62,11 @@
 
 
     <p>
-      <mat-form-field class="full-width">
-        <textarea matInput placeholder="Detail" formControlName="detail" required name="detail"></textarea>
-        <mat-error *ngIf="detail?.dirty && detail?.hasError('required')">
-          Detail est <strong>requis</strong>
-        </mat-error>
-        <mat-error *ngIf="detail?.dirty && !detail?.hasError('required')">
-          Detail est <strong>2 chars min</strong>
-        </mat-error>
-      </mat-form-field>
+      <label>Detail</label>
+      <ckeditor formControlName="detail" data=""></ckeditor>
+      <mat-error *ngIf="detail?.dirty && detail?.hasError('required')">
+        Detail est <strong>requis</strong>
+      </mat-error>
     </p>
 
     <p>

@@ -51,6 +51,10 @@ export class TripService {
     return this._http.get<number>(environment.apiUrl + 'trips/countusertrips');
   }
 
+  count(): Observable<number> {
+    return this._http.get<number>(environment.apiUrl + 'trips/count');
+  }
+
   create(trip: Trip): Observable<Trip> {
     return this._http.post<Trip>(environment.apiUrl + 'trips', trip);
   }

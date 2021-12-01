@@ -31,7 +31,9 @@ export class AppComponent {
       color: '#000000',
     };
     this._busyService.isLoading.subscribe((value) => {
-      value ? (this.showSpinner = true) : (this.showSpinner = false);
+      setTimeout(() => {
+        this.showSpinner = value;
+      }, 1);
     });
     this._toasterService.toast$.subscribe((toast) => {
       this.toasts = [toast, ...this.toasts];

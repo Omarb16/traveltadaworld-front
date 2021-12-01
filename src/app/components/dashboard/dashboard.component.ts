@@ -59,7 +59,6 @@ export class DashboardComponent implements OnInit {
     this.countUserTrips = 0;
     this.defaultImg = environment.defaultImgTrip;
     this.pageSize = 8;
-
     this.sortUserTrips = {
       active: 'createdAt',
       direction: 'desc',

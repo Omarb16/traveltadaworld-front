@@ -13,8 +13,8 @@
     <button mat-menu-item [routerLink]="['/profil']">Profil</button>
     <button mat-menu-item (click)="logOut()">Se deconnecter</button>
   </mat-menu>
-  <span [matBadge]="contNotif" matBadgeOverlap="true" matBadgeColor="accent"
-    *ngIf="(userService.currentUser$ |async) && contNotif>0"></span>
+  <span [matBadge]="countNotif" matBadgeOverlap="true" matBadgeColor="accent"
+    *ngIf="(userService.currentUser$ |async) && countNotif>0"></span>
   <button mat-raised-button color="primary" *ngIf="(userService.currentUser$ |async)" (click)="openNotif()"
     [matMenuTriggerFor]="menuNotif">
     <fa-icon [icon]="faBell"></fa-icon>

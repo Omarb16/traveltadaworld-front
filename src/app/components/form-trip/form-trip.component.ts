@@ -2,8 +2,8 @@ import { Trip } from '../../types/trip.type';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import {UserService} from "../../services/user.service";
-import {User} from "../../types/user.type";
+import { UserService } from '../../services/user.service';
+import { User } from '../../types/user.type';
 
 @Component({
   selector: 'app-form-trip',
@@ -21,8 +21,7 @@ export class FormTripComponent implements OnInit {
   private readonly _submit$: EventEmitter<any>;
   // private property to store form value
   private readonly _form: FormGroup;
-  _country : String;
-
+  _country: String;
 
   _file: File | null;
   /**
@@ -30,11 +29,11 @@ export class FormTripComponent implements OnInit {
    */
   constructor(private _userService: UserService) {
     this._model = {} as Trip;
-    this._country="";
+    this._country = '';
     const userId = this._userService.getIdUser();
     this._userService.find(userId).subscribe(
       (res: User) => {
-       this._country= res.country;
+        this._country = res.country;
       },
       (err) => {
         console.error(err);
@@ -56,10 +55,7 @@ export class FormTripComponent implements OnInit {
         '',
         Validators.compose([Validators.required, Validators.minLength(2)])
       ),
-      detail: new FormControl(
-        '',
-        Validators.compose([Validators.required, Validators.minLength(2)])
-      ),
+      detail: new FormControl('', Validators.required),
       price: new FormControl('', [Validators.required, Validators.min(0)]),
       photo: new FormControl(''),
       city: new FormControl('', Validators.required),
@@ -74,7 +70,6 @@ export class FormTripComponent implements OnInit {
   set model(model: Trip) {
     this._model = model;
   }
-
 
   /**
    * Returns private property _model
@@ -168,7 +163,7 @@ export class FormTripComponent implements OnInit {
     delete trip.photo;
     trip.dateBegin = moment(this.dateBegin.value).utc().format();
     trip.dateEnd = moment(this.dateEnd.value).utc().format();
-    trip.country=this._country;
+    trip.country = this._country;
     if (this._isUpdateMode) {
       const id = trip.id;
       delete trip.id;
@@ -197,7 +192,6 @@ export class FormTripComponent implements OnInit {
       if (name) formData.append('createdNameBy', name);
       if (this._file) formData.append('file', this._file, this._file.name);
       this._submit$.emit({ formData, id: null, isUpdate: false });
-
     }
   }
 

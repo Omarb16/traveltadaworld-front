@@ -1,3 +1,5 @@
+import { NotificationService } from 'src/app/services/notification.service';
+import { Notification } from './../types/notification.type';
 import { SocketService } from 'src/app/services/socket.service';
 import { User } from '../types/user.type';
 import { UserLogged } from '../types/user-logged.type';
@@ -15,19 +17,24 @@ import { AccessToken } from '../types/access-token.type';
 })
 export class UserService {
   currentUserSource = new ReplaySubject<string | null>(1);
+  countNotifSource = new ReplaySubject<void>(1);
   currentUser$ = this.currentUserSource.asObservable();
+  countNotif$ = this.countNotifSource.asObservable();
   isLoggedIn: boolean = false;
+  countNotif: number;
 
   constructor(
     private _http: HttpClient,
     private _router: Router,
     private _socketService: SocketService
   ) {
+    this.countNotif = 0;
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
-      this.currentUserSource.next(localStorage.getItem('name'));
-      this.isLoggedIn = true;
       this._socketService.subscribe();
+      this.currentUserSource.next(localStorage.getItem('name'));
+      this.countNotifSource.next();
+      this.isLoggedIn = true;
     }
   }
 
@@ -64,11 +71,11 @@ export class UserService {
   }
 
   loggedIn(res: UserLogged) {
-    localStorage.setItem('name', res.lastname + ' ' + res.firstname);
+    this.changeName(res.lastname + ' ' + res.firstname);
     localStorage.setItem('access_token', res.access_token);
-    this.currentUserSource.next(res.lastname + ' ' + res.firstname);
     this._socketService.subscribe();
     this.isLoggedIn = true;
+    this.countNotifSource.next();
     this._router.navigate(['/']);
   }
 
