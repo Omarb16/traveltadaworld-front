@@ -1,14 +1,13 @@
 import { Router } from '@angular/router';
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TripService } from 'src/app/services/trip.service';
 import { Trip } from 'src/app/types/trip.type';
 import { MatTableDataSource } from '@angular/material/table';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SocketService } from 'src/app/services/socket.service';
-import {MatSort, Sort} from "@angular/material/sort";
-import {LiveAnnouncer} from "@angular/cdk/a11y";
-
+import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,9 +15,16 @@ import {LiveAnnouncer} from "@angular/cdk/a11y";
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  sortUserTrips: Sort;
+  sortTravelerTrips: Sort;
+  pageUserTrips: PageEvent;
+  pageTravelerTrips: PageEvent;
   defaultImg: string;
   _userTrips: Trip[];
   _travelerTrips: Trip[];
+  countUserTrips: number;
+  countTravelerTrips: number;
+  pageSize: number;
   colTravelertrips: string[] = [
     'photo',
     'title',
@@ -40,35 +46,94 @@ export class DashboardComponent implements OnInit {
     'Modifier',
     'Supprimer',
   ];
-  private _dataSource: MatTableDataSource<Trip> = new MatTableDataSource<Trip>();
 
   constructor(
     private _tripService: TripService,
     private _notificationService: NotificationService,
     private _socketService: SocketService,
-    private _router: Router,private _liveAnnouncer: LiveAnnouncer
+    private _router: Router
   ) {
     this._travelerTrips = [];
     this._userTrips = [];
+    this.countTravelerTrips = 0;
+    this.countUserTrips = 0;
     this.defaultImg = environment.defaultImgTrip;
-  }
+    this.pageSize = 8;
 
-  @ViewChild(MatSort)
-  sort: MatSort = new MatSort;
+    this.sortUserTrips = {
+      active: 'createdAt',
+      direction: 'desc',
+    };
+    this.sortTravelerTrips = {
+      active: 'createdAt',
+      direction: 'desc',
+    };
+    this.pageUserTrips = {
+      length: this.countUserTrips,
+      pageSize: this.pageSize,
+      pageIndex: 0,
+      previousPageIndex: 0,
+    };
+    this.pageTravelerTrips = {
+      length: this.countTravelerTrips,
+      pageSize: this.pageSize,
+      pageIndex: 0,
+      previousPageIndex: 0,
+    };
+  }
   ngOnInit(): void {
-    this._userTrips = [];
-    this._travelerTrips = [];
-    this._tripService.findUserTrips().subscribe(
-      (res: Trip[]) => {
-        this._userTrips = res;
-        this._dataSource= new MatTableDataSource(this._userTrips);
-        this._dataSource.sort = this.sort;
+    this._tripService.countTravelerTrips().subscribe(
+      (res: number) => {
+        this.countTravelerTrips = res;
+        this.findTravelerTrips(this.sortTravelerTrips, this.pageTravelerTrips);
       },
       (err) => {
         console.error(err);
       }
     );
-    this._tripService.findTravelerTrips().subscribe(
+    this._tripService.countUserTrips().subscribe(
+      (res: number) => {
+        this.countUserTrips = res;
+
+        this.findUserTrips(this.sortUserTrips, this.pageUserTrips);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  findUserTrips(sort: Sort, page: PageEvent) {
+    var query: string =
+      '?active=' +
+      sort.active +
+      '&direction=' +
+      sort.direction +
+      '&skip=' +
+      page.pageIndex * this.pageSize +
+      '&take=' +
+      page.pageSize;
+    this._tripService.findUserTrips(query).subscribe(
+      (res: Trip[]) => {
+        this._userTrips = res;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  findTravelerTrips(sort: Sort, page: PageEvent) {
+    var query: string =
+      '?active=' +
+      sort.active +
+      '&direction=' +
+      sort.direction +
+      '&skip=' +
+      page.pageIndex * this.pageSize +
+      '&take=' +
+      page.pageSize;
+    this._tripService.findTravelerTrips(query).subscribe(
       (res: Trip[]) => {
         this._travelerTrips = res;
       },
@@ -76,12 +141,6 @@ export class DashboardComponent implements OnInit {
         console.error(err);
       }
     );
-
-  }
-
-  travlerFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    //this._travelerTrips.filter = filterValue.trim().toLowerCase();
   }
 
   update(id: string) {
@@ -159,10 +218,5 @@ export class DashboardComponent implements OnInit {
         console.error(err);
       }
     );
-  }
-
-
-  get dataSource(): MatTableDataSource<Trip> {
-    return this._dataSource;
   }
 }

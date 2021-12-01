@@ -15,22 +15,21 @@
     * {
       margin-bottom: 20px;
     }
-    p{
+    p {
       color: whitesmoke;
       font-size: 15px;
       font-family: "Trebuchet MS", Verdana, sans-serif;
       font-weight: 700;
-
     }
     h1 {
       position: relative;
-      font-family: 'Montserrat', Arial, sans-serif;
+      font-family: "Montserrat", Arial, sans-serif;
       font-size: 36px;
       font-weight: 700;
       color: #fff;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      text-shadow: 0 0 0.15em #FF00FFFF;
+      text-shadow: 0 0 0.15em #ff00ffff;
       user-select: none;
       white-space: nowrap;
       filter: blur(0.007em);
@@ -67,22 +66,37 @@
     }
 
     @keyframes shake {
-      5%, 15%, 25%, 35%, 55%, 65%, 75%, 95% {
+      5%,
+      15%,
+      25%,
+      35%,
+      55%,
+      65%,
+      75%,
+      95% {
         filter: blur(0.018em);
         transform: translateY(0.018em) rotate(0deg);
       }
 
-      10%, 30%, 40%, 50%, 70%, 80%, 90% {
+      10%,
+      30%,
+      40%,
+      50%,
+      70%,
+      80%,
+      90% {
         filter: blur(0.01em);
         transform: translateY(-0.018em) rotate(0deg);
       }
 
-      20%, 60% {
+      20%,
+      60% {
         filter: blur(0.03em);
         transform: translate(-0.018em, 0.018em) rotate(0deg);
       }
 
-      45%, 85% {
+      45%,
+      85% {
         filter: blur(0.03em);
         transform: translate(0.018em, -0.018em) rotate(0deg);
       }
@@ -94,7 +108,8 @@
     }
 
     @keyframes crack1 {
-      0%, 95% {
+      0%,
+      95% {
         transform: translate(-50%, -50%);
       }
 
@@ -104,7 +119,8 @@
     }
 
     @keyframes crack2 {
-      0%, 95% {
+      0%,
+      95% {
         transform: translate(-50%, -50%);
       }
 
@@ -112,31 +128,23 @@
         transform: translate(-49%, -53%);
       }
     }
-
   }
 }
-
 
 .flex {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
-img{
+img {
   filter: contrast(70%);
 }
 
-#debutvoyage{
-  box-shadow:
-    inset 0 0 50px #fff,
-    inset 20px 0 80px #f0f,
-    inset -20px 0 80px #0ff,
-    inset 20px 0 300px #f0f,
-    inset -20px 0 300px #0ff,
-    0 0 50px #fff,
-    -10px 0 80px #f0f,
-    10px 0 80px #0ff;
+#debutvoyage {
+  box-shadow: inset 0 0 50px #fff, inset 20px 0 80px #f0f,
+    inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
+    0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
 }

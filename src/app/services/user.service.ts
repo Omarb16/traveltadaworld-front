@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { LoginUser } from '../types/login-user.type';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import { AccessToken } from '../types/access-token.type ';
+import { AccessToken } from '../types/access-token.type';
 
 @Injectable({
   providedIn: 'root',

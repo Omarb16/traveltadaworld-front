@@ -7,5 +7,5 @@ export const environment = {
   apiUrl: 'http://localhost:3000/',
   jwt_secret: '$2a$12$Jx1fXSuaVSJEZGfcxeJNWuUrMAJx6p7Mjqz4s56QgcfxGqR/SqfQG',
   defaultImgTrip: 'assets/default_img_trip.jpeg',
-  defaultImgUser: 'assets/default_img_trip.png',
+  defaultImgUser: 'assets/default_img_user.png',
 };

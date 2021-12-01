@@ -1,31 +1,31 @@
 <div class="div1">
-    <img src="assets/img/background/homepage.png">
-    <div>
-        <h1>TravelTadaWorld
-        </h1>
+  <img src="assets/img/background/homepage.png">
+  <div>
+    <h1>TravelTadaWorld
+    </h1>
+    <br>
+    <p>
+      La plateforme de voyages spécialement conçur pour les assoiffés de culturee, d'aventure, de dépaysement et
+      d'échange. <br>
+
+      Plusieurs volontaires prêts à vous accueillir dans leur pays pour vous faire découvrir leur coutume, les secrets
+      du pays et leurs connaissances en vous accompagnant durant votre voyage.
       <br>
-        <p >
-          La plateforme de voyages spécialement conçur pour les assoiffés de culturee, d'aventure, de dépaysement et d'échange. <br>
 
-          Plusieurs volontaires prêts à vous accueillir dans leur pays pour vous faire découvrir leur coutume, les secrets du pays et leurs connaissances en vous accompagnant durant votre voyage.
-          <br>
+      Soyez acteur ou réalisateur de vos aventures.<br>
 
-          Soyez acteur ou réalisateur de vos aventures.<br>
+      Expérience unique et enrichissante assurée!<br>
 
-          Expérience unique et enrichissante assurée!<br>
-
-          <i>"Un voyage est la seule chose qui s’achète et vous rend plus riche."</i>
-        </p>
-      <br>
-        <button mat-raised-button id="debutvoyage" [routerLink]="['/trips-list']">Débuter votre voyage</button>
-    </div>
+      <i>"Un voyage est la seule chose qui s’achète et vous rend plus riche."</i>
+    </p>
+    <br>
+    <button mat-raised-button id="debutvoyage" [routerLink]="['/trips-list']">Débuter votre voyage</button>
+  </div>
 </div>
 <h1 style="margin-left:42%; color:palevioletred;">Suggestion de circuit :</h1>
 <div class="container flex">
 
-    <div *ngFor="let t of trips| slice:0:3; let i=index">
-        <app-trip [trip]="t"></app-trip>
-    </div>
+  <div *ngFor="let t of trips; let i=index">
+    <app-trip [trip]="t"></app-trip>
+  </div>
 </div>
-
-

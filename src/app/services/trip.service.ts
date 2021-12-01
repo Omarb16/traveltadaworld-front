@@ -25,12 +25,30 @@ export class TripService {
     return this._http.get<Trip[]>(environment.apiUrl + 'trips' + query);
   }
 
-  findTravelerTrips(): Observable<Trip[]> {
-    return this._http.get<Trip[]>(environment.apiUrl + 'trips/travelertrips');
+  findFirstTree(): Observable<Trip[]> {
+    return this._http.get<Trip[]>(environment.apiUrl + 'trips/firsttree');
   }
 
-  findUserTrips(): Observable<Trip[]> {
-    return this._http.get<Trip[]>(environment.apiUrl + 'trips/usertrips');
+  findTravelerTrips(query: string): Observable<Trip[]> {
+    return this._http.get<Trip[]>(
+      environment.apiUrl + 'trips/travelertrips' + query
+    );
+  }
+
+  findUserTrips(query: string): Observable<Trip[]> {
+    return this._http.get<Trip[]>(
+      environment.apiUrl + 'trips/usertrips' + query
+    );
+  }
+
+  countTravelerTrips(): Observable<number> {
+    return this._http.get<number>(
+      environment.apiUrl + 'trips/counttravelertrips'
+    );
+  }
+
+  countUserTrips(): Observable<number> {
+    return this._http.get<number>(environment.apiUrl + 'trips/countusertrips');
   }
 
   create(trip: Trip): Observable<Trip> {
