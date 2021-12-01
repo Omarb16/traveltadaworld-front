@@ -1,13 +1,15 @@
-.toast {
-  position: fixed;
-  right: 0;
-  width: 300px;
-  height: 80px;
-  padding: 0.75rem 1.25rem;
-  margin-top: 1rem;
-  border: 1px solid transparent;
+.toast-custom {
+  animation: move 1s both;
   border-radius: 0.25rem;
-  animation: move 2s both;
+  border: 1px solid transparent;
+  margin-top: 1rem;
+  padding: 0.75rem 1.25rem;
+  position: fixed;
+  right: 10px;
+  top: 0px;
+  width: 300px;
+  max-height: 120px;
+  z-index: 10;
 }
 
 .toast-success {
@@ -22,6 +24,11 @@
   right: 10px;
   font-size: 1.5em;
   cursor: pointer;
+  text-decoration: none;
+  color: #155724;
+  &:hover {
+    color: #155724;
+  }
 }
 
 .toast-heading {

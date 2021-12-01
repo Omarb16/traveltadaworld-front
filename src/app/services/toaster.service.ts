@@ -6,8 +6,8 @@ import { BehaviorSubject, filter, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ToasterService {
-  subject: BehaviorSubject<Notification>;
-  toast$: Observable<Notification>;
+  subject: BehaviorSubject<any>;
+  toast$: Observable<any>;
 
   constructor() {
     this.subject = new BehaviorSubject<any>(null);
@@ -17,6 +17,11 @@ export class ToasterService {
   }
 
   show(data: Notification) {
-    this.subject.next(data);
+    console.log(data);
+    this.subject.next({
+      title: data.title,
+      content: data.content,
+      delay: 2000,
+    });
   }
 }

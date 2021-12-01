@@ -1,39 +1,40 @@
 <mat-dialog-content>
-    <form novalidate [formGroup]="form">
-        <h1>Rechercher un voyage</h1>
-        <p>
-            <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="Pays" formControlName="country" requis name="country" />
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="Ville" formControlName="city" requis name="city" />
-            </mat-form-field>
-        </p>
-      <p>
-        <mat-form-field class="full-width">
-          <input type="text" matInput placeholder="Date debut" formControlName="dateBegin" requis name="dateBegin" />
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <input type="text" matInput placeholder="Date fin" formControlName="dateEnd" requis name="dateEnd" />
-        </mat-form-field>
+  <form novalidate [formGroup]="form">
+    <h1>Rechercher un voyage</h1>
+    <mat-form-field class="full-width">
+      <input type="text" matInput placeholder="Pays" formControlName="country" requis name="country" />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input type="text" matInput placeholder="Ville" formControlName="city" requis name="city" />
+    </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <input type="text" matInput placeholder="Prix" formControlName="price" requis name="price" />
-        </mat-form-field>
-      </p>
+    <mat-form-field appearance="fill">
+      <mat-label>Date de debut</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateBegin">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-    </form>
-    <a mat-raised-button color="warn" (click)="find()">Filtrer</a>
+    <mat-form-field appearance="fill">
+      <mat-label>Date de fin</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="dateEnd">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input type="text" matInput placeholder="Prix" formControlName="price" requis name="price" />
+    </mat-form-field>
+
+  </form>
+  <a mat-raised-button color="warn" (click)="find()">Filtrer</a>
 </mat-dialog-content>
 
 
-    <mat-grid-list cols="3" rowHeight="2:1" >
-      <mat-grid-tile  *ngFor="let t of trips;"><app-trip [trip]="t"></app-trip></mat-grid-tile>
-      <br>
+<mat-grid-list cols="3" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let t of trips;">
+    <app-trip [trip]="t"></app-trip>
+  </mat-grid-tile>
+  <br>
 
-    </mat-grid-list>
-
-
-
+</mat-grid-list>

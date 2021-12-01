@@ -1,3 +1,5 @@
+import { ToasterService } from './services/toaster.service';
+import { SocketService } from 'src/app/services/socket.service';
 import { Component } from '@angular/core';
 import {
   ISpinnerConfig,
@@ -14,8 +16,13 @@ import { BusyService } from './services/busy.service';
 export class AppComponent {
   public showSpinner: boolean;
   public spinnerConfig: ISpinnerConfig;
+  toasts: any[];
 
-  constructor(private _busyService: BusyService) {
+  constructor(
+    private _busyService: BusyService,
+    private _toasterService: ToasterService
+  ) {
+    this.toasts = [];
     this.showSpinner = false;
     this.spinnerConfig = {
       animation: SPINNER_ANIMATIONS.rotating_dots,
@@ -26,5 +33,13 @@ export class AppComponent {
     this._busyService.isLoading.subscribe((value) => {
       value ? (this.showSpinner = true) : (this.showSpinner = false);
     });
+    this._toasterService.toast$.subscribe((toast) => {
+      this.toasts = [toast, ...this.toasts];
+      setTimeout(() => this.toasts.pop(), toast.delay);
+    });
+  }
+
+  remove(index: number) {
+    this.toasts = this.toasts.filter((v, i) => i !== index);
   }
 }

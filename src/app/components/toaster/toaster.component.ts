@@ -7,13 +7,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./toaster.component.scss'],
 })
 export class ToasterComponent implements OnInit {
-  @Input() toast: Notification;
-  i: number;
-
+  @Input() toast: any;
+  @Input() i: number;
   @Output() remove = new EventEmitter<number>();
+
   constructor() {
-    this.toast = {} as Notification;
-    this.i = 1000;
+    this.toast = null;
+    this.i = 0;
   }
 
   ngOnInit(): void {}

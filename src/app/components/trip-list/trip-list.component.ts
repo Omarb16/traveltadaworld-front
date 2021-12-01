@@ -1,10 +1,11 @@
 import { TripService } from 'src/app/services/trip.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Trip } from 'src/app/types/trip.type';
-import {Router} from "@angular/router";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
+import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-trip-list',
@@ -16,27 +17,21 @@ export class TripListComponent implements OnInit {
   private _trips: Trip[];
   private _view: string;
 
-
-
-
-
-  constructor(private _tripService: TripService,private  _routeur:Router) {
+  constructor(private _tripService: TripService, private _routeur: Router) {
     this._trips = [];
     this.form = new FormGroup({
       price: new FormControl(null),
       city: new FormControl(null),
       country: new FormControl(null),
       dateBegin: new FormControl(null),
-  dateEnd: new FormControl(null),
+      dateEnd: new FormControl(null),
     });
     this._view = 'list';
-
   }
-
 
   ngOnInit(): void {
     this.find();
-   }
+  }
 
   get trips(): Trip[] {
     return this._trips;
@@ -45,7 +40,6 @@ export class TripListComponent implements OnInit {
   set trips(value: Trip[]) {
     this._trips = value;
   }
-
 
   get view(): string {
     return this._view;
@@ -56,14 +50,12 @@ export class TripListComponent implements OnInit {
   }
 
   navigate(id: string | undefined): void {
-    this._routeur.navigate([ '/trip', id ]);
+    this._routeur.navigate(['/trip', id]);
   }
-
 
   switchView(): void {
-    this._view = (this._view === 'card') ? 'list' : 'card';
+    this._view = this._view === 'card' ? 'list' : 'card';
   }
-
 
   find() {
     if (this.form.valid) {
@@ -71,6 +63,9 @@ export class TripListComponent implements OnInit {
       const trip = this.form.value;
       for (const property in trip) {
         if (trip[property] && trip[property] != '') {
+          if (property == 'dateBegin' || property == 'dateEnd') {
+            trip[property] = moment(trip[property]).utc().format();
+          }
           query += property + '=' + trip[property] + '&';
         }
       }
@@ -85,6 +80,4 @@ export class TripListComponent implements OnInit {
       );
     }
   }
-
 }
-
