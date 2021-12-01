@@ -18,12 +18,10 @@ export class NotificationService {
   }
 
   find(): Observable<Notification[]> {
-    return this._http.get<Notification[]>(
-      environment.apiUrl + 'notifications/'
-    );
+    return this._http.get<Notification[]>(environment.apiUrl + 'notifications');
   }
 
-  seen(id: string, n: Notification): Observable<Notification> {
+  update(id: string, n: Notification): Observable<Notification> {
     return this._http.put<Notification>(
       environment.apiUrl + 'notifications/' + id,
       n
@@ -35,6 +33,6 @@ export class NotificationService {
   }
 
   count(): Observable<number> {
-    return this._http.get<number>(environment.apiUrl + 'notifications/count/');
+    return this._http.get<number>(environment.apiUrl + 'notifications/count');
   }
 }

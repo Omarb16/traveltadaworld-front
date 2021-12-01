@@ -23,8 +23,13 @@
   text-decoration: none;
   background-color: rgb(37, 26, 26) !important;
 }
-.fill-space{
+.fill-space {
   flex: 1 1 auto;
 }
 
-
+::ng-deep .mat-badge {
+  position: relative;
+  z-index: 20;
+  top: -12px;
+  left: 1px;
+}

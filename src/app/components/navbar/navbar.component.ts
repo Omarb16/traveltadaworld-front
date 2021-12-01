@@ -12,12 +12,14 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 export class NavbarComponent implements OnInit {
   faBell = faBell;
   contNotif: number;
+  firstTime: boolean;
   notifs: Notification[];
   constructor(
     private _userService: UserService,
     private _notificationService: NotificationService
   ) {
     this.contNotif = 0;
+    this.firstTime = true;
     this.notifs = [];
   }
 
@@ -43,21 +45,25 @@ export class NavbarComponent implements OnInit {
   openNotif() {
     this._notificationService.find().subscribe(
       (res) => {
-        this.notifs = [];
+        this.notifs = res;
+        this.contNotif = 0;
+        if (this.firstTime) {
+          this.firstTime = false;
+          this.notifs.forEach((e: any) => {
+            const id = e.id;
+            delete e.id;
+            this._notificationService.update(id, e).subscribe(
+              (res) => {},
+              (err) => {
+                console.error(err);
+              }
+            );
+          });
+        }
       },
       (err) => {
         console.error(err);
       }
     );
-    this.notifs.forEach((e) => {
-      this._notificationService.seen(e.id, e).subscribe(
-        (res) => {
-          this.notifs = [];
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
-    });
   }
 }
