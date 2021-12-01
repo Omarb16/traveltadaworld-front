@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
       sort.direction +
       '&skip=' +
       page.pageIndex * this.pageSize +
-      '&take=' +
+      '&limit=' +
       page.pageSize;
     this._tripService.findUserTrips(query).subscribe(
       (res: Trip[]) => {
@@ -131,7 +131,7 @@ export class DashboardComponent implements OnInit {
       sort.direction +
       '&skip=' +
       page.pageIndex * this.pageSize +
-      '&take=' +
+      '&limit=' +
       page.pageSize;
     this._tripService.findTravelerTrips(query).subscribe(
       (res: Trip[]) => {
