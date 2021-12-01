@@ -40,6 +40,6 @@ export class SocketService implements OnDestroy {
   }
 
   showToaster(data: Notification) {
-    this._toasterService.show(data.title, data.content);
+    this._toasterService.show(data);
   }
 }
