@@ -9,6 +9,7 @@ import { LoginUser } from '../types/login-user.type';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
 import { AccessToken } from '../types/access-token.type ';
+import {Trip} from "../types/trip.type";
 
 @Injectable({
   providedIn: 'root',
@@ -79,6 +80,11 @@ export class UserService {
     }
     return '';
   }
+
+  delete(id: string): Observable<User> {
+    return this._http.delete<User>(environment.apiUrl + 'user/delete/' + id);
+  }
+
 
   changeName(name: string) {
     localStorage.setItem('name', name);

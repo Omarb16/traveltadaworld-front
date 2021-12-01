@@ -54,6 +54,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserComponent } from './components/user/user.component';
 import {MatSortModule} from '@angular/material/sort';
 import { ToasterComponent } from './components/toaster/toaster.component';
+import {DialogDeleteComponent} from "./components/dialog-delete/dialogDelete.component";
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -79,6 +80,7 @@ registerLocaleData(localeFr);
     ContactComponent,
     UserComponent,
     ToasterComponent,
+    DialogDeleteComponent,
   ],
   imports: [
     AppRoutingModule,
