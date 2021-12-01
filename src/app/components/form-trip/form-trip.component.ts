@@ -4,6 +4,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import {UserService} from "../../services/user.service";
+import {User} from "../../types/user.type";
 
 @Component({
   selector: 'app-form-trip',
@@ -21,13 +23,25 @@ export class FormTripComponent implements OnInit {
   private readonly _submit$: EventEmitter<any>;
   // private property to store form value
   private readonly _form: FormGroup;
+  _country : String;
+
 
   _file: File | null;
   /**
    * Component constructor
    */
-  constructor() {
+  constructor(private _userService: UserService) {
     this._model = {} as Trip;
+    this._country="";
+    const userId = this._userService.getIdUser();
+    this._userService.find(userId).subscribe(
+      (res: User) => {
+       this._country= res.country;
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
     this._file = null;
     this._isUpdateMode = false;
     this._submit$ = new EventEmitter<FormData>();
@@ -51,7 +65,7 @@ export class FormTripComponent implements OnInit {
       price: new FormControl('', [Validators.required, Validators.min(0)]),
       photo: new FormControl(''),
       city: new FormControl('', Validators.required),
-      country: new FormControl('', Validators.required),
+      country: new FormControl(''),
     });
   }
 
@@ -62,6 +76,7 @@ export class FormTripComponent implements OnInit {
   set model(model: Trip) {
     this._model = model;
   }
+
 
   /**
    * Returns private property _model
