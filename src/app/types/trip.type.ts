@@ -2,10 +2,10 @@ export type Trip = {
   id: string;
   title: string;
   dateBegin: string;
-  dataEnd: string;
+  dateEnd: string;
   description: string;
   detail: string;
-  price:number;
+  price: number;
   country: string;
   city: string;
   photo?: string;

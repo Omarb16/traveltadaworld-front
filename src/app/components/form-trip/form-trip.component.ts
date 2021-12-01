@@ -115,7 +115,7 @@ export class FormTripComponent implements OnInit {
         photo: 'https://randomuser.me/api/portraits/lego/6.jpg',
         title: '',
         dateBegin: '',
-        dataEnd: '',
+        dateEnd: '',
         description: '',
         detail: '',
         price: 0,
@@ -162,7 +162,7 @@ export class FormTripComponent implements OnInit {
       delete trip.id;
       formData.append('title', trip.title);
       formData.append('dateBegin', trip.dateBegin);
-      formData.append('dateEnd', trip.dataEnd);
+      formData.append('dateEnd', trip.dateEnd);
       formData.append('description', trip.description);
       formData.append('detail', trip.detail);
       formData.append('price', trip.price);
@@ -175,7 +175,7 @@ export class FormTripComponent implements OnInit {
     } else {
       formData.append('title', trip.title);
       formData.append('dateBegin', trip.dateBegin);
-      formData.append('dateEnd', trip.dataEnd);
+      formData.append('dateEnd', trip.dateEnd);
       formData.append('description', trip.description);
       formData.append('detail', trip.detail);
       formData.append('price', trip.price);

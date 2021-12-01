@@ -9,7 +9,7 @@
   </div>
   <mat-card-content>
     <p>
-      {{_trip?.dateBegin}} jusqu'au {{_trip?.dataEnd}}
+      {{_trip?.dateBegin}} jusqu'au {{_trip?.dateEnd}}
     </p>
     <p>
       {{_trip?.description}}
@@ -20,10 +20,10 @@
 
     <p>
     <p>
-    Estimation du prix :  <a style="color:green;">{{_trip?.price}} € </a>
+      Estimation du prix : <a style="color:green;">{{_trip?.price}} € </a>
     </p>
   </mat-card-content>
 </mat-card>
 <button mat-button type="button" *ngIf="_trip.canDemand" (click)="demand(_trip)">Effectuer une demande</button>
 <button mat-button type="button" *ngIf="_trip.canCancel" (click)="cancel(_trip)">Annuler la demande</button>
-<button mat-button type="button"  color=warn [routerLink]="['/trips-list']">Retour</button>
+<button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
