@@ -50,7 +50,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatPaginatorModule} from "@angular/material/paginator";
-
+import {UserComponent} from "./components/user/user.component";
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -74,6 +74,7 @@ registerLocaleData(localeFr);
     TripDetailComponent,
     TripListComponent,
     ContactComponent,
+    UserComponent,
   ],
   imports: [
     AppRoutingModule,
