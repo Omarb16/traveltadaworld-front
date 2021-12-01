@@ -46,7 +46,9 @@ export class ProfilComponent implements OnInit {
         this._userService.delete(userId).subscribe(
           () => {},
           (err) => console.error(err),
-          () => this._router.navigate(['/'])
+          () => {
+            this._userService.logOut();
+          }
         );
       } else {
         this._router.navigate(['/profil']);
