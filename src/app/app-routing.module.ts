@@ -14,6 +14,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { NotAuthGuard } from './guards/not-auth.guard';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import {ContactComponent} from "./components/contact/contact.component";
+import {UserComponent} from "./components/user/user.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthGuard] },
+  { path: 'user-card/:id', component: UserComponent, canActivate: [AuthGuard] },
   {
     path:'contact',
     component:ContactComponent,

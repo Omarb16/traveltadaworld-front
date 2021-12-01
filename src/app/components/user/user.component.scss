@@ -1,0 +1,25 @@
+.trip-card{
+  max-width: 400px;
+  margin-bottom: 8px;
+}
+
+.img-profil {
+  border-radius: 50%;
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+  object-fit: cover;
+  object-position: top;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+::ng-deep .mat-list-item {
+  overflow-x: unset !important;
+}
