@@ -8,8 +8,7 @@ import { environment } from 'src/environments/environment';
 import { LoginUser } from '../types/login-user.type';
 import { Router } from '@angular/router';
 import jwt_decode from 'jwt-decode';
-import { AccessToken } from '../types/access-token.type ';
-import { Trip } from '../types/trip.type';
+import { AccessToken } from '../types/access-token.type';
 
 @Injectable({
   providedIn: 'root',
@@ -82,7 +81,7 @@ export class UserService {
   }
 
   delete(id: string): Observable<User> {
-    return this._http.delete<User>(environment.apiUrl + 'user/delete/' + id);
+    return this._http.delete<User>(environment.apiUrl + 'users/delete/' + id);
   }
 
   changeName(name: string) {
