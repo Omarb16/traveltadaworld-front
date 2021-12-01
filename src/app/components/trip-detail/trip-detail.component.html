@@ -1,17 +1,17 @@
 <mat-card class="trip-card">
   <mat-card-header>
     <div mat-card-avatar class="trip-header-image"></div>
-    <mat-card-title>{{_trip?.title}}</mat-card-title>
+    <mat-card-title >{{_trip?.title}}</mat-card-title>
     <mat-card-subtitle>{{_trip?.country}}</mat-card-subtitle>
   </mat-card-header>
   <div class="flex">
     <img class="img-profil" mat-card-image [src]="_trip.photo">
   </div>
   <mat-card-content>
-    <p>
+    <p style="color: #723e52;font-size: 18px">
       {{_trip?.dateBegin | date:'longDate'}} jusqu'au {{_trip?.dateEnd| date:'longDate'}}
     </p>
-    <p>
+    <p style="color:purple;">
       {{_trip?.description}}
     </p>
     <p [innerHTML]="_trip?.detail">
@@ -26,3 +26,5 @@
 <button mat-button type="button" *ngIf="_trip.canDemand" (click)="demand(_trip)">Effectuer une demande</button>
 <button mat-button type="button" *ngIf="_trip.canCancel" (click)="cancel(_trip)">Annuler la demande</button>
 <button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
+
+<button mat-button type="button" color=warn (click)="makePdf()">Télécharger devis</button>
