@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Trip} from "../../types/trip.type";
+import {TripService} from "../../services/trip.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -6,41 +9,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  trips: any[] = [
-    {
-      title: "Title",
-      descritpion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur varius ultricies. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium luctus enim a dapibus. Vestibulum efficitur et ante vel pretium. In vitae volutpat erat. Maecenas vulputate, urna eget interdum molestie, augue sem venenatis ante, in pulvinar neque risus id tellus. Donec maximus, eros eget tempor vehicula",
-      img: 'assets/ponte_sant_angelo_rome_italy_travel-wallpaper-1920x1080.jpg'
-    },
-    {
-      title: "Title",
-      descritpion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur varius ultricies. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium luctus enim a dapibus. Vestibulum efficitur et ante vel pretium. In vitae volutpat erat. Maecenas vulputate, urna eget interdum molestie, augue sem venenatis ante, in pulvinar neque risus id tellus. Donec maximus, eros eget tempor vehicula",
-      img: 'assets/ponte_sant_angelo_rome_italy_travel-wallpaper-1920x1080.jpg'
-    },
-    {
-      title: "Title",
-      descritpion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur varius ultricies. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium luctus enim a dapibus. Vestibulum efficitur et ante vel pretium. In vitae volutpat erat. Maecenas vulputate, urna eget interdum molestie, augue sem venenatis ante, in pulvinar neque risus id tellus. Donec maximus, eros eget tempor vehicula",
-      img: 'assets/ponte_sant_angelo_rome_italy_travel-wallpaper-1920x1080.jpg'
-    },
-    {
-      title: "Title",
-      descritpion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur varius ultricies. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium luctus enim a dapibus. Vestibulum efficitur et ante vel pretium. In vitae volutpat erat. Maecenas vulputate, urna eget interdum molestie, augue sem venenatis ante, in pulvinar neque risus id tellus. Donec maximus, eros eget tempor vehicula",
-      img: 'assets/ponte_sant_angelo_rome_italy_travel-wallpaper-1920x1080.jpg'
-    },
-    {
-      title: "Title",
-      descritpion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur varius ultricies. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium luctus enim a dapibus. Vestibulum efficitur et ante vel pretium. In vitae volutpat erat. Maecenas vulputate, urna eget interdum molestie, augue sem venenatis ante, in pulvinar neque risus id tellus. Donec maximus, eros eget tempor vehicula",
-      img: 'assets/ponte_sant_angelo_rome_italy_travel-wallpaper-1920x1080.jpg'
-    },
-    {
-      title: "Title",
-      descritpion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur varius ultricies. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum pretium luctus enim a dapibus. Vestibulum efficitur et ante vel pretium. In vitae volutpat erat. Maecenas vulputate, urna eget interdum molestie, augue sem venenatis ante, in pulvinar neque risus id tellus. Donec maximus, eros eget tempor vehicula",
-      img: 'assets/ponte_sant_angelo_rome_italy_travel-wallpaper-1920x1080.jpg'
-    },
-  ]
-  constructor() { }
+  private _trips: Trip[];
+  form: FormGroup;
+
+  constructor(private _tripService: TripService){
+    this._trips = [];
+    this.form = new FormGroup({
+      price: new FormControl(null),
+      city: new FormControl(null),
+      country: new FormControl(null),
+      dateBegin: new FormControl(null),
+      dateEnd: new FormControl(null),
+    });
+  }
 
   ngOnInit(): void {
+    this.find();
+
+  }
+  get trips(): Trip[] {
+    return this._trips;
+  }
+
+
+  find() {
+    if (this.form.valid) {
+      var query: string = '?';
+      const trip = this.form.value;
+      for (const property in trip) {
+        if (trip[property] && trip[property] != '') {
+          query += property + '=' + trip[property] + '&';
+        }
+      }
+      query = query.slice(0, query.length - 1);
+      this._tripService.findAll(query).subscribe(
+        (res: Trip[]) => {
+          this._trips = res;
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    }
   }
 
 }

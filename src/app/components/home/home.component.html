@@ -21,11 +21,15 @@
         <button mat-raised-button id="debutvoyage" [routerLink]="['/trips-list']">Débuter votre voyage</button>
     </div>
 </div>
+<h1 style="margin-left:42%; color:palevioletred;">Suggestion de circuit :</h1>
 <div class="container flex">
-    <div *ngFor="let t of trips; let i = index">
+
+    <div *ngFor="let t of trips| slice:0:3; let i=index">
         <app-trip [trip]="t"></app-trip>
     </div>
 </div>
+
+
 
 
 
