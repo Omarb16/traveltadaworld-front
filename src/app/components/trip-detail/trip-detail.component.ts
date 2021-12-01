@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TripDetail } from 'src/app/types/trip-detail.type';
 import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-trip-detail',
   templateUrl: './trip-detail.component.html',
@@ -79,15 +80,22 @@ export class TripDetailComponent implements OnInit {
     );
   }
 
+  //Telechargement pdf
   public makePdf() {
-    let data = document.getElementById('content');
+    var data = document.getElementById('content');
     // @ts-ignore
     html2canvas(data).then((canvas) => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+
       const contentDataURL = canvas.toDataURL('image/png');
-      let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
-      // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
-      pdf.save('devis.pdf');
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('ListeApprenant.pdf'); // Generated PDF
     });
   }
 }

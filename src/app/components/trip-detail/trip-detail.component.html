@@ -1,3 +1,4 @@
+<div id="content">
 <mat-card class="trip-card">
   <mat-card-header>
     <div mat-card-avatar class="trip-header-image"></div>
@@ -23,6 +24,7 @@
     </p>
   </mat-card-content>
 </mat-card>
+</div>
 <button mat-button type="button" *ngIf="_trip.canDemand" (click)="demand(_trip)">Effectuer une demande</button>
 <button mat-button type="button" *ngIf="_trip.canCancel" (click)="cancel(_trip)">Annuler la demande</button>
 <button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
