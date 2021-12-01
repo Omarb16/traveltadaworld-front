@@ -1,8 +1,6 @@
-import { TripService } from '../../services/trip.service';
 import { Trip } from '../../types/trip.type';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import {UserService} from "../../services/user.service";
 import {User} from "../../types/user.type";
@@ -170,6 +168,7 @@ export class FormTripComponent implements OnInit {
     delete trip.photo;
     trip.dateBegin = moment(this.dateBegin.value).utc().format();
     trip.dateEnd = moment(this.dateEnd.value).utc().format();
+    trip.country=this._country;
     if (this._isUpdateMode) {
       const id = trip.id;
       delete trip.id;
@@ -198,6 +197,7 @@ export class FormTripComponent implements OnInit {
       if (name) formData.append('createdNameBy', name);
       if (this._file) formData.append('file', this._file, this._file.name);
       this._submit$.emit({ formData, id: null, isUpdate: false });
+
     }
   }
 

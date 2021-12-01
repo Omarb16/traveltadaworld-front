@@ -31,7 +31,6 @@ export class DialogTripComponent implements OnInit {
    */
   onCancel(): void {
     this._dialogRef.close();
-    this._router.navigate(['/profil']);
   }
 
   /**
@@ -39,7 +38,7 @@ export class DialogTripComponent implements OnInit {
    */
   onSave(trip: any): void {
     this._dialogRef.close(trip);
-    this._router.navigate(['/profil']);
+
 
   }
 }

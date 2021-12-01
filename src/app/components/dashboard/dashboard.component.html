@@ -56,19 +56,19 @@
 
 <br>
 <h4 class="mat-subheading-1 accent-color ">Organisateur</h4>
-<table mat-table [dataSource]="_userTrips" class="mat-elevation-z8" *ngIf="!!_userTrips && _userTrips.length>0">
+<table mat-table [dataSource]="_userTrips"  matSort class="mat-elevation-z8" *ngIf="!!_userTrips && _userTrips.length>0" >
   <ng-container matColumnDef="photo">
     <th mat-header-cell *matHeaderCellDef> Photo </th>
     <td mat-cell *matCellDef="let e"> <img [src]="e.photo||defaultImg" class="card-img-top" alt="..."></td>
   </ng-container>
 
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef> Titre </th>
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header > Titre </th>
     <td mat-cell *matCellDef="let e"> {{e.title}} </td>
   </ng-container>
 
   <ng-container matColumnDef="travelers">
-    <th mat-header-cell *matHeaderCellDef> Voyageurs </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header > Voyageurs </th>
     <td mat-cell *matCellDef="let e; let i = index;">
       <div *ngFor="let t of e.travelers">
         <a [routerLink]="['/user-card',t.user]">{{t.name}}</a>
@@ -83,25 +83,25 @@
     </td>
   </ng-container>
   <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
     <td mat-cell *matCellDef="let e"> {{e.description}} </td>
   </ng-container>
   <ng-container matColumnDef="city">
-    <th mat-header-cell *matHeaderCellDef> Ville </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ville </th>
     <td mat-cell *matCellDef="let e"> {{e.city}} </td>
   </ng-container>
 
   <ng-container matColumnDef="country">
-    <th mat-header-cell *matHeaderCellDef> Pays </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Pays </th>
     <td mat-cell *matCellDef="let e"> {{e.country}} </td>
   </ng-container>
   <ng-container matColumnDef="createdAt">
-    <th mat-header-cell *matHeaderCellDef> Date de création </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de création </th>
     <td mat-cell *matCellDef="let e"> {{e.createdAt| date:'longDate'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Modifier">
-    <th mat-header-cell *matHeaderCellDef> </th>
+    <th mat-header-cell *matHeaderCellDef > </th>
     <td mat-cell *matCellDef="let e">
       <a mat-raised-button color="warn" (click)="update(e.id)">
         <mat-icon>edit</mat-icon>

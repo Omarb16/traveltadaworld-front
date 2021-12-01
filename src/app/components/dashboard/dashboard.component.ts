@@ -1,12 +1,14 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { TripService } from 'src/app/services/trip.service';
 import { Trip } from 'src/app/types/trip.type';
 import { MatTableDataSource } from '@angular/material/table';
 import { environment } from 'src/environments/environment';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Notification } from '../../types/notification.type';
 import { SocketService } from 'src/app/services/socket.service';
+import {MatSort, Sort} from "@angular/material/sort";
+import {LiveAnnouncer} from "@angular/cdk/a11y";
+
 
 @Component({
   selector: 'app-dashboard',
@@ -38,24 +40,29 @@ export class DashboardComponent implements OnInit {
     'Modifier',
     'Supprimer',
   ];
+  private _dataSource: MatTableDataSource<Trip> = new MatTableDataSource<Trip>();
 
   constructor(
     private _tripService: TripService,
     private _notificationService: NotificationService,
     private _socketService: SocketService,
-    private _router: Router
+    private _router: Router,private _liveAnnouncer: LiveAnnouncer
   ) {
     this._travelerTrips = [];
     this._userTrips = [];
     this.defaultImg = environment.defaultImgTrip;
   }
 
+  @ViewChild(MatSort)
+  sort: MatSort = new MatSort;
   ngOnInit(): void {
     this._userTrips = [];
     this._travelerTrips = [];
     this._tripService.findUserTrips().subscribe(
       (res: Trip[]) => {
         this._userTrips = res;
+        this._dataSource= new MatTableDataSource(this._userTrips);
+        this._dataSource.sort = this.sort;
       },
       (err) => {
         console.error(err);
@@ -69,6 +76,7 @@ export class DashboardComponent implements OnInit {
         console.error(err);
       }
     );
+
   }
 
   travlerFilter(event: Event) {
@@ -151,5 +159,10 @@ export class DashboardComponent implements OnInit {
         console.error(err);
       }
     );
+  }
+
+
+  get dataSource(): MatTableDataSource<Trip> {
+    return this._dataSource;
   }
 }

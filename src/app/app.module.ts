@@ -52,6 +52,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserComponent } from './components/user/user.component';
+import {MatSortModule} from '@angular/material/sort';
 import { ToasterComponent } from './components/toaster/toaster.component';
 registerLocaleData(localeFr);
 
@@ -104,6 +105,7 @@ registerLocaleData(localeFr);
     MatSnackBarModule,
     MatGridListModule,
     MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

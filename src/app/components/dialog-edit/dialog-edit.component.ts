@@ -31,7 +31,7 @@ export class DialogEditComponent implements OnInit {
    */
   onCancel(): void {
     this._dialogRef.close();
-    this._router.navigate(['/profil']);
+
   }
 
   /**
