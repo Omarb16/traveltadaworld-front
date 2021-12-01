@@ -26,3 +26,11 @@ p {
 mat-form-field {
   margin: 10px;
 }
+
+.flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}

@@ -1,6 +1,7 @@
 .trip-card {
-  max-width: 400px;
+  width: 400px;
   margin-bottom: 8px;
+  overflow-x: unset;
 }
 
 .img-profil {
@@ -17,11 +18,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-
-::ng-deep .trip-card {
-  width: 100%;
-  overflow-x: unset;
 }
 
 ::ng-deep .mat-list-item {
