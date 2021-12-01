@@ -1,0 +1,8 @@
+<span class="material-icons-outlined"><mat-icon>warning</mat-icon>
+
+</span>
+<h1 mat-dialog-title>Etes vous sure de vouloir supprimer votre compte?</h1>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Non</button>
+  <button mat-button cdkFocusInitial (click)="delete($event)">Oui</button>
+</div>
