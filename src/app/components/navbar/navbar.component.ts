@@ -57,8 +57,14 @@ export class NavbarComponent implements OnInit {
           this.firstTime = false;
           this.notifs.forEach((e: any) => {
             if (e.seen == false) {
-              console.log(e);
-              this._notificationService.update(e.id, e).subscribe(
+              const n = {
+                title: e.title,
+                content: e.content,
+                seen: e.seen,
+                userId: e.userId,
+                createdAt: e.createdAt,
+              };
+              this._notificationService.update(e.id, n).subscribe(
                 (res) => {},
                 (err) => {
                   console.error(err);
@@ -75,7 +81,6 @@ export class NavbarComponent implements OnInit {
   }
 
   delete(id: string) {
-    console.log(id);
     this._notificationService.delete(id).subscribe(
       (res) => {
         this.notifs = this.notifs.filter((e) => e.id !== id);

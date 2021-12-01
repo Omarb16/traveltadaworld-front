@@ -4,7 +4,7 @@ import { TripService } from './../../services/trip.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TripDetail } from 'src/app/types/trip-detail.type';
-import jspdf from "jspdf";
+import jspdf from 'jspdf';
 @Component({
   selector: 'app-trip-detail',
   templateUrl: './trip-detail.component.html',
@@ -82,14 +82,12 @@ export class TripDetailComponent implements OnInit {
   public makePdf() {
     let data = document.getElementById('content');
     // @ts-ignore
-    html2canvas(data).then(canvas => {
-      const contentDataURL = canvas.toDataURL('image/png')
+    html2canvas(data).then((canvas) => {
+      const contentDataURL = canvas.toDataURL('image/png');
       let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
       // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
       pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
       pdf.save('devis.pdf');
     });
-
   }
-
 }

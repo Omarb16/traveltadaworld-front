@@ -21,7 +21,7 @@ export class NotificationService {
     return this._http.get<Notification[]>(environment.apiUrl + 'notifications');
   }
 
-  update(id: string, n: Notification): Observable<Notification> {
+  update(id: string, n: any): Observable<Notification> {
     return this._http.put<Notification>(
       environment.apiUrl + 'notifications/' + id,
       n

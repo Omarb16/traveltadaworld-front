@@ -1,47 +1,47 @@
 <br>
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8">
-        <mat-card class="mat-whiteframe-2dp">
-          <mat-card-content [style.overflow]="'auto'" [style.height.px]="'600'">
-            <mat-card-title>
-              Trips
-            </mat-card-title>
-            <app-dashboard></app-dashboard>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+      <mat-card class="mat-whiteframe-2dp">
+        <mat-card-content [style.overflow]="'auto'" [style.height.px]="'600'">
+          <mat-card-title>
+            Trips
+          </mat-card-title>
+          <app-dashboard></app-dashboard>
 
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-profile">
+        <div class="card-avatar">
+          <a>
+            <img class="img-profil" [src]="user.photo||defaultImg" />
+          </a>
+        </div>
+        <mat-card class="mat-whiteframe-2dp">
+          <mat-card-content>
+            <div class="card-body">
+              <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
+              <h4>{{user.city}}, {{user.country}}</h4>
+
+              <p class="card-description">
+                {{user.description}}
+              </p>
+              <a mat-raised-button color="warn" [routerLink]="['/create-trip']">Organiser
+                un voyage</a>
+              &nbsp;&nbsp;
+
+              <button mat-icon-button color="warn" [routerLink]="['/edit', user?.id]" title="Edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="openDialog()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </mat-card-content>
         </mat-card>
-      </div>
-      <div class="col-md-4">
-        <div class="card card-profile">
-          <div class="card-avatar">
-            <a>
-              <img class="img-profil" [src]="user.photo||defaultImg" />
-            </a>
-          </div>
-          <mat-card class="mat-whiteframe-2dp">
-            <mat-card-content>
-              <div class="card-body">
-                <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
-                <h4>{{user.city}}, {{user.country}}</h4>
-
-                <p class="card-description">
-                  {{user.description}}
-                </p>
-                <a mat-raised-button color="warn" [routerLink]="['/create-trip']">Organiser
-                  un voyage</a>
-                &nbsp;&nbsp;
-
-                <button mat-icon-button color="warn" [routerLink]="['/edit', user?.id]"title="Edit"><mat-icon>edit</mat-icon></button>
-                <button mat-icon-button color="warn" (click)="openDialog()" ><mat-icon>delete</mat-icon></button>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
       </div>
     </div>
   </div>
 </div>
-
-

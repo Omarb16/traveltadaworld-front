@@ -56,6 +56,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ToasterComponent } from './components/toaster/toaster.component';
 import { DialogDeleteComponent } from './components/dialog-delete/dialogDelete.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { MatTooltipModule } from '@angular/material/tooltip';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -89,6 +90,7 @@ registerLocaleData(localeFr);
     MatButtonModule,
     BrowserAnimationsModule,
     BrowserModule,
+    MatTooltipModule,
     CKEditorModule,
     HttpClientModule,
     MatDatepickerModule,

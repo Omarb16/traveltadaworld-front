@@ -17,7 +17,6 @@ export class ToasterService {
   }
 
   show(data: Notification) {
-    console.log(data);
     this.subject.next({
       title: data.title,
       content: data.content,

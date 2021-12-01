@@ -129,7 +129,6 @@ export class FormTripComponent implements OnInit {
       };
       this._isUpdateMode = false;
       this.photo.addValidators(Validators.required);
-      console.log(this.photo);
     }
 
     // update form's values with model

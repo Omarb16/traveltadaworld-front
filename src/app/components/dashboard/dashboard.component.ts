@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   colTravelertrips: string[] = [
     'photo',
     'title',
-    'createdBy',
+    'createdNameBy',
     'description',
     'city',
     'country',
