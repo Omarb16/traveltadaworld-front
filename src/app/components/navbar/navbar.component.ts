@@ -66,4 +66,16 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
+
+  delete(id: string) {
+    this._notificationService.delete(id).subscribe(
+      (res) => {
+        this.notifs= this.notifs.filter((e) => e.id !== id);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
 }

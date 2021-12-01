@@ -18,10 +18,12 @@
     [matMenuTriggerFor]="menuNotif">
     <fa-icon [icon]="faBell"></fa-icon>
   </button>
+
   <mat-menu #menuNotif="matMenu">
     <mat-card *ngFor="let n of notifs">
-      <h3><strong>{{n.title}}</strong></h3>
+      <h3><strong>{{n.title}} </strong>  <mat-icon (click)="delete(n.id)" color="primary">close</mat-icon> </h3>
       <p>{{n.content}}</p>
+
     </mat-card>
   </mat-menu>
 
