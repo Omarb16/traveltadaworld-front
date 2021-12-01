@@ -104,7 +104,7 @@ registerLocaleData(localeFr);
     MatGridListModule,
     MatPaginatorModule,
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 3000,
       positionClass: 'toast-top-right',
       closeButton: true,
       progressBar: true,

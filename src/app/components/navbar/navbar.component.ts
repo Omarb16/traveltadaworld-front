@@ -50,14 +50,15 @@ export class NavbarComponent implements OnInit {
         if (this.firstTime) {
           this.firstTime = false;
           this.notifs.forEach((e: any) => {
-            const id = e.id;
-            delete e.id;
-            this._notificationService.update(id, e).subscribe(
-              (res) => {},
-              (err) => {
-                console.error(err);
-              }
-            );
+            if (e.seen == false) {
+              console.log(e);
+              this._notificationService.update(e.id, e).subscribe(
+                (res) => {},
+                (err) => {
+                  console.error(err);
+                }
+              );
+            }
           });
         }
       },
@@ -68,14 +69,14 @@ export class NavbarComponent implements OnInit {
   }
 
   delete(id: string) {
+    console.log(id);
     this._notificationService.delete(id).subscribe(
       (res) => {
-        this.notifs= this.notifs.filter((e) => e.id !== id);
+        this.notifs = this.notifs.filter((e) => e.id !== id);
       },
       (err) => {
         console.error(err);
       }
     );
   }
-
 }

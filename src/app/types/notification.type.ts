@@ -4,4 +4,5 @@ export type Notification = {
   content: string;
   seen: boolean;
   userId: string;
+  createdAt: string;
 };
