@@ -20,7 +20,25 @@ et bien d'autres... On vous laisse découvrir seul.
 
 
 ## Instllation du projet
-
+  
+  Configuration de la machine 
+  ```bash
+  
+# Installation de  yarn
+  $ yarn install
+  
+# Installation de Node.js 
+  Vous trouverz sur ce lien les étapes d'installation :  [lien](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions/)
+  
+# Installer @angular/cli grâce à Yarn en tapant dans votre terminal 
+$ yarn global add @angular/cl
+  
+# Indiquer à @angular/cli d’utiliser Yarn comme package manager
+$ ng config --global cli.packageManager yarn
+  
+  ```
+  
+  Lancement du projet 
 ```bash
 # Cloner le projet du git 
 $ git clone https://github.com/Omarb16/traveltadaworld-front
