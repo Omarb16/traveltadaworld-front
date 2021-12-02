@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { SocketService } from './../../services/socket.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TripService } from './../../services/trip.service';
@@ -16,6 +17,7 @@ export class TripDetailComponent implements OnInit {
   private _trip: TripDetail;
   private _tripRecomm: Trip[];
   private _id: string | null;
+  private _defaultImg: string;
   constructor(
     private _tripService: TripService,
     private _notificationService: NotificationService,
@@ -23,6 +25,7 @@ export class TripDetailComponent implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) {
     this._trip = {} as TripDetail;
+    this._defaultImg = environment.defaultImgTrip;
     this._tripRecomm = [] as Trip[];
     this._id = this._activatedRoute.snapshot.paramMap.get('id');
   }
@@ -50,6 +53,10 @@ export class TripDetailComponent implements OnInit {
 
   get trip(): TripDetail {
     return this._trip;
+  }
+
+  get defaultImg(): string {
+    return this._defaultImg;
   }
 
   get tripRecomm(): Trip[] {

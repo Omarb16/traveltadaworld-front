@@ -1,5 +1,5 @@
 import { TripService } from 'src/app/services/trip.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Trip } from 'src/app/types/trip.type';
 import { Router } from '@angular/router';
@@ -30,12 +30,14 @@ export class TripListComponent implements OnInit {
       previousPageIndex: 0,
     };
     this._form = new FormGroup({
-      price: new FormControl(null),
+      pricemin: new FormControl(null),
+      pricemax: new FormControl(null),
       city: new FormControl(null),
       country: new FormControl(null),
       dateBegin: new FormControl(null),
       dateEnd: new FormControl(null),
     });
+    this.form.setValidators(this.priceValidaotr());
   }
 
   ngOnInit(): void {
@@ -48,6 +50,16 @@ export class TripListComponent implements OnInit {
         console.error(err);
       }
     );
+  }
+
+  priceValidaotr(): ValidatorFn {
+    return () => {
+      const min: number = this.pricemin.value;
+      const max: number = this.pricemax.value;
+      let valid: boolean = +max >= +min;
+      console.log(valid);
+      return valid ? null : { priceError: true };
+    };
   }
 
   get count(): number {
@@ -64,6 +76,14 @@ export class TripListComponent implements OnInit {
   }
   get trips(): Trip[] {
     return this._trips;
+  }
+
+  get pricemin(): FormControl {
+    return <FormControl>this.form.get('pricemin');
+  }
+
+  get pricemax(): FormControl {
+    return <FormControl>this.form.get('pricemax');
   }
 
   navigate(id: string | undefined): void {

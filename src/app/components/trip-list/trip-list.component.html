@@ -1,4 +1,4 @@
-<div class="cont">
+<div class="container">
   <mat-dialog-content>
     <form novalidate [formGroup]="form">
       <h1>Rechercher un voyage</h1>
@@ -24,7 +24,19 @@
       </mat-form-field>
 
       <mat-form-field class="full-width">
-        <input type="text" matInput placeholder="Prix" formControlName="price" requis name="price" />
+        <input type="text" matInput placeholder="Prix minimum" formControlName="pricemin" requis name="pricemin" />
+        <mat-error *ngIf="form?.hasError('priceError')">
+          Prix min plus grand que prix max
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field class="full-width">
+        <input type="text" matInput placeholder="Prix maximum" formControlName="pricemax" requis name="pricemax" />
+        <mat-error *ngIf="form?.hasError('priceError')">
+          Prix min plus grand que prix max
+        </mat-error>
       </mat-form-field>
 
     </form>

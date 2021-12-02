@@ -1,43 +1,65 @@
-<img class="img-profil" [src]="trip.photo">
+<div class="bg"></div>
 
-<div class="cont">
-  <div id="content">
-    <mat-card class="trip-card">
-      <mat-card-header>
-        <div mat-card-avatar class="trip-header-image"></div>
-        <mat-card-title>{{trip?.title}}</mat-card-title>
-        <mat-card-subtitle>{{trip?.country}}</mat-card-subtitle>
-      </mat-card-header>
 
-      <mat-card-content>
-        <p style="color: #723e52;font-size: 18px">
-          {{trip?.dateBegin | date:'longDate'}} jusqu'au {{trip?.dateEnd| date:'longDate'}}
-        </p>
-        <p style="color:purple;">
-          {{trip?.description}}
-        </p>
-        <p [innerHTML]="trip?.detail">
-        </p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mt40">
+      <div class="project__figure-wrapper">
+        <figure class="project__figure">
+          <img class="img-profil" [src]="trip.photo||defaultImg">
+        </figure>
 
-        <p>
-        <p>
-          Estimation du prix : <a style="color:green;">{{trip?.price}} € </a>
-        </p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <button mat-button type="button" *ngIf="trip.canDemand" (click)="demand(trip)">Effectuer une demande</button>
-  <button mat-button type="button" *ngIf="trip.canCancel" (click)="cancel(trip)">Annuler la demande</button>
-  <button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
-
-  <button mat-button type="button" color=warn (click)="makePdf()">Télécharger devis</button>
-  <div *ngIf="!!tripRecomm && tripRecomm.length>0">
-    <h2>Suggestions</h2>
-    <div class="flex-sugg">
-      <div *ngFor="let t of tripRecomm; let i=index">
-        <app-trip [trip]="t"></app-trip>
+      </div>
+      <header class="mt30 mb30">
+        <h1 class="title-h2">{{trip?.title}} </h1>
+        <h2 class="project__tagline"> {{trip?.description}}</h2>
+      </header>
+    </div>
+    <div class="col-lg-4 mt40">
+      <div class="d-none d-lg-block">
+        <section class="project__section project__main-section__wrapper mb30">
+          <div class="project__main-section">
+            <div class="title-h3 text-center opensans js-collected-value">{{trip?.country}}</div>
+            <div class="project__gauge ">
+              <div class="row justify-content-between">
+                <div class="d-flex flex-column align-content-center justify-content-center">
+                  <div class=" js-collect-goal total">
+                    {{trip?.dateBegin | date:'longDate'}}
+                  </div>
+                  <div class=" js-collect-goal total">jusqu'au</div>
+                  <div class=" js-collect-goal total"> {{trip?.dateEnd| date:'longDate'}}</div>
+                </div>
+              </div>
+            </div>
+            <p style="text-align: center;">
+              Estimation du prix : <a style="color:green;">{{trip?.price}} € </a>
+            </p>
+          </div>
+        </section>
       </div>
     </div>
   </div>
+</div>
 
+
+<div class="container">
+  <h3> Detail</h3>
+  <p [innerHTML]="trip?.detail">
+  </p>
+</div>
+
+<div class="container">
+  <button mat-button type="button" *ngIf="trip.canDemand" (click)="demand(trip)">Effectuer une demande</button>
+  <button mat-button type="button" *ngIf="trip.canCancel" (click)="cancel(trip)">Annuler la demande</button>
+  <button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
+  <button mat-button type="button" color=warn (click)="makePdf()">Télécharger devis</button>
+</div>
+
+<div *ngIf="!!tripRecomm && tripRecomm.length>0" class="container">
+  <h2>Suggestions</h2>
+  <div class="flex-sugg">
+    <div *ngFor="let t of tripRecomm; let i=index">
+      <app-trip [trip]="t"></app-trip>
+    </div>
+  </div>
 </div>
