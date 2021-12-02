@@ -7,7 +7,7 @@ import * as moment from 'moment';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  _year: string;
+  private _year: string;
   constructor() {
     this._year = moment().format('YYYY');
   }

@@ -12,8 +12,8 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./trip-detail.component.scss'],
 })
 export class TripDetailComponent implements OnInit {
-  _trip: TripDetail;
-  _id: string | null;
+  private _trip: TripDetail;
+  private _id: string | null;
   constructor(
     private _tripService: TripService,
     private _notificationService: NotificationService,
@@ -37,7 +37,15 @@ export class TripDetailComponent implements OnInit {
     }
   }
 
-  demand(item: any) {
+  get trip(): TripDetail {
+    return this._trip;
+  }
+
+  get id(): string | null {
+    return this._id;
+  }
+
+  demand(item: any): void {
     const body = {
       name: localStorage.getItem('name'),
     };

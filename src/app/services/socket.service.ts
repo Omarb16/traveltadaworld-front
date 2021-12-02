@@ -1,10 +1,8 @@
 import { Notification } from './../types/notification.type';
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, Subject, take } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
-import { Router } from '@angular/router';
 import { ToasterService } from './toaster.service';
 
 @Injectable({
@@ -13,25 +11,22 @@ import { ToasterService } from './toaster.service';
 export class SocketService implements OnDestroy {
   private socket: Socket<DefaultEventsMap, DefaultEventsMap>;
 
-  constructor(
-    private _router: Router,
-    private _toasterService: ToasterService
-  ) {
+  constructor(private _toasterService: ToasterService) {
     this.socket = io(environment.apiUrl);
     this.socket.on('sendNotiftoClient', (data: Notification) => {
       this.showToaster(data);
     });
   }
 
-  sendNotif(data: Notification) {
+  sendNotif(data: Notification): void {
     this.socket.emit('sendToServer', data);
   }
 
-  subscribe() {
+  subscribe(): void {
     this.socket.emit('subscribe', localStorage.getItem('access_token'));
   }
 
-  unsubscribe() {
+  unsubscribe(): void {
     this.socket.emit('unsubscribe', localStorage.getItem('access_token'));
   }
 
@@ -39,7 +34,7 @@ export class SocketService implements OnDestroy {
     this.socket.disconnect();
   }
 
-  showToaster(data: Notification) {
+  showToaster(data: Notification): void {
     this._toasterService.show(data);
   }
 }

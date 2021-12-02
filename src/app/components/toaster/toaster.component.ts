@@ -36,7 +36,7 @@ export class ToasterComponent implements OnInit {
   }
 
   get toast(): any {
-    return this.toast;
+    return this._toast;
   }
 
   ngOnInit(): void {}

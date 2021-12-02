@@ -1,21 +1,21 @@
 <mat-card class="trip-card">
   <mat-card-header>
     <div mat-card-avatar class="trip-header-image"></div>
-    <mat-card-title>{{_user.firstname}} {{_user.lastname}}</mat-card-title>
+    <mat-card-title>{{user.firstname}} {{user.lastname}}</mat-card-title>
 
   </mat-card-header>
   <div class="flex">
-    <img class="img-profil" mat-card-image [src]="_user.photo">
+    <img class="img-profil" mat-card-image [src]="user.photo">
   </div>
   <mat-card-content>
-    Provenance: <p> {{_user.city}} {{_user.country}}</p>
+    Provenance: <p> {{user.city}} {{user.country}}</p>
     Description :
     <p>
-      {{_user?.description}}
+      {{user?.description}}
     </p>
     Contact :
     <p>
-      {{_user?.email}}
+      {{user?.email}}
     </p>
   </mat-card-content>
   <mat-card-actions>

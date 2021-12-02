@@ -13,38 +13,36 @@ import * as moment from 'moment';
   styleUrls: ['./trip-list.component.scss'],
 })
 export class TripListComponent implements OnInit {
-  form: FormGroup;
+  private _count: number;
+  private _form: FormGroup;
+  private _page: PageEvent;
+  private _pageSize: number;
   private _trips: Trip[];
-  private _view: string;
-  count: number;
-  pageSize: number;
-  page: PageEvent;
 
   constructor(private _tripService: TripService, private _routeur: Router) {
     this._trips = [];
-    this.count = 0;
-    this.pageSize = 8;
-    this.page = {
-      length: this.count,
-      pageSize: this.pageSize,
+    this._count = 0;
+    this._pageSize = 8;
+    this._page = {
+      length: this._count,
+      pageSize: this._pageSize,
       pageIndex: 0,
       previousPageIndex: 0,
     };
-    this.form = new FormGroup({
+    this._form = new FormGroup({
       price: new FormControl(null),
       city: new FormControl(null),
       country: new FormControl(null),
       dateBegin: new FormControl(null),
       dateEnd: new FormControl(null),
     });
-    this._view = 'list';
   }
 
   ngOnInit(): void {
     this._tripService.count().subscribe(
       (res: number) => {
-        this.count = res;
-        this.find(this.page);
+        this._count = res;
+        this.find(this._page);
       },
       (err) => {
         console.error(err);
@@ -52,34 +50,30 @@ export class TripListComponent implements OnInit {
     );
   }
 
+  get count(): number {
+    return this._count;
+  }
+  get form(): FormGroup {
+    return this._form;
+  }
+  get page(): PageEvent {
+    return this._page;
+  }
+  get pageSize(): number {
+    return this._pageSize;
+  }
   get trips(): Trip[] {
     return this._trips;
-  }
-
-  set trips(value: Trip[]) {
-    this._trips = value;
-  }
-
-  get view(): string {
-    return this._view;
-  }
-
-  set view(value: string) {
-    this._view = value;
   }
 
   navigate(id: string | undefined): void {
     this._routeur.navigate(['/trip', id]);
   }
 
-  switchView(): void {
-    this._view = this._view === 'card' ? 'list' : 'card';
-  }
-
   find(page: PageEvent) {
-    if (this.form.valid) {
+    if (this._form.valid) {
       var query: string = '?';
-      const trip = this.form.value;
+      const trip = this._form.value;
       var added = false;
       for (const property in trip) {
         if (trip[property] && trip[property] != '') {
@@ -97,7 +91,7 @@ export class TripListComponent implements OnInit {
         query += '&';
       }
       query +=
-        'skip=' + page.pageIndex * this.pageSize + '&limit=' + page.pageSize;
+        'skip=' + page.pageIndex * this._pageSize + '&limit=' + page.pageSize;
 
       this._tripService.findAll(query).subscribe(
         (res: Trip[]) => {

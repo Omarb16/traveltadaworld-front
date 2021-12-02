@@ -8,13 +8,23 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./trip.component.scss'],
 })
 export class TripComponent implements OnInit {
-  @Input() trip: any = {};
-  defaultImg: string;
+  private _trip: any;
+  private _defaultImg: string;
   constructor(private _router: Router) {
-    this.defaultImg = environment.defaultImgTrip;
+    this._trip = {};
+    this._defaultImg = environment.defaultImgTrip;
   }
 
   ngOnInit(): void {}
+
+  @Input()
+  set trip(model: any) {
+    this._trip = model;
+  }
+
+  get defaultImg(): string {
+    return this._defaultImg;
+  }
 
   more(id: string) {
     this._router.navigate(['/trip', id]);

@@ -1,11 +1,11 @@
 import { environment } from './../../../environments/environment';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
-import {User} from "../../types/user.type";
-import {UserService} from "../../services/user.service";
-import {TripDetail} from "../../types/trip-detail.type";
-import {TripService} from "../../services/trip.service";
-import {NotificationService} from "../../services/notification.service";
+import { User } from '../../types/user.type';
+import { UserService } from '../../services/user.service';
+import { TripDetail } from '../../types/trip-detail.type';
+import { TripService } from '../../services/trip.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-user',
@@ -13,9 +13,8 @@ import {NotificationService} from "../../services/notification.service";
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  _user:User;
-  _id: string | null;
-
+  private _user: User;
+  private _id: string | null;
 
   constructor(
     private _userService: UserService,
@@ -26,7 +25,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      if (this._id) {
+    if (this._id) {
       this._userService.find(this._id).subscribe(
         (res: User) => {
           Object.assign(this._user, res);
@@ -36,5 +35,12 @@ export class UserComponent implements OnInit {
         }
       );
     }
+  }
+
+  get user(): User {
+    return this._user;
+  }
+  get id(): string | null {
+    return this._id;
   }
 }

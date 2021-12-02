@@ -5,7 +5,13 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
   providedIn: 'root',
 })
 export class BusyService {
-  public isLoading = new BehaviorSubject(false);
+  private _isLoading: BehaviorSubject<boolean>;
 
-  constructor() {}
+  constructor() {
+    this._isLoading = new BehaviorSubject<boolean>(false);
+  }
+
+  get isLoading(): BehaviorSubject<boolean> {
+    return this._isLoading;
+  }
 }

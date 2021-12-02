@@ -17,10 +17,10 @@ import * as moment from 'moment';
   styleUrls: ['./signin.component.scss'],
 })
 export class SigninComponent implements OnInit {
-  _form: FormGroup;
-  _file: File;
-  _hide: boolean;
-  _error: string;
+  private _form: FormGroup;
+  private _file: File;
+  private _hide: boolean;
+  private _error: string;
 
   constructor(private _userService: UserService, private _router: Router) {
     this._file = {} as File;

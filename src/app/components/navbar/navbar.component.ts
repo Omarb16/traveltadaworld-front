@@ -10,10 +10,10 @@ import { faBell, IconDefinition } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  _faBell: IconDefinition;
-  _countNotif: number;
-  _firstTime: boolean;
-  _notifs: Notification[];
+  private _faBell: IconDefinition;
+  private _countNotif: number;
+  private _firstTime: boolean;
+  private _notifs: Notification[];
   constructor(
     private _userService: UserService,
     private _notificationService: NotificationService

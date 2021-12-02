@@ -14,17 +14,17 @@ import { BusyService } from './services/busy.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public showSpinner: boolean;
-  public spinnerConfig: ISpinnerConfig;
-  toasts: any[];
+  private _showSpinner: boolean;
+  public _spinnerConfig: ISpinnerConfig;
+  private _toasts: any[];
 
   constructor(
     private _busyService: BusyService,
     private _toasterService: ToasterService
   ) {
-    this.toasts = [];
-    this.showSpinner = false;
-    this.spinnerConfig = {
+    this._toasts = [];
+    this._showSpinner = false;
+    this._spinnerConfig = {
       animation: SPINNER_ANIMATIONS.rotating_dots,
       placement: SPINNER_PLACEMENT.block_ui,
       size: '4rem',
@@ -32,16 +32,26 @@ export class AppComponent {
     };
     this._busyService.isLoading.subscribe((value) => {
       setTimeout(() => {
-        this.showSpinner = value;
+        this._showSpinner = value;
       }, 1);
     });
     this._toasterService.toast$.subscribe((toast) => {
-      this.toasts = [toast, ...this.toasts];
-      setTimeout(() => this.toasts.pop(), toast.delay);
+      this._toasts = [toast, ...this._toasts];
+      setTimeout(() => this._toasts.pop(), toast.delay);
     });
   }
 
   remove(index: number) {
-    this.toasts = this.toasts.filter((v, i) => i !== index);
+    this._toasts = this._toasts.filter((v, i) => i !== index);
+  }
+
+  get showSpinner(): boolean {
+    return this._showSpinner;
+  }
+  get spinnerConfig(): ISpinnerConfig {
+    return this._spinnerConfig;
+  }
+  get toasts(): any[] {
+    return this._toasts;
   }
 }

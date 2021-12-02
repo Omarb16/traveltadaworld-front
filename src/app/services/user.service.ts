@@ -16,25 +16,30 @@ import { AccessToken } from '../types/access-token.type';
   providedIn: 'root',
 })
 export class UserService {
-  currentUserSource = new ReplaySubject<string | null>(1);
-  countNotifSource = new ReplaySubject<void>(1);
-  currentUser$ = this.currentUserSource.asObservable();
-  countNotif$ = this.countNotifSource.asObservable();
-  isLoggedIn: boolean = false;
-  countNotif: number;
+  private _currentUserSource: ReplaySubject<string | null>;
+  private _countNotifSource: ReplaySubject<void>;
+  private _currentUser$: Observable<string | null>;
+  private _countNotif$: Observable<void>;
+  private _isLoggedIn: boolean;
+  private _countNotif: number;
 
   constructor(
     private _http: HttpClient,
     private _router: Router,
     private _socketService: SocketService
   ) {
-    this.countNotif = 0;
+    this._currentUserSource = new ReplaySubject<string | null>(1);
+    this._countNotifSource = new ReplaySubject<void>(1);
+    this._currentUser$ = this._currentUserSource.asObservable();
+    this._countNotif$ = this._countNotifSource.asObservable();
+    this._isLoggedIn = false;
+    this._countNotif = 0;
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
       this._socketService.subscribe();
-      this.currentUserSource.next(localStorage.getItem('name'));
-      this.countNotifSource.next();
-      this.isLoggedIn = true;
+      this._currentUserSource.next(localStorage.getItem('name'));
+      this._countNotifSource.next();
+      this._isLoggedIn = true;
     }
   }
 
@@ -60,23 +65,35 @@ export class UserService {
     return this._http.get<User>(environment.apiUrl + 'users/' + id);
   }
 
-  logOut() {
+  logOut(): void {
     this._socketService.unsubscribe();
     localStorage.removeItem('name');
     localStorage.removeItem('access_token');
     localStorage.removeItem('id');
-    this.currentUserSource.next(null);
-    this.isLoggedIn = false;
+    this._currentUserSource.next(null);
+    this._isLoggedIn = false;
     this._router.navigate(['/']);
   }
 
-  loggedIn(res: UserLogged) {
+  loggedIn(res: UserLogged): void {
     this.changeName(res.lastname + ' ' + res.firstname);
     localStorage.setItem('access_token', res.access_token);
     this._socketService.subscribe();
-    this.isLoggedIn = true;
-    this.countNotifSource.next();
+    this._isLoggedIn = true;
+    this._countNotifSource.next();
     this._router.navigate(['/']);
+  }
+
+  get isLoggedIn(): boolean {
+    return this._isLoggedIn;
+  }
+
+  get countNotif$(): Observable<void> {
+    return this._countNotif$;
+  }
+
+  get currentUser$(): Observable<string | null> {
+    return this._currentUser$;
   }
 
   getIdUser(): string {
@@ -91,8 +108,8 @@ export class UserService {
     return this._http.delete<User>(environment.apiUrl + 'users/delete/' + id);
   }
 
-  changeName(name: string) {
+  changeName(name: string): void {
     localStorage.setItem('name', name);
-    this.currentUserSource.next(name);
+    this._currentUserSource.next(name);
   }
 }
