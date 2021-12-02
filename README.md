@@ -26,7 +26,8 @@ et bien d'autres... On vous laisse découvrir seul.
   
 # Installation de  yarn
   $ yarn install
-    ```
+   ```
+  
 Installation de Node.js 
   Vous trouverz sur ce lien les étapes d'installation :  [lien](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions/)
   
