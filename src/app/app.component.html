@@ -2,7 +2,6 @@
 <section class="main-cont">
   <router-outlet></router-outlet>
 </section>
-<app-footer></app-footer>
 <app-toaster *ngFor="let toast of toasts; let i=index" [toast]="toast" [i]="i" (remove)="remove($event)"></app-toaster>
 
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig">

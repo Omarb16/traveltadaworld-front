@@ -112,6 +112,7 @@ export class TripDetailComponent implements OnInit {
 
   //Telechargement pdf
   public makePdf() {
+
     var data = document.getElementById('content');
     // @ts-ignore
     html2canvas(data).then((canvas) => {

@@ -44,6 +44,7 @@ export class ModalEditComponent implements OnInit {
    * Initialize modal process
    */
   private _initModal(user: User): void {
+
     // create modal with initial data inside
     this._personDialog = this._dialog.open(DialogEditComponent, {
       width: '500px',
@@ -53,11 +54,16 @@ export class ModalEditComponent implements OnInit {
 
     // subscribe to afterClosed observable to set dialog status and do process
     this._personDialog.afterClosed().subscribe((res: any) => {
+      if(res){
       this._userService
         .update(this._userService.getIdUser(), res)
         .subscribe((res2) => {
           this._router.navigate(['/profil']);
         });
+    }
+      else{
+        this._router.navigate(['/profil']);
+      }
     });
   }
 }
