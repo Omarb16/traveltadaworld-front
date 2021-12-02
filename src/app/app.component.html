@@ -4,6 +4,7 @@
 </section>
 <app-toaster *ngFor="let toast of toasts; let i=index" [toast]="toast" [i]="i" (remove)="remove($event)"></app-toaster>
 
+<app-footer></app-footer>
 <ngx-spinner [visible]="showSpinner" [config]="spinnerConfig">
   <h4>Chargement...</h4>
 </ngx-spinner>
