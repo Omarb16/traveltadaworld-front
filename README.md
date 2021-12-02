@@ -28,7 +28,7 @@ $ git clone https://github.com/Omarb16/traveltadaworld-front
 # Aller sur le dossier
 $ cd traveltadaworld-front
 
-# Installation des dependances de deux façon :
+# Installation des dependances de deux façons :
 $ npm install
 # ou
 $ yarn install
@@ -68,6 +68,6 @@ Package                      Version
 
 
 ## Important
-Ce projet necessite l'instation du back, vous le trouverez sur ce lien : [back](https://github.com/Omarb16/traveltadaworld-back/)
+Ce projet necessite l'instalation du back, vous le trouverez sur ce lien : [back](https://github.com/Omarb16/traveltadaworld-back/)
   
 
