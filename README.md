@@ -1,27 +1,93 @@
-# Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+## Description
+Projet TravelTadaWorld pour organiser et participer à des voyages.
+Réalisé par Nada MADAD et Omar BOUAYAD.
 
-## Development server
+## Fonctionnalités 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<li>Creation de compte.
+<li>Authentification.
+<li>Editer compte.
+<li>Supprimer compte.
+<li>Creation d'un voyage.
+<li>Edite voyage.
+<li>supprimer voyage.
+<li>Integrer un voyage.
+<li>Telecharger devis en pdf.
+<li>Tris de l'affichage.
+et bien d'autres... On vous laisse découvrir seul.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Instllation du projet
+  
+  Configuration de la machine 
+  ```bash
+  
+# Installation de  yarn
+  $ yarn install
+   ```
+  
+Installation de Node.js 
+  Vous trouverz sur ce lien les étapes d'installation :  [lien](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions/)
+  
+  ```bash
+# Installer @angular/cli grâce à Yarn en tapant dans votre terminal 
+$ yarn global add @angular/cl
+  
+# Indiquer à @angular/cli d’utiliser Yarn comme package manager
+$ ng config --global cli.packageManager yarn
+  
+  ```
+  
+  Lancement du projet 
+```bash
+# Cloner le projet du git 
+$ git clone https://github.com/Omarb16/traveltadaworld-front
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Aller sur le dossier
+$ cd traveltadaworld-front
 
-## Running unit tests
+# Installation des dependances de deux façons :
+$ npm install
+# ou
+$ yarn install
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Lancement du projet
+$ nest start
+```
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Installation de dependances:
+```bash
 
-## Further help
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+    
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Angular CLI: 13.0.3
+Node: 16.13.0
+Package Manager: yarn 1.22.15
+OS: linux x64
+
+Angular: 
+... 
+
+Package                      Version
+------------------------------------------------------
+@angular-devkit/architect    0.1300.3 (cli-only)
+@angular-devkit/core         13.0.3 (cli-only)
+@angular-devkit/schematics   13.0.3 (cli-only)
+@schematics/angular          13.0.3 (cli-only)
+
+```
+
+
+## Important
+Ce projet necessite l'instalation du back, vous le trouverez sur ce lien : [back](https://github.com/Omarb16/traveltadaworld-back/)
+  
+
