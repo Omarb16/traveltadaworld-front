@@ -1,9 +1,9 @@
 <h4 class="mat-subheading-1">Voyageur</h4>
 <mat-paginator [length]="countTravelerTrips" [pageSize]="pageSize" (page)="findTravelerTrips(sortTravelerTrips, $event)"
-  *ngIf="!!_travelerTrips && _travelerTrips.length>0">
+  *ngIf="!!travelerTrips && travelerTrips.length>0">
 </mat-paginator>
-<table mat-table [dataSource]="_travelerTrips" matSort class="mat-elevation-z8"
-  *ngIf="!!_travelerTrips && _travelerTrips.length>0" (matSortChange)="findTravelerTrips($event,pageTravelerTrips)">
+<table mat-table [dataSource]="travelerTrips" matSort class="mat-elevation-z8"
+  *ngIf="!!travelerTrips && travelerTrips.length>0" (matSortChange)="findTravelerTrips($event,pageTravelerTrips)">
   <ng-container matColumnDef="photo">
     <th mat-header-cell *matHeaderCellDef> Photo </th>
     <td mat-cell *matCellDef="let e"> <img [src]="e.photo||defaultImg" class="card-img-top" alt="..."></td>
@@ -51,16 +51,16 @@
   <tr mat-header-row *matHeaderRowDef="colTravelertrips"></tr>
   <tr mat-row *matRowDef="let row; columns: colTravelertrips;"></tr>
 </table>
-<p *ngIf="!_travelerTrips || _travelerTrips.length<=0">
+<p *ngIf="!travelerTrips || travelerTrips.length<=0">
   Aucun voyage
 </p>
 
 <br>
 <h4 class="mat-subheading-1 accent-color ">Organisateur</h4>
 <mat-paginator [length]="countUserTrips" [pageSize]="pageSize" (page)="findUserTrips(sortUserTrips, $event)"
-  *ngIf="!!_userTrips && _userTrips.length>0">
+  *ngIf="!!userTrips && userTrips.length>0">
 </mat-paginator>
-<table mat-table [dataSource]="_userTrips" matSort class="mat-elevation-z8" *ngIf="!!_userTrips && _userTrips.length>0"
+<table mat-table [dataSource]="userTrips" matSort class="mat-elevation-z8" *ngIf="!!userTrips && userTrips.length>0"
   (matSortChange)="findUserTrips($event,pageUserTrips)">
   <ng-container matColumnDef="photo">
     <th mat-header-cell *matHeaderCellDef> Photo </th>
@@ -129,6 +129,6 @@
   <tr mat-header-row *matHeaderRowDef="colUserTrips"></tr>
   <tr mat-row *matRowDef="let row; columns: colUserTrips;"></tr>
 </table>
-<p *ngIf="!_userTrips ||_userTrips.length<=0">
+<p *ngIf="!userTrips ||userTrips.length<=0">
   Aucun voyage organisé
 </p>

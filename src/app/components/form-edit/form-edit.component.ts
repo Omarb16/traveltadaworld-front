@@ -26,7 +26,7 @@ export class FormEditComponent implements OnInit, OnChanges {
   // private property to store form value
   private readonly _form: FormGroup;
 
-  _file: File | null;
+  private _file: File | null;
 
   constructor(private _userService: UserService) {
     this._model = {} as User;
@@ -128,7 +128,7 @@ export class FormEditComponent implements OnInit, OnChanges {
     this._form.patchValue(this._model);
   }
 
-  onFileChange(event: any) {
+  onFileChange(event: any): void {
     this._file = null;
     this._file = event.target.files[0];
   }

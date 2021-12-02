@@ -15,37 +15,18 @@ import { Sort } from '@angular/material/sort';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  sortUserTrips: Sort;
-  sortTravelerTrips: Sort;
-  pageUserTrips: PageEvent;
-  pageTravelerTrips: PageEvent;
-  defaultImg: string;
-  _userTrips: Trip[];
-  _travelerTrips: Trip[];
-  countUserTrips: number;
-  countTravelerTrips: number;
-  pageSize: number;
-  colTravelertrips: string[] = [
-    'photo',
-    'title',
-    'createdNameBy',
-    'description',
-    'city',
-    'country',
-    'createdAt',
-    'Annuler',
-  ];
-  colUserTrips: string[] = [
-    'photo',
-    'title',
-    'travelers',
-    'description',
-    'city',
-    'country',
-    'createdAt',
-    'Modifier',
-    'Supprimer',
-  ];
+  private _sortUserTrips: Sort;
+  private _sortTravelerTrips: Sort;
+  private _pageUserTrips: PageEvent;
+  private _pageTravelerTrips: PageEvent;
+  private _defaultImg: string;
+  private _userTrips: Trip[];
+  private _travelerTrips: Trip[];
+  private _countUserTrips: number;
+  private _countTravelerTrips: number;
+  private _pageSize: number;
+  private _colTravelertrips: string[];
+  private _colUserTrips: string[];
 
   constructor(
     private _tripService: TripService,
@@ -53,29 +34,50 @@ export class DashboardComponent implements OnInit {
     private _socketService: SocketService,
     private _router: Router
   ) {
+    this._colTravelertrips = [
+      'photo',
+      'title',
+      'createdNameBy',
+      'description',
+      'city',
+      'country',
+      'createdAt',
+      'Annuler',
+    ];
+    this._colUserTrips = [
+      'photo',
+      'title',
+      'travelers',
+      'description',
+      'city',
+      'country',
+      'createdAt',
+      'Modifier',
+      'Supprimer',
+    ];
     this._travelerTrips = [];
     this._userTrips = [];
-    this.countTravelerTrips = 0;
-    this.countUserTrips = 0;
-    this.defaultImg = environment.defaultImgTrip;
-    this.pageSize = 8;
-    this.sortUserTrips = {
+    this._countTravelerTrips = 0;
+    this._countUserTrips = 0;
+    this._defaultImg = environment.defaultImgTrip;
+    this._pageSize = 8;
+    this._sortUserTrips = {
       active: 'createdAt',
       direction: 'desc',
     };
-    this.sortTravelerTrips = {
+    this._sortTravelerTrips = {
       active: 'createdAt',
       direction: 'desc',
     };
-    this.pageUserTrips = {
-      length: this.countUserTrips,
-      pageSize: this.pageSize,
+    this._pageUserTrips = {
+      length: this._countUserTrips,
+      pageSize: this._pageSize,
       pageIndex: 0,
       previousPageIndex: 0,
     };
-    this.pageTravelerTrips = {
-      length: this.countTravelerTrips,
-      pageSize: this.pageSize,
+    this._pageTravelerTrips = {
+      length: this._countTravelerTrips,
+      pageSize: this._pageSize,
       pageIndex: 0,
       previousPageIndex: 0,
     };
@@ -83,8 +85,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this._tripService.countTravelerTrips().subscribe(
       (res: number) => {
-        this.countTravelerTrips = res;
-        this.findTravelerTrips(this.sortTravelerTrips, this.pageTravelerTrips);
+        this._countTravelerTrips = res;
+        this.findTravelerTrips(
+          this._sortTravelerTrips,
+          this._pageTravelerTrips
+        );
       },
       (err) => {
         console.error(err);
@@ -92,9 +97,9 @@ export class DashboardComponent implements OnInit {
     );
     this._tripService.countUserTrips().subscribe(
       (res: number) => {
-        this.countUserTrips = res;
+        this._countUserTrips = res;
 
-        this.findUserTrips(this.sortUserTrips, this.pageUserTrips);
+        this.findUserTrips(this._sortUserTrips, this._pageUserTrips);
       },
       (err) => {
         console.error(err);
@@ -102,14 +107,51 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  findUserTrips(sort: Sort, page: PageEvent) {
+  get sortUserTrips(): Sort {
+    return this._sortUserTrips;
+  }
+  get sortTravelerTrips(): Sort {
+    return this._sortTravelerTrips;
+  }
+  get pageUserTrips(): PageEvent {
+    return this._pageUserTrips;
+  }
+  get pageTravelerTrips(): PageEvent {
+    return this._pageTravelerTrips;
+  }
+  get defaultImg(): string {
+    return this._defaultImg;
+  }
+  get userTrips(): Trip[] {
+    return this._userTrips;
+  }
+  get travelerTrips(): Trip[] {
+    return this._travelerTrips;
+  }
+  get countUserTrips(): number {
+    return this._countUserTrips;
+  }
+  get countTravelerTrips(): number {
+    return this._countTravelerTrips;
+  }
+  get pageSize(): number {
+    return this._pageSize;
+  }
+  get colTravelertrips(): string[] {
+    return this._colTravelertrips;
+  }
+  get colUserTrips(): string[] {
+    return this._colUserTrips;
+  }
+
+  findUserTrips(sort: Sort, page: PageEvent): void {
     var query: string =
       '?active=' +
       sort.active +
       '&direction=' +
       sort.direction +
       '&skip=' +
-      page.pageIndex * this.pageSize +
+      page.pageIndex * this._pageSize +
       '&limit=' +
       page.pageSize;
     this._tripService.findUserTrips(query).subscribe(
@@ -122,14 +164,14 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  findTravelerTrips(sort: Sort, page: PageEvent) {
+  findTravelerTrips(sort: Sort, page: PageEvent): void {
     var query: string =
       '?active=' +
       sort.active +
       '&direction=' +
       sort.direction +
       '&skip=' +
-      page.pageIndex * this.pageSize +
+      page.pageIndex * this._pageSize +
       '&limit=' +
       page.pageSize;
     this._tripService.findTravelerTrips(query).subscribe(
@@ -142,11 +184,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  update(id: string) {
+  update(id: string): void {
     this._router.navigate(['/update-trip', id]);
   }
 
-  delete(id: string) {
+  delete(id: string): void {
     this._tripService.delete(id).subscribe(
       (res) => {
         this._userTrips = this._userTrips.filter((e) => e.id !== id);
@@ -157,7 +199,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  cancel(item: any) {
+  cancel(item: any): void {
     this._tripService.cancel(item.id).subscribe(
       (res) => {
         this._travelerTrips = this._travelerTrips.filter(
@@ -178,7 +220,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  accept(id: string, t: any) {
+  accept(id: string, t: any): void {
     this._tripService.accept(id, t.user).subscribe(
       (res) => {
         t.accept = true;
@@ -197,7 +239,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  decline(id: string, t: any, i: number) {
+  decline(id: string, t: any, i: number): void {
     this._tripService.decline(id, t.user).subscribe(
       (res) => {
         this._userTrips[i].travelers = this._userTrips[i].travelers.filter(

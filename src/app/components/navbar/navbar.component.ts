@@ -2,7 +2,7 @@ import { Notification } from './../../types/notification.type';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBell, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -10,17 +10,18 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  faBell = faBell;
-  countNotif: number;
-  firstTime: boolean;
-  notifs: Notification[];
+  _faBell: IconDefinition;
+  _countNotif: number;
+  _firstTime: boolean;
+  _notifs: Notification[];
   constructor(
     private _userService: UserService,
     private _notificationService: NotificationService
   ) {
-    this.countNotif = 0;
-    this.firstTime = true;
-    this.notifs = [];
+    this._faBell = faBell;
+    this._countNotif = 0;
+    this._firstTime = true;
+    this._notifs = [];
   }
 
   ngOnInit(): void {
@@ -29,10 +30,23 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  getCountNotif() {
+  get faBell(): IconDefinition {
+    return this._faBell;
+  }
+  get countNotif(): number {
+    return this._countNotif;
+  }
+  get firstTime(): boolean {
+    return this._firstTime;
+  }
+  get notifs(): Notification[] {
+    return this._notifs;
+  }
+
+  getCountNotif(): void {
     this._notificationService.count().subscribe(
       (res) => {
-        this.countNotif = res;
+        this._countNotif = res;
       },
       (err) => {
         console.error(err);
@@ -40,22 +54,22 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  get userService() {
+  get userService(): UserService {
     return this._userService;
   }
 
-  logOut() {
+  logOut(): void {
     this._userService.logOut();
   }
 
-  openNotif() {
+  openNotif(): void {
     this._notificationService.find().subscribe(
       (res) => {
-        this.notifs = res;
-        this.countNotif = 0;
-        if (this.firstTime) {
-          this.firstTime = false;
-          this.notifs.forEach((e: any) => {
+        this._notifs = res;
+        this._countNotif = 0;
+        if (this._firstTime) {
+          this._firstTime = false;
+          this._notifs.forEach((e: any) => {
             if (e.seen == false) {
               const n = {
                 title: e.title,
@@ -80,10 +94,10 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-  delete(id: string) {
+  delete(id: string): void {
     this._notificationService.delete(id).subscribe(
       (res) => {
-        this.notifs = this.notifs.filter((e) => e.id !== id);
+        this._notifs = this._notifs.filter((e) => e.id !== id);
       },
       (err) => {
         console.error(err);

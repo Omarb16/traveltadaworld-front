@@ -13,14 +13,19 @@ import { DialogDeleteComponent } from '../dialog-delete/dialogDelete.component';
 })
 export class ProfilComponent implements OnInit {
   private _user: User;
-  defaultImg: string;
+  private _defaultImg: string;
   constructor(
     private _router: Router,
     private _userService: UserService,
     private dialog: MatDialog
   ) {
     this._user = {} as User;
-    this.defaultImg = environment.defaultImgUser;
+    this._defaultImg = environment.defaultImgUser;
+  }
+
+  @Input()
+  set user(value: User) {
+    this._user = value;
   }
 
   ngOnInit(): void {
@@ -60,8 +65,7 @@ export class ProfilComponent implements OnInit {
     return this._user;
   }
 
-  @Input()
-  set user(value: User) {
-    this._user = value;
+  get defaultImg(): string {
+    return this._defaultImg;
   }
 }

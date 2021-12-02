@@ -17,16 +17,16 @@ import * as moment from 'moment';
   styleUrls: ['./signin.component.scss'],
 })
 export class SigninComponent implements OnInit {
-  form: FormGroup;
-  file: File;
-  hide: boolean;
-  error: string;
+  _form: FormGroup;
+  _file: File;
+  _hide: boolean;
+  _error: string;
 
   constructor(private _userService: UserService, private _router: Router) {
-    this.file = {} as File;
-    this.hide = true;
-    this.error = '';
-    this.form = new FormGroup({
+    this._file = {} as File;
+    this._hide = true;
+    this._error = '';
+    this._form = new FormGroup({
       email: new FormControl('mclaughlin.cochran@gmail.com', [
         Validators.required,
         Validators.email,
@@ -70,18 +70,22 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onFileChange(event: any) {
-    this.file = {} as File;
+  onFileChange(event: any): void {
+    this._file = {} as File;
     this.photo.setValue(null);
     this.photo.markAsTouched();
-    this.file = event.target.files[0];
+    this._file = event.target.files[0];
     this.photo.setValue('photo');
   }
 
-  save() {
-    if (this.form.valid) {
+  onCLick(): void {
+    this._hide = !this._hide;
+  }
+
+  save(): void {
+    if (this._form.valid) {
       var formData = new FormData();
-      var user = this.form.value;
+      var user = this._form.value;
       delete user.photo;
       user.birthDate = moment(this.birthDate.value).utc().format();
       for (const property in user) {
@@ -89,64 +93,80 @@ export class SigninComponent implements OnInit {
           formData.append(property, user[property]);
         }
       }
-      if (this.file) formData.append('file', this.file, this.file.name);
+      if (this._file) formData.append('file', this._file, this._file.name);
       this._userService.signIn(formData).subscribe(
         (res: UserLogged) => {
           this._userService.loggedIn(res);
         },
         (err) => {
           console.error(err);
-          this.error = err.error.message;
+          this._error = err.error.message;
         }
       );
     }
   }
 
+  get form(): FormGroup {
+    return this._form;
+  }
+
+  get file(): File {
+    return this._file;
+  }
+
+  get hide(): boolean {
+    return this._hide;
+  }
+
+  get error(): string {
+    return this._error;
+  }
+
   get email(): FormControl {
-    return <FormControl>this.form.get('email');
+    return <FormControl>this._form.get('email');
   }
 
   get password(): FormControl {
-    return <FormControl>this.form.get('password');
+    return <FormControl>this._form.get('password');
   }
 
   get repassword(): FormControl {
-    return <FormControl>this.form.get('repassword');
+    return <FormControl>this._form.get('repassword');
   }
 
   get firstname(): FormControl {
-    return <FormControl>this.form.get('firstname');
+    return <FormControl>this._form.get('firstname');
   }
 
   get lastname(): FormControl {
-    return <FormControl>this.form.get('lastname');
+    return <FormControl>this._form.get('lastname');
   }
 
   get address(): FormControl {
-    return <FormControl>this.form.get('address');
+    return <FormControl>this._form.get('address');
   }
 
   get city(): FormControl {
-    return <FormControl>this.form.get('city');
+    return <FormControl>this._form.get('city');
   }
 
   get postalCode(): FormControl {
-    return <FormControl>this.form.get('postalCode');
+    return <FormControl>this._form.get('postalCode');
   }
 
   get country(): FormControl {
-    return <FormControl>this.form.get('country');
+    return <FormControl>this._form.get('country');
   }
 
   get phone(): FormControl {
-    return <FormControl>this.form.get('phone');
+    return <FormControl>this._form.get('phone');
   }
 
   get photo(): FormControl {
-    return <FormControl>this.form.get('photo');
+    return <FormControl>this._form.get('photo');
   }
 
   get birthDate(): FormControl {
-    return <FormControl>this.form.get('birthDate');
+    return <FormControl>this._form.get('birthDate');
   }
 }

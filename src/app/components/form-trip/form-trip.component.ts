@@ -23,7 +23,7 @@ export class FormTripComponent implements OnInit {
   private readonly _form: FormGroup;
   _country: String;
 
-  _file: File | null;
+  private _file: File | null;
   /**
    * Component constructor
    */
@@ -146,7 +146,7 @@ export class FormTripComponent implements OnInit {
     this._cancel$.emit();
   }
 
-  onFileChange(event: any) {
+  onFileChange(event: any): void {
     this._file = null;
     this._file = event.target.files[0];
     if (!this.isUpdateMode) {

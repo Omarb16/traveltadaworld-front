@@ -5,8 +5,7 @@
   <mat-card class="mat-whiteframe-2dp" style=" position: relative;
   top:25%; left: 23%;">
     <mat-card-title-group>
-      <button mat-button color="primary" type="submit" [routerLink]="['/']"
-      style="color:blue; position: absolute;
+      <button mat-button color="primary" type="submit" [routerLink]="['/']" style="color:blue; position: absolute;
 bottom: 0; right:0;">Retour</button>
       <mat-card-title>
         <a href="javascript:void(0);">
@@ -33,7 +32,8 @@ bottom: 0; right:0;">Retour</button>
               <mat-error *ngIf="password?.dirty && password?.hasError('requis')">
                 Mot de passe est <strong>requis</strong>
               </mat-error>
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <button mat-icon-button matSuffix (click)="onClick()" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
@@ -47,7 +47,7 @@ bottom: 0; right:0;">Retour</button>
         <mat-dialog-actions align="end">
           <button mat-button color="primary" type="submit" (click)="save()" [disabled]="form.invalid"
             style="color:blueviolet;">Se connecter</button>
-            <div class="col-sm-12 pt-3 text-left">
+          <div class="col-sm-12 pt-3 text-left">
             <a [routerLink]="['/signin']" style="color:blueviolet; position: center">Pas encore inscrit? c'est ici !</a>
           </div>
         </mat-dialog-actions>

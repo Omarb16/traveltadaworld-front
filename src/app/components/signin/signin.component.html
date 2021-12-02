@@ -65,7 +65,7 @@
         <mat-error *ngIf="password.touched && password?.hasError('pattern')">
           Mot de passe est <strong>invalide</strong>
         </mat-error>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        <button mat-icon-button matSuffix (click)="onCLick()" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>

@@ -18,11 +18,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.find();
   }
+
   get trips(): Trip[] {
     return this._trips;
   }
 
-  find() {
+  find(): void {
     this._tripService.findFirstTree().subscribe(
       (res: Trip[]) => {
         this._trips = res;
