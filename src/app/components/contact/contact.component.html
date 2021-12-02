@@ -1,18 +1,20 @@
-<h2>Contactez nous <mat-icon aria-hidden="false">contact_support</mat-icon>
-</h2>
+<div class="cont">
+  <h2>Contactez nous <mat-icon aria-hidden="false">contact_support</mat-icon>
+  </h2>
 
 
-<form class="contact-form" [formGroup]="form" (ngSubmit)="openSnackBar(form)">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Object</mat-label>
-    <input matInput placeholder="Ex. Signalement" formControlName="object">
-  </mat-form-field>
+  <form class="contact-form" [formGroup]="form" (ngSubmit)="openSnackBar(form)">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Object</mat-label>
+      <input matInput placeholder="Ex. Signalement" formControlName="object">
+    </mat-form-field>
 
-  <mat-form-field class="message" appearance="fill">
-    <mat-label>Votre message</mat-label>
-    <textarea matInput placeholder="Ex. Probelement eu avec un certain utilisateur" formControlName="text"></textarea>
-  </mat-form-field>
-  <button mat-stroked-button>Envoyer</button>
+    <mat-form-field class="message" appearance="fill">
+      <mat-label>Votre message</mat-label>
+      <textarea matInput placeholder="Ex. Probelement eu avec un certain utilisateur" formControlName="text"></textarea>
+    </mat-form-field>
+    <button mat-stroked-button>Envoyer</button>
 
 
-</form>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-<h4 class="mat-subheading-1">Voyageur</h4>
+<h2 class="mat-subheading-1">Voyageur</h2>
 <mat-paginator [length]="countTravelerTrips" [pageSize]="pageSize" (page)="findTravelerTrips(sortTravelerTrips, $event)"
   *ngIf="!!travelerTrips && travelerTrips.length>0">
 </mat-paginator>
@@ -56,7 +56,7 @@
 </p>
 
 <br>
-<h4 class="mat-subheading-1 accent-color ">Organisateur</h4>
+<h2 class="mat-subheading-1 accent-color ">Organisateur</h2>
 <mat-paginator [length]="countUserTrips" [pageSize]="pageSize" (page)="findUserTrips(sortUserTrips, $event)"
   *ngIf="!!userTrips && userTrips.length>0">
 </mat-paginator>

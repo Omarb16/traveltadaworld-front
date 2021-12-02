@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TripDetail } from 'src/app/types/trip-detail.type';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Trip } from 'src/app/types/trip.type';
 @Component({
   selector: 'app-trip-detail',
   templateUrl: './trip-detail.component.html',
@@ -13,6 +14,7 @@ import html2canvas from 'html2canvas';
 })
 export class TripDetailComponent implements OnInit {
   private _trip: TripDetail;
+  private _tripRecomm: Trip[];
   private _id: string | null;
   constructor(
     private _tripService: TripService,
@@ -21,6 +23,7 @@ export class TripDetailComponent implements OnInit {
     private _activatedRoute: ActivatedRoute
   ) {
     this._trip = {} as TripDetail;
+    this._tripRecomm = [] as Trip[];
     this._id = this._activatedRoute.snapshot.paramMap.get('id');
   }
 
@@ -34,11 +37,23 @@ export class TripDetailComponent implements OnInit {
           console.error(err);
         }
       );
+      this._tripService.findRecommandation(this._id).subscribe(
+        (res: Trip[]) => {
+          this._tripRecomm = res;
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
     }
   }
 
   get trip(): TripDetail {
     return this._trip;
+  }
+
+  get tripRecomm(): Trip[] {
+    return this._tripRecomm;
   }
 
   get id(): string | null {

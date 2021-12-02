@@ -22,6 +22,10 @@ export class TripComponent implements OnInit {
     this._trip = model;
   }
 
+  get trip(): any {
+    return this._trip;
+  }
+
   get defaultImg(): string {
     return this._defaultImg;
   }

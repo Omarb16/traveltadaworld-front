@@ -7,12 +7,14 @@
   <div class="flex">
     <img class="img-profil" mat-card-image [src]="trip.photo||defaultImg">
   </div>
-  <mat-card-content>
+  <mat-card-content style="overflow: hidden;">
     <p>
       {{trip?.description}}
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button [routerLink]="['/trip', trip?.id]"><mat-icon>travel_explore</mat-icon></button>
+    <button mat-button [routerLink]="['/trip', trip?.id]">
+      <mat-icon>travel_explore</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>

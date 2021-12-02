@@ -1,32 +1,43 @@
-<div id="content">
-  <mat-card class="trip-card">
-    <mat-card-header>
-      <div mat-card-avatar class="trip-header-image"></div>
-      <mat-card-title>{{trip?.title}}</mat-card-title>
-      <mat-card-subtitle>{{trip?.country}}</mat-card-subtitle>
-    </mat-card-header>
-    <div class="flex">
-      <img class="img-profil" mat-card-image [src]="trip.photo">
+<img class="img-profil" [src]="trip.photo">
+
+<div class="cont">
+  <div id="content">
+    <mat-card class="trip-card">
+      <mat-card-header>
+        <div mat-card-avatar class="trip-header-image"></div>
+        <mat-card-title>{{trip?.title}}</mat-card-title>
+        <mat-card-subtitle>{{trip?.country}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p style="color: #723e52;font-size: 18px">
+          {{trip?.dateBegin | date:'longDate'}} jusqu'au {{trip?.dateEnd| date:'longDate'}}
+        </p>
+        <p style="color:purple;">
+          {{trip?.description}}
+        </p>
+        <p [innerHTML]="trip?.detail">
+        </p>
+
+        <p>
+        <p>
+          Estimation du prix : <a style="color:green;">{{trip?.price}} € </a>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <button mat-button type="button" *ngIf="trip.canDemand" (click)="demand(trip)">Effectuer une demande</button>
+  <button mat-button type="button" *ngIf="trip.canCancel" (click)="cancel(trip)">Annuler la demande</button>
+  <button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
+
+  <button mat-button type="button" color=warn (click)="makePdf()">Télécharger devis</button>
+  <div *ngIf="!!tripRecomm && tripRecomm.length>0">
+    <h2>Suggestions</h2>
+    <div class="flex-sugg">
+      <div *ngFor="let t of tripRecomm; let i=index">
+        <app-trip [trip]="t"></app-trip>
+      </div>
     </div>
-    <mat-card-content>
-      <p style="color: #723e52;font-size: 18px">
-        {{trip?.dateBegin | date:'longDate'}} jusqu'au {{trip?.dateEnd| date:'longDate'}}
-      </p>
-      <p style="color:purple;">
-        {{trip?.description}}
-      </p>
-      <p [innerHTML]="trip?.detail">
-      </p>
+  </div>
 
-      <p>
-      <p>
-        Estimation du prix : <a style="color:green;">{{trip?.price}} € </a>
-      </p>
-    </mat-card-content>
-  </mat-card>
 </div>
-<button mat-button type="button" *ngIf="trip.canDemand" (click)="demand(trip)">Effectuer une demande</button>
-<button mat-button type="button" *ngIf="trip.canCancel" (click)="cancel(trip)">Annuler la demande</button>
-<button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
-
-<button mat-button type="button" color=warn (click)="makePdf()">Télécharger devis</button>

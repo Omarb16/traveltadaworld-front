@@ -41,6 +41,11 @@ export class TripService {
     );
   }
 
+  findRecommandation(id: string): Observable<Trip[]> {
+    return this._http.get<Trip[]>(
+      environment.apiUrl + 'trips/recommandation/' + id
+    );
+  }
   countTravelerTrips(): Observable<number> {
     return this._http.get<number>(
       environment.apiUrl + 'trips/counttravelertrips'
