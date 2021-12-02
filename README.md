@@ -6,18 +6,18 @@ Réalisé par Nada MADAD et Omar BOUAYAD.
 ## Fonctionnalités 
 
 <li>Creation de compte.
-Authentification.
-Editer compte.
-Supprimer compte.
-Creation d'un voyage.
-Edite voyage.
-supprimer voyage.
-Integrer un voyage.
-Telecharger devis en pdf.
-Tris de l'affichage.
+<li>Authentification.
+<li>Editer compte.
+<li>Supprimer compte.
+<li>Creation d'un voyage.
+<li>Edite voyage.
+<li>supprimer voyage.
+<li>Integrer un voyage.
+<li>Telecharger devis en pdf.
+<li>Tris de l'affichage.
 et bien d'autres... On vous laisse découvrir seul.
 
-```
+
 
 ## Instllation du projet
 
