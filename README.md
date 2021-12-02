@@ -5,8 +5,7 @@ Réalisé par Nada MADAD et Omar BOUAYAD.
 
 ## Fonctionnalités 
 
-```bash
-Creation de compte.
+<li>Creation de compte.
 Authentification.
 Editer compte.
 Supprimer compte.
