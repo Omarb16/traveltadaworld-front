@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { environment } from './../../../environments/environment';
 import { SocketService } from './../../services/socket.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -20,6 +21,7 @@ export class TripDetailComponent implements OnInit {
   private _defaultImg: string;
   constructor(
     private _tripService: TripService,
+    private _userService: UserService,
     private _notificationService: NotificationService,
     private _socketService: SocketService,
     private _activatedRoute: ActivatedRoute
@@ -49,6 +51,10 @@ export class TripDetailComponent implements OnInit {
         }
       );
     }
+  }
+
+  get userService(): UserService {
+    return this._userService;
   }
 
   get trip(): TripDetail {
@@ -112,7 +118,6 @@ export class TripDetailComponent implements OnInit {
 
   //Telechargement pdf
   public makePdf() {
-
     var data = document.getElementById('content');
     // @ts-ignore
     html2canvas(data).then((canvas) => {

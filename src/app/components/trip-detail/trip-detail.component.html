@@ -49,10 +49,13 @@
 </div>
 
 <div class="container">
-  <button mat-button type="button" *ngIf="trip.canDemand" (click)="demand(trip)">Effectuer une demande</button>
-  <button mat-button type="button" *ngIf="trip.canCancel" (click)="cancel(trip)">Annuler la demande</button>
+  <button mat-button type="button" *ngIf="trip.canDemand && (userService.currentUser$ |async)"
+    (click)="demand(trip)">Effectuer une demande</button>
+  <button mat-button type="button" *ngIf="trip.canCancel && (userService.currentUser$ |async)"
+    (click)="cancel(trip)">Annuler la demande</button>
   <button mat-button type="button" color=warn [routerLink]="['/trips-list']">Retour</button>
-  <button mat-button type="button" color=warn (click)="makePdf()">Télécharger devis</button>
+  <button mat-button type="button" color=warn *ngIf="(userService.currentUser$ |async)" (click)="makePdf()">Télécharger
+    devis</button>
 </div>
 
 <div *ngIf="!!tripRecomm && tripRecomm.length>0" class="container">
